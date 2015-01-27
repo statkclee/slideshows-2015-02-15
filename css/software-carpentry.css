@@ -299,17 +299,19 @@ li > ol, li > ul {
 
 @font-face {
     font-family: 'Nanum NanumMyeongjo';
-    src: local('NanumMyeongjo-Regular.ttf'), url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
+    font-style: normal;
+    font-weight: 400;
+    src: local("NanumMyeongjo-Regular.ttf"), url(http://fonts.googleapis.com/earlyaccess/nanummyeongjo.css);
 }
 
-/*
 @font-face {
-    font-family: "Nanum Brush Script";
-    src: local("NanumBrushScript-Regular.ttf");
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Montserrat-Regular"), url(local-fonts/zhcz-_WihjSQC0oHJ9TCYBsxEYwM7FgeyaSgU71cLG0.woff) format("woff"), url(http://fonts.gstatic.com/s/montserrat/v6/zhcz-_WihjSQC0oHJ9TCYBsxEYwM7FgeyaSgU71cLG0.woff) format("woff");
 }
-*/
 .timekeeper {
-  font-family: 'Nanum NanumMyeongjo', monospace;
+  font-family: monospace;
 }
 
 .deck-container {
@@ -406,7 +408,7 @@ a:hover, a:focus {
 
 .deck-prev-link, .deck-next-link {
   background: #ccc;
-  font-family: 'Nanum NanumMyeongjo', serif;
+  font-family: serif;
 }
 .deck-prev-link, .deck-prev-link:hover, .deck-prev-link:focus, .deck-prev-link:active, .deck-prev-link:visited, .deck-next-link, .deck-next-link:hover, .deck-next-link:focus, .deck-next-link:active, .deck-next-link:visited {
   color: #fff;
