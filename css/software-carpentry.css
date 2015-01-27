@@ -76,7 +76,7 @@ select, input, textarea, button {
 }
 
 pre, code, kbd, samp {
-  font-family: 'Nanum Gothic Coding', 'Nanum Gothic', monospace, sans-serif;
+  font-family: 'Nanum Gothic', monospace, sans-serif;
 }
 
 a {
@@ -305,11 +305,13 @@ li > ol, li > ul {
     src: local("NanumGothic-Bold.ttf");
     font-weight: bold;
 }
+
+/*
 @font-face {
     font-family: "Nanum Brush Script";
     src: local("NanumBrushScript-Regular.ttf");
 }
-
+*/
 .timekeeper {
   font-family: 'Nanum Gothic', monospace;
 }
@@ -443,12 +445,13 @@ a:hover, a:focus {
 }
 .deck-container .slide :not(h1):not(h2) {
   /* TODO: the original style mispelled the font name, so it was using Helvetica for everything but the titles, this line does the same. */
-  font-family: 'Nanum Gothic',"Nanum Brush Script", 'Helvetica', 'Arial', 'sans';
+  font-family: 'Nanum Gothic', 'Helvetica', 'Arial', 'sans';
 }
 
 .deck-container .slide {
   margin: 0;
   padding: 160px 50px;
+  font-family: 'Nanum Brush Script'
   /*        text-align: justify;*/
 }
 
