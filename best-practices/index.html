@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Software Carpentry: Lessons Learned</title>
+    <title>과학 컴퓨팅의 업무처리 모범 규준(Best Practice)</title>
     <meta name="author" content="Thomas Arildsen" />
     <meta name="author" content="Greg Wilson" />
     <!-- meta name="audio" content="voiceover.ogg" -->
@@ -26,170 +26,173 @@
     <div class="deck-container">
 
       <section class="slide title-slide" data-container-class="no-status">
-        <h1 style="font-size: 210%;">Best Practices in<br/>Scientific Computing</h1>
-        <p>January 2015</p>
+        <h1 style="font-size: 210%;">과학 컴퓨팅의 업무처리 <br/>모범 규준(Best Practice)</h1>
+        <p>2015년 1월</p>
         <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
       </section>
 
       <section class="slide">
-	<h2>Background</h2>
+	<h2>배경</h2>
 	<ul>
-	  <li>Software is lab equipment for the 21st Century</li>
-	  <li>Scientists spend a lot of time writing it</li>
-	  <li>But over 90% are self-taught</li>
-	  <li>They don't know what "good" looks like</li>
-	  <li>So we describe 24 practices in 8 groups</li>
+	  <li>소프트웨어는 21세기 연구장비.</li>
+	  <li>과학자가 소프트웨어 작성에 많은 시간을 투여.</li>
+	  <li>하지만, 90%이상 과학자가 소프트웨어를 독학.</li>
+	  <li>"좋은" 소프트웨어 의미를 모름.</li>
+	  <li>그래서, 8개 범주 24개 모범규준(Practice)을 기술.</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h4 align="center">Good programmers are<br/>10X more productive than average</h4>
+	<h4 align="center">좋은 프로그래머가 평균보다<br/>10배 더 생산성이 높다.</h4>
       </section>
 
       <section class="slide">
-	<h4 align="center">Good <strike>programmers</strike> are<br/>10X more productive than average</h4>
+	<h4 align="center">
+		좋은 <strike>프로그래머</strike>가 평균보다<br/>10배 더 생산성이 높다.</h4>
       </section>
 
       <section class="slide">
-	<h4 align="center">Good <em><strong>practices</strong></em> are<br/>10X more productive</h4>
+	<h4 align="center">
+		좋은 <em><strong>모범규준(Practice)</strong></em>가 평균보다<br/>10배 더 생산성이 높다.</h4>
       </section>
 
       <section class="slide">
-	<h2>Rule 1</h2>
-	<h3 class="rule">Write Programs for People,<br/>not Computers</h3>
+	<h2>규칙 1</h2>
+	<h3 class="rule">사람을 위한 프로그램을 작성하라.
+		        <br/>컴퓨터를 위해서가 아니다.</h3>
 	<ul>
-	  <li>Hard to tell if code that's difficult to understand is doing what it's supposed to</li>
-	  <li>Hard for other scientists to re-use it...</li>
-	  <li>...including your future self</li>
+	  <li>이해하기 어려운 코드는 무슨 기능을 수행하는지 분간하기가 어렵다.</li>
+	  <li>다른 동료 과학자가 재사용하기도 어렵다...</li>
+	  <li>...미래의 본인 자신도 포함된다.</li>
 	</ul>
       </section>
 
       <section class="slide">
 	<h2>Rule 1a</h2>
-	<p class="rule">A program should not require its readers to hold more than a handful of facts in memory at once.</p>
+	<p class="rule">한번에 프로그램을 읽는 사람 머리속에 소수의 사실만 기억하도록 프로그램이 작성되어야 한다.</p>
 	<ul>
-	  <li>Short-term memory can hold 7&plusmn;2 items</li>
-	  <li>So break programs into short, readable functions, each taking only a few parameters</li>
+	  <li>사람 단기 기억은 7&plusmn;2 가지만 기억한다.</li>
+	  <li>그래서, 프로그램을 매개변수가 몇개 있는 짧고, 읽기 쉬운 함수로 쪼개야 한다.</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 1b</h2>
-	<p class="rule">Make names consistent, distinctive, and meaningful.</p>
+	<h2>규칙 1b</h2>
+	<p class="rule">이름은 일관되고, 독특하고, 의미있게 명명한다.</p>
 	<ul>
-	  <li><code>p</code> doesn't help the reader's short term memory as much as <code>pressure</code></li>
-	  <li>Don't use <code>temp</code> for both "temporary" and "temperature"</li>
-	  <li><code>i</code>, <code>j</code> are OK for indices in small scopes</li>
+	  <li><code>p</code>는 <code>pressure</code>(압력)만큼 독자의 단기 기억에 도움이 되지 않는 이름이다.</li>
+	  <li><code>temp</code>를 사용하지 말라. "temporary"(임시)와 "temperature"(온도)를 의미할 수 있다.</li>
+	  <li>단, <code>i</code>, <code>j</code>가 적은 유효 범위(scope)를 가지는 인덱스에 사용될 때는 OK.</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 1c</h2>
-	<p class="rule">Make code style and formatting consistent.</p>
+	<h2>규칙 1c</h2>
+	<p class="rule">코드 작성 스타일과 형식을 일관되게 하라.</p>
 	<ul>
-	  <li><em>Which</em> rules don't matter &mdash; <em>having</em> rules does</li>
-	  <li>Brain assumes all differences are significant</li>
-	  <li>Every inconsistency slows comprehension</li>
+	  <li><em>어떤</em> 코드 작성 규칙인지 관계없다. &mdash; 규칙을 <em>갖는게</em> 중요한다.</li>
+	  <li>뇌는 모든 차이가 특별한 의미가 있다고 가정한다.</li>
+	  <li>모든 불일관성이 이해를 떨어뜨린다.</li>
 	</ul>
       </section>
 
       <section class="slide">
-        <h2>Rule 2</h2>
-	<h3 class="rule">Let the Computer Do the Work</h3>
+        <h2>규칙 2</h2>
+	<h3 class="rule">컴퓨터가 작업을 처리하게 하라.</h3>
 	<ul>
-	  <li>Computers exist to repeat things quickly</li>
-	  <li>99% accuracy &rArr; 63% of at least one error per hundred repetitions</li>
+	  <li>컴퓨터의 존재이유는 빨리 작업을 반복하는데 있다.</li>
+	  <li>99% 정확성 &rArr; 100번 반복에 한번 오류가 있는 경우 63% 오류 가능성 의미.</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 2a</h2>
-	<p class="rule">Make the computer repeat tasks.</p>
+	<h2>규칙 2a</h2>
+	<p class="rule">컴퓨터가 작업을 반복하게 하라.</p>
 	<ul>
-	  <li>Write little programs for everything</li>
-	  <li>Even if they're called scripts, macros, or aliases</li>
-	  <li>Easier to do this with text-based programming systems than with GUIs</li>
+	  <li>모든 일에 작은 프로그램을 작성하라.</li>
+	  <li>스크립트, 매크로, 엘리어스로 불려도 상관없다.</li>
+	  <li>GUI 보다는 텍스트 기반 프로그래밍 시스템으로 하는 것이 쉽다.</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 2b</h2>
-	<p class="rule">Save recent commands in a file for re-use.</p>
+	<h2>규칙 2b</h2>
+	<p class="rule">재사용을 위해서 파일에 최든 명령어를 저장하라.</p>
 	<ul>
-	  <li>Most text-based interfaces do this automatically
+	  <li>대부분의 텍스트 기반 인터페이스는 자동으로 지원
 	    <ul>
-	      <li>Repeat recent operations using <code>history</code></li>
-	      <li>"Reproducibility in the small"</li>
+	      <li>최근 작업을 <code>history</code>를 사용해서 반복하라.</li>
+	      <li>"소규모로 재현(Reproducibility)"</li>
 	    </ul>
 	  </li>
-	  <li>Saving history supports "reproducibility in the large"
+	  <li>이력을 저장하면, "대규모로 재현(Reproducibility)"도 쉽다.
 	    <ul>
-	      <li>An accurate record of how a result was produced</li>
-	      <li><em>If</em> everything can be captured</li>
+	      <li>결과가 도출된 방법에 대한 정확한 기록</li>
+	      <li><em>만약</em> 모든 것이 수집된다면 그렇다.</li>
 	    </ul>
 	  </li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 2c</h2>
-	<p class="rule">Use a build tool to automate workflows.</p>
+	<h2>규칙 2c</h2>
+	<p class="rule">워크플로어(workflow)를 자동화하는 빌드(build) 도구를 사용.</p>
 	<ul>
-	  <li>Originally developed for compiling programs</li>
-	  <li>Can be used whenever some files depend on others</li>
-	  <li>Makes workflow explicit</li>
+	  <li>최초 프로그램을 컴파일하는 용도로 개발</li>
+	  <li>특정 파일이 다른 파일에 의존성을 가지는 경우 사용될 수 있다.</li>
+	  <li>Makes는 워크플로어를 명시적으로 만든다.</li>
 	</ul>
       </section>
 
       <section class="slide">
-        <h2>Rule 3</h2>
-	<h3 class="rule">Make Incremental Changes</h3>
+        <h2>규칙 3</h2>
+	<h3 class="rule">점진적 변경을 한다.</h3>
 	<ul>
-	  <li>Most scientists don't have "requirements"
+	  <li>대부분의 과학자는 "요구사항(requirement)"이 없다.
 	    <ul>
-	      <li>They are their own users</li>
-	      <li>Code evolves in tandem with research</li>
+	      <li>연구자 자신이 사용자가 된다.</li>
+	      <li>코드는 연구와 함께 진화한다.</li>
 	    </ul>
 	  </li>
-	  <li>Closest fit from industry is <em>agile development</em></li>
+	  <li>산업계에 가장 가까운 사례가 <em>애자일 개발(agile development)</em>이다.</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 3a</h2>
-	<p class="rule">Work in small steps with frequent feedback<br/>and course correction.</p>
+	<h2>규칙 3a</h2>
+	<p class="rule">피드백을 자주 받고 경로 보정으로 <br/>작은 움직임으로 작업한다.</p>
 	<ul>
-	  <li>People can concentrate for 45-90 minutes without a break</li>
-	  <li>So size each burst of work to fit that</li>
-	  <li>Longer cycle should be a week or two</li>
+	  <li>휴식없이 사람이 집중할 수 있는 시간은 45-90분 정도다.</li>
+	  <li>그래서, 작업 크기를 이정도 시간에 맞춘다.</li>
+	  <li>장기 사이클 주기는 1주 혹은 2주다.</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 3b</h2>
-	<p class="rule">Use a version control system.</p>
+	<h2>규칙 3b</h2>
+	<p class="rule">버젼 제어(version control) <br/> 시스템을 사용한다.</p>
 	<ul>
-	  <li>Tracks changes</li>
-	  <li>Allows them to be undone</li>
-	  <li>Supports independent parallel development</li>
-	  <li>Essential for collaboration <a href="#collaborate">collaboration</a></li>
+	  <li>변경 사항을 추적한다.</li>
+	  <li>실행취소(undo)가 될 수 있게 한다.</li>
+	  <li>독립적인 병렬 개발을 지원한다.</li>
+	  <li><a href="#collaborate">협업(collaboration)</a>에 필수적이다.</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 3c</h2>
-	<p class="rule">Put everything that has been created manually<br/>in version control.</p>
+	<h2>규칙 3c</h2>
+	<p class="rule">버젼 제어에 수작업으로 생성한 <br/>모든 것을 저장한다.</p>
 	<ul>
-	  <li>Not just software: papers, raw images, ...
+	  <li>소프트웨어 뿐만 아니라: 논문, 이미지, ...
 	    <ul>
-	      <li>Not gigabytes...</li>
-	      <li>...but metadata <em>about</em> those gigabytes</li>
+	      <li>기가바이트 데이터는 아니다....</li>
+	      <li>...기가바이트 데이터에 <em>대한</em> 메타데이터</li>
 	    </ul>
 	  </li>
-	  <li>Leave out things generated by the computer
+	  <li>컴퓨터가 생성한 것은 배제한다.
 	    <ul>
-	      <li>Use build tools to reproduce those instead</li>
-	      <li>Unless they take a very long time to create</li>
+	      <li>대신에 다시 생성하기 위해서 빌드(build) 도구를 사용한다.</li>
+	      <li>만약 다시 생성하는데 매우 오랜 시간이 걸리지 않는다면 그렇다.</li>
 	    </ul>
 	  </li>
 	</ul>
@@ -430,13 +433,13 @@
       </section>
 
       <section class="slide">
-	<h2>Gosh, That's a Lot</h2>
-	<p class="rule">One step at a time.</p>
+	<h2>이런, 엄청 많네...</h2>
+	<p class="rule">한번에 하나씩.</p>
 	<ol>
-	  <li>Use text-based interfaces</li>
-	  <li>Turn history into scripts</li>
-	  <li>Put everything in version control</li>
-	  <li>Use test-driven development</li>
+	  <li>텍스트 기반 인터페이스 사용한다.</li>
+	  <li>history를 스크립트로 변환한다.</li>
+	  <li>모든 것을 버젼 제어(version control) 시스템에 넣는다.</li>
+	  <li>테스트 주도 개발(Test-driven development) 사용한다.</li>
 	</ol>
       </section>
 
