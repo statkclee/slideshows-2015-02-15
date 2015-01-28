@@ -282,156 +282,158 @@
 	<h2>규칙 5c</h2>
 	<p class="rule">버그를 테스트 사례(test case)로 바꿔 놓는다.</p>
 	<ul>
-	  <li>만약 버그가 존재한다면, 실패하는 테스트를 작성한다.
-	  	Write a test that fails when the bug is present</li>
-	  <li>Then work on the code until that test passes...</li>
-	  <li>...and no others are failing</li>
+	  <li>만약 버그가 존재한다면, 실패하는 테스트를 작성한다.</li>
+	  <li>그리고 나서, 테스트가 통과할 때까지 코드 개발 작업한다...</li>
+	  <li>...그리고 다른 것들은 실패하지 않는다.</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Test-Driven Development</h2>
+	<h2>테스트 주도 개발</h2>
 	<ul>
-	  <li>Why wait? Always write the tests, then the code</li>
-	  <li>Improves focus</li>
-	  <li>Encourages writing testable code</li>
-	  <li>And ensures tests actually get written...</li>
-	  <li>"Red, green, refactor"</li>
+	  <li>왜 기다려야 하죠? 항상 테스트를 작성하고, 코드를 작성하라.</li>
+	  <li>초점이 되는 진원지를 개선한다.</li>
+	  <li>테스트 가능한 코드를 작성하게 격려한다.</li>
+	  <li>그리고, 테스트가 실제로 작성되었는지 확실히 한다...</li>
+	  <li>테스트 주도 개발 리듬 "레드(Red), 그린(green), 리팩터(refactor)"</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 5d</h2>
-	<p class="rule">Use a symbolic debugger.</p>
+	<h2>규칙 5d</h2>
+	<p class="rule">기호 결함 수정자(symbolic debugger)를 사용하라.</p>
 	<ul>
-	  <li>Explore the program as it runs</li>
-	  <li>Better than print statements
+	  <li>프로그램이 실행하며 프로그램을 탐구한다.</li>
+	  <li><code>print</code> 문장보다 좋다.
 	    <ul>
-	      <li>You don't have to re-run...</li>
-	      <li>...or guess in advance what you'll need to know</li>
+	      <li>다시 실행해야할 필요가 없다...</li>
+	      <li>...혹은 미리 알 필요가 있는 것을 추측한다.</li>
 	    </ul>
 	  </li>
-	  <li>Use <em>breakpoints</em> to stop program at particular points or when particular things are true</li>
+	  <li><em>breakpoints</em>를 사용해서 특정한 지점에서, 혹은 특정한 것이 참일대 프로그램을 정지한다.</li>
 	</ul>
       </section>
 
       <section class="slide">
         <h2>Rule 6</h2>
-	<h3 class="rule">Optimize Software<br/>Only After It Works Correctly</h3>
+	<h3 class="rule">올바르게 동작하는 뒤에야<br/>소프트웨어를 최적화한다.</h3>
 	<ul>
-	  <li>Even experts find it hard to predict performance bottlenecks</li>
-	  <li>Small changes to code often have dramatic impact on performance</li>
-	  <li>So get it right, <em>then</em> make it fast</li>
+	  <li>심지어 전문가조차도 성능 병목지점을 예측하기 어렵다.</li>
+	  <li>종종 코드에 작은 변경이 성능에 극적인 영향을 끼친다.</li>
+	  <li>그래서, 소프트웨어를 올바르게 만든다. <em>그리고 나서</em> 빠르게 만든다.</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 6a</h2>
-	<p class="rule">Use a profiler to identify bottlenecks.</p>
+	<h2>규칙 6a</h2>
+	<p class="rule">병목지점을 식별하는데 프로파일러(profiler)를 사용한다.</p>
 	<ul>
-	  <li>Reports how much time is spent on each line of code</li>
-	  <li>Re-check on new computers or when switching libraries</li>
-	  <li>Summarize across unit tests</li>
+	  <li>각 코드라인별로 얼마나 시간이 소요되었는지 기록한다.</li>
+	  <li>새로운 컴퓨터나 라이브러리를 바꿔서 다시 검증한다.</li>
+	  <li>단위 테스트를 거쳐 요약한다.</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 6b</h2>
-	<p class="rule">Write code in the highest-level language possible.</p>
+	<h2>규칙 6b</h2>
+	<p class="rule">가능한면 가장 높은 수준(highest-level) 언어로 코드를 작성한다.</p>
 	<ul>
-	  <li>People write the same number of lines of code per hour regardless of language</li>
-	  <li>So use the most expressive language available to get the "right" version...</li>
-	  <li>...then rewrite core pieces (possibly in a lower-level language) to get the "fast" version</li>
+	  <li>언어에 관계없이, 시간당 동일한 코드 라인을 작성한다.</li>
+	  <li>그래서, "올바르게 동작하는" 버젼을 개발하는데 이용가능한 가장 표현력이 큰 언어를 사용한다...</li>
+	  <li>...그리고 나서 "빠른" 버젼이 되도록 (아마도 좀더 낮은 수준(lower-leve) 언어로) 핵심 부분을 다시 작성한다.</li>
 	</ul>
       </section>
 
       <section class="slide">
-        <h2>Rule 7</h2>
-	<h3 class="rule">Document Design and Purpose,<br/>not Mechanics</h3>
+        <h2>규칙 7</h2>
+	<h3 class="rule">디자인과 의도를 문서화하라.<br/>기계적인 부분은 문서화하지 마라.</h3>
 	<ul>
-	  <li>Goal is to make the next person's life easier</li>
-	  <li>Focus on things the code <em>doesn't</em> say
+	  <li>목표가 다음 사람 인생을 좀더 쉽게 한다.</li>
+	  <li>코드가 말하지 <em>않는</em> 것에 초점을 맞춰라.
 	    <ul>
-	      <li>Or doesn't say clearly</li>
-	      <li>E.g., file formats</li>
+	      <li>혹은 명확히 말하지 않는 것</li>
+	      <li>예를 들어, 파일 형식</li>
 	    </ul>
 	  </li>
-	  <li>An example is worth a thousand words...</li>
+	  <li>예제 하나가 천마디 단어보다 가치가 있다...</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 7a</h2>
-	<p class="rule">Document interfaces and reasons,<br/>not implementations.</p>
+	<h2>규칙 7a</h2>
+	<p class="rule">인터페이스와 사유를 문서화하라, <br/>구현을 문서화하지 마라.</p>
 	<ul>
-	  <li>Interfaces and reasons change more slowly than implementation details, so documenting them is better economics</li>
-	  <li>And most people care about using code more than understanding it</li>
+	  <li>인터페이스와 사유 변경이 세부 구현보다 좀더 천천히 변경된다. 그래서 인터페이스와 사유를 문서화하는 것이 좀더 경제적이다.</li>
+	  <li>사람 대부분은 코드를 이해하는 것보다 사용하는데 관심이 있다.</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 7b</h2>
-	<p class="rule">Refactor code in preference to<br/>explaining how it works.</p>
+	<h2>규칙 7b</h2>
+	<p class="rule">코드 동작을 설명하는 것보다 <br/> 우선해서 코드를 리팩터한다.</p>
 	<ul>
-	  <li>Good code can be understood when read aloud</li>
-	  <li>Good programmers build libraries so that solving their problem is straightforward</li>
-	  <li>Again, "red, green, refactor"</li>
+	  <li>소리내어 읽게 되면, 좋은 코드는 이해될 수 있다.</li>
+	  <li>좋은 프로그래머는 라이브러리를 개발해서 문제 해결이 간단한다.</li>
+	  <li>다시, "레드, 그린, 리팩터"</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 7c</h2>
-	<p class="rule">Embed the documentation for a piece of software<br/>in that software.</p>
+	<h2>규칙 7c</h2>
+	<p class="rule">소프트웨어 내부에 소프트웨어 조각에 대한 문서를 내장한다.</p>
 	<ul>
-	  <li>Specially-formatted comments or strings</li>
-	  <li>More likely to be kept up to date</li>
-	  <li>More accessible to interactive help</li>
-	  <li>Many modern tools embed code in documentation rather than vice versa</li>
+	  <li>특정 형식의 주석 혹은 문자열</li>
+	  <li>좀더 최신정보로 갱신될 듯 하다.</li>
+	  <li>인터랙티브 도움말에 좀더 접근성이 좋다.</li>
+	  <li>많은 최신 도구는 문서화를 코드에 내장한다.(문서에 코드를 내장하기보다)</li>
 	</ul>
       </section>
 
       <section class="slide">
-        <h2 id="collaborate">Rule 8</h2>
-	<h3 class="rule">Collaborate</h3>
+        <h2 id="collaborate">규칙 8</h2>
+	<h3 class="rule">협업하라.(Collaborate)</h3>
 	<ul>
-	  <li>Computers were invented to calculate</li>
-	  <li>The web was invented to collaborate</li>
-	  <li>Science is more fun when it's shared</li>
+	  <li>컴퓨터는 계산하기 위해서 발명되었다.</li>
+	  <li>웹은 협업하기 위해서 발명되었다.</li>
+	  <li>과학은 공유될 때, 좀더 재밌다.</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 8a</h2>
-	<p class="rule">Use pre-merge code reviews.</p>
+	<h2>규칙 8a</h2>
+	<p class="rule">사전 병합(pre-merge) 코드 리뷰를 사용한다.</p>
 	<ul>
-	  <li>Have someone else review changes <em>before</em> merging in version control</li>
-	  <li>Significantly reduces errors</li>
-	  <li>Good way to share knowledge</li>
-	  <li>It's what makes open source possible</li>
+	  <li>버젼 제어 시스템에 병합하기 <em>전에</em> 다른 누군가 변경사항을 리뷰하게 시킨다.</li>
+	  <li>엄청나게 오류가 줄어든다.</li>
+	  <li>지식을 공유하는 좋은 방법</li>
+	  <li>이것이 공개 소프트웨어(open source)를 가능하게 만드는 것이다.</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 8b</h2>
-	<p class="rule">Use pair programming<br/>when bringing someone new up to speed<br/>and when tackling particularly tricky problems.</p>
+	<h2>규칙 8b</h2>
+	<p class="rule"> 새로운 누군가 빨리 적응시키고자 할때, <br/>
+	    특히, 까다로운 문제를 다룰 때 <br/>
+	    페어 프로그래밍(pair programming)을 사용한다.</p>
 	<ul>
-	  <li>Two people, one keyboard, one screen</li>
-	  <li>An extreme form of code review</li>
-	  <li>Can get a bit tired if done all the time...</li>
+	  <li>두명, 키보드 한개, 화면 한개</li>
+	  <li>코드 리뷰의 극단적인 형태</li>
+	  <li>아주 자주 한다면, 다소 지칠수도 있다...</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 8c</h2>
-	<p class="rule">Use an issue tracking tool.</p>
+	<h2>규칙 8c</h2>
+	<p class="rule">이슈 추적 도구를 사용한다.</p>
 	<ul>
-	  <li>A shared to-do list
+	  <li>공유 작업 목록 (shared to-do list)
 	    <ul>
-	      <li>Items can be assigned to people</li>
-	      <li>Supports comments, links to code and papers, etc.</li>
+	      <li>작업항목이 사람에게 할당될 수 있다.</li>
+	      <li>주석, 코드와 논문에 링크 등을 지원한다.</li>
 	    </ul>
 	  </li>
-	  <li>"Version control is where we've been, the issue tracker is where we're going"</li>
+	  <li>"버젼 제어(version control)는 갔던 장소를 이슈 추적(issue tracker)은 가고 있는 방향이다."<br/>
+	  <em>"Version control is where we've been, the issue tracker is where we're going"</em></li>
 	</ul>
       </section>
 
@@ -440,14 +442,14 @@
 	<p class="rule">한번에 하나씩.</p>
 	<ol>
 	  <li>텍스트 기반 인터페이스 사용한다.</li>
-	  <li>history를 스크립트로 변환한다.</li>
-	  <li>모든 것을 버젼 제어(version control) 시스템에 넣는다.</li>
-	  <li>테스트 주도 개발(Test-driven development) 사용한다.</li>
+	  <li><code>history</code>를 스크립트로 변환한다.</li>
+	  <li>모든 것을 버젼 제어 시스템에 넣는다.</li>
+	  <li>테스트 주도 개발 사용한다.</li>
 	</ol>
       </section>
 
       <section class="slide" data-container-class="no-status">
-        <h2 style="font-size: 160%;">Thank You</h2>
+        <h2 style="font-size: 160%;">감사합니다.</h2>
 	<p class="small">
 	  Greg Wilson,
 	  D. A. Aruliah,
