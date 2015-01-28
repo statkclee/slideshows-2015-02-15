@@ -68,7 +68,7 @@
       </section>
 
       <section class="slide">
-	<h2>Rule 1a</h2>
+	<h2>규칙 1a</h2>
 	<p class="rule">한번에 프로그램을 읽는 사람 머리속에 소수의 사실만 기억하도록 프로그램이 작성되어야 한다.</p>
 	<ul>
 	  <li>사람 단기 기억은 7&plusmn;2 가지만 기억한다.</li>
@@ -199,88 +199,91 @@
       </section>
 
       <section class="slide">
-        <h2>Rule 4</h2>
-	<h3 class="rule">Don't Repeat Yourself (or Others)</h3>
+        <h2>규칙 4</h2>
+	<h3 class="rule">자신 (혹은 타인)을 반복하지 않는다.</h3>
 	<ul>
-	  <li>Anything repeated in two or more places will eventually be wrong in at least one</li>
-	  <li>If it's faster to re-create than to discover or understand, <em>fix it</em></li>
+	  <li>두곳이상에서 반복되는 어떤 것이든지 결국 적어도 한 곳에서 잘못된다.</li>
+	  <li>찾거나 이해하는 것보다 다시 생성하는 것이 더 빠르다면, <em>고쳐라(fix it)</em></li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 4a</h2>
-	<p class="rule">Every piece of data must have<br/>a single authoritative representation in the system.</p>
+	<h2>규칙 4a</h2>
+	<p class="rule">
+		시스템에서 모든 데이터는 단 하나의 <br/>
+		믿을만한 표현만 가져야 한다.</p>
 	<ul>
-	  <li>Define constants exactly once</li>
-	  <li>Ditto file formats, geographical locations, ...</li>
+	  <li>상수(constant)는 정확히 한번 정의한다.</li>
+	  <li>파일 형식, 지리 정보, ... 등도 동일하다.</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 4b</h2>
-	<p class="rule">Modularize code rather than copying and pasting.</p>
+	<h2>규칙 4b</h2>
+	<p class="rule">코드를 CV신공(복사-붙여넣기)보다는 모듈화하라.</p>
 	<ul>
-	  <li>Reducing code cloning reduces error rates</li>
-	  <li>Cuts the amount of testing needed</li>
-	  <li>And increases comprehension</li>
+	  <li>코드 복제(code cloning)를 줄이면 오류가 줄어든다.</li>
+	  <li>테스팅 업무량을 줄여라.</li>
+	  <li>이해도(comprehension)를 높여라.</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 4c</h2>
-	<p class="rule">Re-use code instead of rewriting it.</p>
+	<h2>규칙 4c</h2>
+	<p class="rule">코드를 다시 작성하지 말고 재사용하라.</p>
 	<ul>
-	  <li>It takes experts years to build high-quality numerical or statistical software</li>
-	  <li>Your time is better spent doing science on top of that</li>
+	  <li>품질 좋은 수치해석 혹은 통계 소프트웨어를 개발하는데 수년의 전문가 시간이 소요된다.</li>
+	  <li>이 기반위에서 과학에 더 많은 시간을 보내는 것이 낫다.</li>
 	</ul>
       </section>
 
       <section class="slide">
-        <h2>Rule 5</h2>
-	<h3 class="rule">Plan for Mistakes</h3>
+        <h2>규칙 5</h2>
+	<h3 class="rule">실수에 대한 대비</h3>
 	<ul>
-	  <li>No single practice catches everything</li>
-	  <li>So practice <em>defense in depth</em></li>
+	  <li>단 하나의 모범규준(practice)이 모든걸 해결하지 못한다.</li>
+	  <li>그래서, <em>심도깊게 방어</em> 실습한다.</li>
 	</ul>
-	<p align="center"><em>Note: improving quality increases productivity</em></p>
+	<p align="center"><em>주석: 품질을 높이면 생산성이 올라간다.</em></p>
       </section>
 
       <section class="slide">
-	<h2>Rule 5a</h2>
-	<p class="rule">Add assertions to programs to check their operation.</p>
+	<h2>규칙 5a</h2>
+	<p class="rule">프로그램이 동작을 검증하는데 가정 설정문(assertions)을 추가하라.</p>
 	<ul>
-	  <li>"This must be true here or there is an error"</li>
-	  <li>Like diagnostic circuits in hardware</li>
-	  <li>No point proceeding if the program is broken...</li>
-	  <li>...and they serve as <em>executable documentation</em></li>
-	</ul>
-      </section>
-
-      <section class="slide">
-	<h2>Rule 5b</h2>
-	<p class="rule">Use an off-the-shelf unit testing library.</p>
-	<ul>
-	  <li>Manages setup, execution, and reporting</li>
-	  <li>Re-run unit tests after every change to the code to check for <em>regression</em></li>
+	  <li>"여기는 참(true)으로 문제가 없다. 혹은 오류가 있다"</li>
+	  <li>하드웨어에 진단 회로와 같은 역할</li>
+	  <li>만약 프로그램이 고장난 경우 보정 절차에 대한 안내는 없다...</li>
+	  <li>...<em>실행가능한 문서(executable documentation)</em>로 역할 수행.</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Testing is Hard</h2>
+	<h2>규칙 5b</h2>
+	<p class="rule">범용 단위 테스트 라이브러리를 사용한다.</p>
 	<ul>
-	  <li>"If I knew what the right answer was, I'd have published by now."</li>
-	  <li>Compare to experimental data</li>
-	  <li>Or to analytic solutions of simple problems</li>
-	  <li>Or to old (trusted) programs</li>
-	  <li>If nothing else, forces scientists to document what "errors" are acceptable</li>
+	  <li>설치, 환경설정, 실행, 보고서 작성을 관리한다.</li>
+	  <li>코드가 매번 변경될 때 <em>회귀 테스트(regression test)</em>를 통해서 단위 테스트를 다시 실행한다.</li>
 	</ul>
       </section>
 
       <section class="slide">
-	<h2>Rule 5c</h2>
-	<p class="rule">Turn bugs into test cases.</p>
+	<h2>테스팅은 어렵다.</h2>
 	<ul>
-	  <li>Write a test that fails when the bug is present</li>
+	  <li>"정답이 무엇인지 알고 있다면, 당장 논문을 발표할 것이다."</li>
+	  <li>실험 데이터와 비교하거나,</li>
+	  <li>단순한 문제의 해석적인 해와 비교하거나,</li>
+	  <li>예전 (신임된) 프로그램과 비교한다.</li>
+	  <li>만약 그외의 경우라면, 수용가능한 "오류"범위가 얼마인지 문서화한다.</li>
+	</ul>
+      </section>
+
+      <section class="slide">
+	<h2>규칙 5c</h2>
+	<p class="rule">버그를 테스트 사례(test case)로 바꿔 놓는다.</p>
+	<ul>
+	  <li>만약 버그가 존재한다면, 실패하는 테스트를 작성한다.
+	  	Write a test that fails when the bug is present</li>
 	  <li>Then work on the code until that test passes...</li>
 	  <li>...and no others are failing</li>
 	</ul>
