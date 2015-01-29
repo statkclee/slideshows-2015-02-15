@@ -116,70 +116,98 @@
       </section>
 
       <section class="slide">
-	<h2>왜 Git인가?  </h2>
-	  <img src='visual-git-basic-usage.png' height="100$">
+		<h2>왜 Git인가?  </h2>
+	  <img src='visual-git-basic-usage.png' height="100%">
 	  <small>
 	    출처: <a href="http://marklodato.github.io/visual-git-guide/">
 	    http://marklodato.github.io/visual-git-guide/</a>, <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">CC-BY-NC-SA</a>
 	    .
 	  </small>
   
-	<aside class="notes">
+		<aside class="notes">
 	  This provides the highest level overview of the structure of Git on one
 	  machine.
         </aside>
       </section>
 
       <section class="slide">
-	<h2>왜 Git인가?  </h2>
-	  <img src='visual-git-basic-usage.png' height="100$">
-	  <small>
-	    출처: <a href="http://marklodato.github.io/visual-git-guide/">
-	    http://marklodato.github.io/visual-git-guide/</a>, <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">CC-BY-NC-SA</a>
-	    .
-	  </small>
+		<h2>Git은 한번에 많은 문제를 해결한다.</h2>
+ 		  <ul>
+ 		  	<li>
+ 		      본인과 협업 동료가 수행한 기록
+	  		</li>
+		    <li class="slide" id="extensions-goto">
+		      변경된 것을 확인하는 방법
+		    </li>
+		    <li class="slide" id="extensions-goto">
+		      협업 동료가 했던 것에 대해 "남 탓(blame)"할 수 있는 방법
+		    </li>
+	      </ul>
+		<aside class="notes">
+	  		Note the odd humor again in "blame"
+        </aside>
+      </section>
+
+      <section class="slide">
+		<h2>유용한 커밋 메시지  </h2>
+
+		  <img src='git_commit.png' height="100%">
+
+		  <small>
+		    출처: <a href="http://xkcd.com/1296/">http://xkcd.com/1296/</a>, <a href="http://creativecommons.org/licenses/by-nc/2.5/"> CC-BY-NC 2.5 License</a>
+		  </small>
   
-	<aside class="notes">
-	  This provides the highest level overview of the structure of Git on one
-	  machine.
+		<aside class="notes">
+		  There are two points here: if you don't explain what you're doing, you
+	      won't know later. But also, don't let your desire not to write a commit
+	      message stop you from making a snapshot of your work!
+      </aside>
+      </section>
+
+      <section class="slide">
+		<h2>이력 공유 </h2>
+ 		  <ul>
+		    <li class="slide" id="extensions-goto">
+ 		      이력(history)은 (저장소 사본에 걸쳐) 발생한 일에 대한 항구적으로 기록이다.
+	  		</li>
+		    <li class="slide" id="extensions-goto">
+		      다르게 말해서, 저장소를 복사할 때 이력이 복사한 것이다.
+		    </li>
+	      </ul>
+  
+		<aside class="notes">
         </aside>
       </section>
 
       <section class="slide">
-	<h2>교육과정 </h2>
-	  <ol>
+		<h2>교육과정 </h2>
+	     <ol>
 	      <li class="slide" id="extensions-goto">
-		쉘(shell) 소개
+          버젼 관리 소개
 	      </li>
 	      <li class="slide" id="extensions-goto">
-		  파일과 디렉토리  
+		  더 훌륭한 백업 방법
 	      </li>
 	      <li class="slide" id="extensions-goto">
-		  파일과 디렉토리 생성  
+    	  협업(Collaboration)
 	      </li>
 	      <li class="slide" id="extensions-goto">
-		  파이프(pipe)와 필터(filter)
+		  충돌(Conflicts)
 	      </li>
 	      <li class="slide" id="extensions-goto">
-		  루프(Loops)
-	      </li>
-	      <li class="slide" id="extensions-goto">
-		  쉘 스크립트(shell script)
-	      </li>
-	      <li class="slide" id="extensions-goto">
-		  파일, 문자, 디렉토리 등 찾기    
+		  공개 과학(Open Science)
 	      </li>
 	  </ol>
 
 	<aside class="notes">    
-	    We will only explore a dozen or so commands in this lesson.
-	    Our real goal is to teach you how the shell works
-	    and how best to use it.
-	    If you'd like to know more,
-	    we recommend Deborah and Eric Ray's
-	    <em>Unix and Linux: Visual QuickStart Guide</em>,
+	    We will only explore the basics in this lesson.  Our real goal is to teach
+	    you how version control works and how best to use it.  While many of our
+	    images were from web comics, one was from a very useful guide:
+
+	        http://marklodato.github.io/visual-git-guide/
+
 	    which is good both as a tutorial and as a reference.
-	</aside>
+    </aside>
       </section>
 
   </body>
