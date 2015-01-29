@@ -1,167 +1,173 @@
----
-layout: slides
-title: "Software Carpentry: Version Control with Git"
-root: ..
-datetime: August 2014
-website: http://software-carpentry.org
----
-<!-- Working on the CSS?
-+++ b/reveal.js/css/theme/swc_slides.css
-@@ -234,6 +234,8 @@ xmp {
-   bottom:0;
-   background: #d6d6d6;
-   z-index:2;
-+  margin-top: 20px;
-+  top: 100px;
- }
- -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
 
-<section>
-  <h2>&nbsp;</h2>
-  <img src="{{page.root}}/img/software-carpentry-large.png" alt="Software Carpentry logo" />
-  <h1>Version Control with Git</h1>
-  <aside class="notes">
-    Over the next hour, we will introduce you to version control with Git.
-    Version control is:
-    <ol>
-        <li> A record of what you and your collaborators have done,
-        <li> A way to see what's changed, and
-        <li> A way to "blame" people for what they did.
-    </ol>
-    The sense of humor is also very corny...
-  </aside>
-</section>
+    <title>Git 버젼 제어 </title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="voiceover.ogg" />
+    <meta name="timings" content="timings.json" /> -->
 
-<section>
-  <h1>What It Is</h1>
-  <ul>
-    <li> A way to store and synchronize code (or any files).
-    <li class="fragment">
-        Documents collections of changes <em>upon your request</em>.
-    <li class="fragment">
-        Keeps your work safe and up-to-date <em>across machines</em>!
-  </ul>
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+    <div class="deck-container">
 
-  <aside class="notes">
-      The important thing is the general concept of version control, but we are
-      using Git because it has become the standard among open-source developers,
-      and strong hosting options are available (GitHub and BitBucket).
-  </aside>
-</section>
+      <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <p>2015년 2월 </p>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+	<aside class="notes">
+	  Over the next hour, we will introduce you to version control with Git.
+	  Version control is:
+	  <ol>
+	      <li> A record of what you and your collaborators have done,
+	      <li> A way to see what's changed, and
+	      <li> A way to "blame" people for what they did.
+	  </ol>
+	  The sense of humor is also very corny...
+	</aside>
+      </section>
 
-<section>
-  <h1>A common approach...</h1>
-  <img src='phd101212s-versions.gif'
+      <section class="slide">
+	<h2>Git이 무엇일까요?</h2>
+	  <ul>
+	    <li class="slide" id="extensions-goto">
+		  코드(혹은 파일)를 저장하고 동기화하는 방법
+	    </li>
+	    <li class="slide" id="extensions-goto">
+		  <em>사용자 요청으로</em> 변경 수집한 것을 문서화
+	    </li>
+	    <li class="slide" id="extensions-goto">
+		  <em>여러 컴퓨터</em> 에 걸쳐 있는 작업결과물을 안전하게 보관하고, 최신정보로 갱신한다.
+	    </li>
+      </ul>
+	<aside class="notes">
+	  The important thing is the general concept of version control, but we are
+	  using Git because it has become the standard among open-source developers,
+	  and strong hosting options are available (GitHub and BitBucket).
+	</aside>
+      </section>
+
+     <section class="slide">
+	<h2>흔한 접근 방법 ...  </h2>
+
+	<img src='phd101212s-versions.gif' height="100%"
        longdesc="used with permission (obtained by @davclark), from http://www.phdcomics.com/comics/archive/phd101212s.gif">
-  <aside class="notes">
-      Currently, the image doesn't always format properly. Sorry about that.
-      @gvwilson said he may be able to fix it?
-  </aside>
-</section>
+	
+	<aside class="notes">
+	</aside>
+      </section>
 
-<section>
-  <h1>Other problems we can solve</h1>
-  <ul>
-    <li> Imagine multiple copies of important code and data across machines:
-    <ul>
-        <li> Which copy has “the fix”
-        <li> Sharing with yourself can be hard, but 
-        <li> sharing with others is downright treacherous
-    </ul>
+     <section class="slide">
+	<h2>해결할 수 있는 다른 문제들... </h2>
+	  <ul>
+	    <li class="slide" id="extensions-goto">
+	      중요한 코드, 데이터가 여러 컴퓨터에 사본으로 널려있는 경우
+	    </li>
+	    <ul>
+	      <li class="slide" id="extensions-goto">
+		사본 중에 "버그 수정"본은? 
+	      </li>
+	      <li class="slide" id="extensions-goto">
+		 본인 스스로 공유하는 것도 힘들 수 있다. 하지만,
+	      </li>
+	      <li class="slide" id="extensions-goto">
+		 다른 사람과 공유하는 것은 매우 위험할 수 있다.
+	      </li>
+	    </ul>
+	    <li class="slide" id="extensions-goto">
+	      만약 충돌(conflict)이 있다면 어떨까? 
+	    </li>
+      </ul>
+	<aside class="notes">
+	</aside>
+      </section>
+      
 
-    <li class="fragment"> What if there’s a conflict?
-</section>
+      <section class="slide">
+	<h2>완벽하게 합리적(하지만, 실제 더 어려운) </h2>
+	  <p style="text-align: center">
+	      클라우드 저장소<br>
+	      +<br>
+	      고려를 잘한 이름 구조<br>
+	      =<br>
+	      아마도 충분할까?
+	  </p>
+	  <p>
+	    이제 파일을 어떻게 관리할까요? <br/>
+	    주의: 여전히 작업을 끝낼 수 있지요, 그렇지요?	    
+	  </p>
+	<aside class="notes">
+	  Have a serious, brief discussion with students. Some of them will be using
+	  good practices. Every time someone mentions something useful, explain how
+	  Git ensures or automates it.	
+	</aside>
+      </section>
 
-<section>
-  <h1>Perfectly reasonable (but actually harder)</h1>
-    <p style="text-align: center">
-        Cloud storage<br>
-        +<br>
-        well-considered naming schemes<br>
-        =<br>
-        Maybe good enough?
-    </p>
-    <p class="fragment" style="text-align: center">
-        How do you manage files now?<br>
-        NB: you are still getting work done, right?
-    </p>
-  <aside class="notes">
-      Have a serious, brief discussion with students. Some of them will be using
-      good practices. Every time someone mentions something useful, explain how
-      Git ensures or automates it.
-  </aside>
-</section>
+      <section class="slide">
+	<h2>왜 Git인가?  </h2>
+	  <img src='visual-git-basic-usage.png' height="100$">
+	  <small>
+	    출처: <a href="http://marklodato.github.io/visual-git-guide/">
+	    http://marklodato.github.io/visual-git-guide/</a>, <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">CC-BY-NC-SA</a>
+	    .
+	  </small>
+  
+	<aside class="notes">
+	  This provides the highest level overview of the structure of Git on one
+	  machine.
+        </aside>
+      </section>
 
-<section>
-  <h1>Why Git?</h1>
-  <img src='visual-git-basic-usage.svg'>
-  <small>
-    From <a href="http://marklodato.github.io/visual-git-guide/">
-    http://marklodato.github.io/visual-git-guide/</a>, licensed under a
-    <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/us/">Creative
-    Commons Attribution-Noncommercial-Share Alike 3.0 United States License</a>.
-  </small>
-  <aside class="notes">
-      This provides the highest level overview of the structure of Git on one
-      machine.
-  </aside>
-</section>
+      <section class="slide">
+	<h2>교육과정 </h2>
+	  <ol>
+	      <li class="slide" id="extensions-goto">
+		쉘(shell) 소개
+	      </li>
+	      <li class="slide" id="extensions-goto">
+		  파일과 디렉토리  
+	      </li>
+	      <li class="slide" id="extensions-goto">
+		  파일과 디렉토리 생성  
+	      </li>
+	      <li class="slide" id="extensions-goto">
+		  파이프(pipe)와 필터(filter)
+	      </li>
+	      <li class="slide" id="extensions-goto">
+		  루프(Loops)
+	      </li>
+	      <li class="slide" id="extensions-goto">
+		  쉘 스크립트(shell script)
+	      </li>
+	      <li class="slide" id="extensions-goto">
+		  파일, 문자, 디렉토리 등 찾기    
+	      </li>
+	  </ol>
 
-<section>
-    <h1>Git solves a lot of problems at once</h1>
-    <ul>
-      <li> A record of what you and your collaborators have done
-      <li class="fragment"> A way to see what’s changed
-      <li class="fragment"> A way to “blame” people for what they did
-    </ul>
-    <aside class="notes">
-        Note the odd humor again in "blame"
-    </aside>
-</section>
+	<aside class="notes">    
+	    We will only explore a dozen or so commands in this lesson.
+	    Our real goal is to teach you how the shell works
+	    and how best to use it.
+	    If you'd like to know more,
+	    we recommend Deborah and Eric Ray's
+	    <em>Unix and Linux: Visual QuickStart Guide</em>,
+	    which is good both as a tutorial and as a reference.
+	</aside>
+      </section>
 
-<section>
-  <h1>Informative commit messages</h1>
-  <img src='git_commit.png'>
-  <small>
-    From <a href="http://xkcd.com/1296/">http://xkcd.com/1296/</a>, licensed
-    under a <a href="http://creativecommons.org/licenses/by-nc/2.5/">Creative
-    Commons Attribution-NonCommercial 2.5 License</a>
-  </small>
-  <aside class="notes">
-      There are two points here: if you don't explain what you're doing, you
-      won't know later. But also, don't let your desire not to write a commit
-      message stop you from making a snapshot of your work!
-  </aside>
-</section>
-
-<section>
-    <h1>Sharing history</h1>
-    <ul>
-      <li> The history is a permanent record of what happened (across copies of
-           the repository)
-      <li class="fragment"> Put another way: the history is what we copy when we
-           copy a repository
-  </ul>
-</section>
+  </body>
+</html>
 
 
-<section>
-  <h1>Syllabus</h1>
-      <ol>
-        <li>Working directly with remote repositories
-        <li>Making "clones"
-        <li>Adding and committing your work
-        <li>Looking at history with diff and log
-        <li>Pushing your work back to a remote
-        <li>Pulling updates from a remote
-      </ol>
-  <aside class="notes">
-    We will only explore the basics in this lesson.  Our real goal is to teach
-    you how version control works and how best to use it.  While many of our
-    images were from web comics, one was from a very useful guide:
-
-        http://marklodato.github.io/visual-git-guide/
-
-    which is good both as a tutorial and as a reference.
-  </aside>
-</section>
