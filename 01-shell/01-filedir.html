@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>파일과 디렉토리</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> XWMOOC </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+	<aside class="notes">
+	</aside>
+      </section>
+
+    <section class="slide">
+    	<h2> REPL </h2>
+    	<h3 align="center"> <u>R</u>ead-<u>E</u>valudate-<u>P</u>rint Loop </h3>
+	  <ul>
+	    <li>
+		  읽기(<u>R</u>ead): 명령어 타이핑하고 엔터(enter)키를 입력
+	    </li>
+	    <li>
+		  평가(<u>E</u>valudate): 컴퓨터가 읽고, 실행
+	    </li>
+	    <li>
+		  출력(<u>P</u>rint): 결과를 출력한다.
+	    </li>
+	    <li>
+		  반복(<u>L</u>oop): 읽기-평가-출력 과정을 로그 오프할때까지 반복
+	    </li>	     
+      </ul>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+    	<h2> CRUD </h2>
+    	<h3 align="center"> <u>C</u>reate-<u>R</u>etrieve-<u>U</u>pdate-<u>D</u>elete </h3>
+	  <ul style="font-size: 80%">
+	    <li>
+		  생성(<u>C</u>reate): 파일, 디렉토리, 코드 등 정보를 최초 만든다.
+	    </li>
+	    <li>
+		  읽기(<u>R</u>etrieve): 이미 만들어진 파일, 디렉토리, 코드 등 정보를 읽어온다.
+	    </li>
+	    <li>
+		  갱신(<u>U</u>pdate): 파일, 디렉토리, 코드 등 정보를 갱신한다.
+	    </li>
+	    <li>
+		  삭제(<u>D</u>elete): 파일, 디렉토리, 코드 등 정보를 삭제한다.
+	    </li>	     
+      </ul>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> 유닉스 쉘 기본 명령어 </h2>
+	  <h3 align="center"> 컴퓨터 상태 파악 </h3>
+		<table width="100%">
+		<tr>
+			<td>현재 상태 파악</td>
+			<td>파일 상태 파악 </td>
+		</tr>
+		<tr>
+		    <td>
+			  <ul>
+			    <li>
+				  <code> whoami </code>
+			    </li>
+			    <li>
+				  <code> pwd </code>
+			    </li>
+			    <li>
+				  <code> ls -F -a </code>
+			    </li>
+			    <li>
+				  <code> ls -F -a /data</code>
+			    </li>
+			    <li>
+				  <code> history</code>
+			    </li>
+   			    <li>
+				  <code> !77 </code>
+			    </li>
+		      </ul>
+		    </td>
+		    <td align="left">
+			  <ul>
+			    <li>
+				  <code> cd .. </code>
+			    </li>
+   			    <li>
+				  <code> cd /data </code>
+			    </li>
+   			    <li>
+				  <code> wc NENE01729A.txt </code>
+			    </li>
+   			    <li>
+				  <code> cat NENE01729A.txt | less</code>
+			    </li>
+   			    <li>
+				  <code> head -5 NENE01729A.txt </code>
+			    </li>
+   			    <li>
+				  <code> tail -5 NENE01729A.txt </code>
+			    </li>
+   			    <li>
+				  파일의 중간 값은?
+			    </li>
+
+		      </ul>
+		    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> 유닉스 쉘 기본 명령어 </h2>
+	  <h3 align="center"> 편집 </h3>
+		<table width="100%">
+		<tr>
+			<td>편집과 복사</td>
+			<td>텍스트 편집기(editor)</td>
+		</tr>
+		<tr>
+		    <td>
+			  <ul>
+			    <li>
+				  탭 완성(tab completion)
+			    </li>
+			    <li>
+				  <code> nano test.txt </code>
+			    </li>
+   			    <li>
+				  <code> cp test.txt data/cptest.txt </code>
+			    </li>
+		      </ul>
+		    </td>
+		    <td align="left">
+			  <ul>
+			    <li>
+				  vi
+			    </li>
+   			    <li>
+				  emacs
+			    </li>
+   			    <li>
+				  nano
+			    </li>
+   			    <li>
+				  notepad++
+			    </li>
+   			    <li>
+				  sublimetext
+			    </li>
+   			    <li>
+				  ...
+			    </li>
+		      </ul>
+		    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> 유닉스 쉘 기본 명령어 </h2>
+	  <h3 align="center"> 생성 및 삭제 </h3>
+		<table width="100%">
+		<tr>
+			<td>생성</td>
+			<td>삭제</td>
+		</tr>
+		<tr>
+		    <td>
+			  <ul>
+			    <li>
+				  <code> $ mkdir swc </code>
+			    </li>
+			    <li>
+				  <code> $ nano test.txt </code>
+			    </li>
+		      </ul>
+		    </td>
+		    <td align="left">
+			  <ul>
+			    <li>
+				  <code> $ rm test.txt </code>
+			    </li>
+			    <li>
+				  <code> $ rmdir swc </code>
+			    </li>
+			    <li>
+				  <code> $ rm -r swc </code>
+			    </li>
+		      </ul>
+		    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> 유닉스 쉘 기본 명령어 </h2>
+	  <h3 align="center"> find </h3>
+		<table width="100%" style="font-size: 70%">
+		<tr align="center">
+			<td>데이터</td>
+			<td>find & grep </td>
+		</tr>
+		<tr>
+		    <td>		      
+		      <img src="img/01-find-file-tree.png" height="50%"/>
+		    </td>
+		    <td align="left">
+			  <ul>
+			    <li>
+				  <code> $ find . -name haiku.txt </code>
+			    </li>
+			    <li>
+				  <code> $ find . -name '*.txt' </code>
+			    </li>
+			    <li>
+				  <code> $ find . -type d </code>
+			    </li>
+			    <hr/>
+			    <li>
+				  <code> $ grep not haiku.txt </code>
+			    </li>
+			    <li>
+				  <code> $ grep -w Today haiku.txt </code>
+			    </li>
+			    <li>
+				  <code> $ grep -i -v the haiku.txt </code>
+			    </li>
+			    <hr/>
+			    <li>
+				  <code> $ wc -l $(find . -name '*.txt') </code>
+			    </li>
+
+		      </ul>
+		    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+
+
+
+  </div>
+  </body>
+</html>
+
+
+
+

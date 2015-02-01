@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>쉘 프로그래밍</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> XWMOOC </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+	<aside class="notes">
+	</aside>
+      </section>
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> 자료분석 </h2>
+	  <h3 align="center"> 최대값 </h3>
+		<table width="100%" style="font-size:60%"> 
+		<tr align="center">
+			<td>데이터</td>
+			<td>분석</td>
+		</tr>
+	    <tr>
+			<td><hr/></td>
+			<td><hr/></td>
+		</tr>
+		<tr>
+		    <td>
+				Site/Date/Evil <br/>
+				Davison/May 23, 2010/1724.7 <br/>
+				Pertwee/May 24, 2010/2103.8 <br/>
+				Davison/June 19, 2010/1731.9 <br/>
+				Davison/July 6, 2010/2010.7 <br/>
+				Pertwee/Aug 4, 2010/1731.3 <br/>
+				Pertwee/Sept 3, 2010/4981.0 <br/>
+				Pertwee/June 20, 2011/2103.8 <br/>
+				Davison/June 5, 2011/1731.9 <br/>
+				Davison/Dec 14, 2011/2200.4 <br/>
+				Pertwee/Nov 2, 2011/930.1 <br/>
+				Pertwee/Sept 5, 2011/5000.9 <br/>
+		    </td>
+		    <td align="left">
+			  <ul>
+			    <li>
+				  <code> $ cut -d / -f 1 notebook-1.txt</code>				  
+			    </li>
+			    <li>
+				  <code> $ cut -d / -f 1 notebook-1.txt  | tail +2 </code>
+			    </li>
+			    <li>
+				  <code> $ cut -d / -f 1 notebook-1.txt  | tail +2 | sort | uniq -c </code>
+			    </li>
+		      </ul>
+		    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> 자료분석 </h2>
+	  <h3 align="center"> 최대값 </h3>
+		<table width="100%" style="font-size:60%"> 
+		<tr align="center">
+			<td>데이터</td>
+			<td>분석1(tail)</td>
+		</tr>
+	    <tr>
+			<td><hr/></td>
+			<td><hr/></td>
+		</tr>
+		<tr>
+		    <td>
+				Site	Date		Evil (milliVaders) <br/>
+				Baker 1	2009-11-17	1223.0 <br/>
+				Baker 1	2010-06-24	1122.7 <br/>
+				Baker 2	2009-07-24	2819.0 <br/>
+				Baker 2	2010-08-25	2971.6 <br/>
+				Baker 1	2011-01-05	1410.0 <br/>
+				Baker 2	2010-09-04	4671.6 <br/>
+				Baker 2	2012-02-25	1099.0 <br/>
+				Baker 1	2013-01-01	950.9 <br/>
+				Baker 1	2012-07-23	2000.0 <br/>
+				Baker 2	2013-08-22	3500.4 <br/>
+				Baker 2	2014-01-02	4510.1 <br/>
+		    </td>
+		    <td align="left">
+			  <ul>
+			    <li>
+				  <code> $ cut -f 1 notebook-1.txt</code>				  
+			    </li>
+			    <li>
+				  <code> $ cut -f 1 notebook-1.txt  | tail +2 </code>
+			    </li>
+			    <li>
+				  <code> $ cut -f 1 notebook-1.txt  | tail +2 | sort | uniq -c </code>
+			    </li>
+		      </ul>
+		    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> 자료분석 </h2>
+	  <h3 align="center"> 최대값 </h3>	  
+		<table width="100%" style="font-size:50%"> 
+		<tr align="center">
+			<td>데이터</td>
+			<td>분석2(grep)</td>
+		</tr>
+	    <tr>
+			<td><hr/></td>
+			<td><hr/></td>
+		</tr>
+		<tr>
+		    <td>
+				Site/Date/Evil <br/>
+				Davison/May 23, 2010/1724.7 <br/>
+				Pertwee/May 24, 2010/2103.8 <br/>
+				Davison/June 19, 2010/1731.9 <br/>
+				Davison/July 6, 2010/2010.7 <br/>
+				Pertwee/Aug 4, 2010/1731.3 <br/>
+				Pertwee/Sept 3, 2010/4981.0 <br/>
+				Pertwee/June 20, 2011/2103.8 <br/>
+				Davison/June 5, 2011/1731.9 <br/>
+				Davison/Dec 14, 2011/2200.4 <br/>
+				Pertwee/Nov 2, 2011/930.1 <br/>
+				Pertwee/Sept 5, 2011/5000.9 <br/>
+		    </td>
+   		    <td align="left">
+			  <ul>
+			    <li>
+				  <code> $ grep Pertwee notebook-2.txt </code>				  
+			    </li>
+			    <li>
+				  <code> $ grep -v Site notebook-2.txt </code>
+			    </li>
+			    <li>
+				  <code> $ grep -v Site notebook-2.txt | cut -d / -f 1 | sort | uniq -c </code>
+			    </li>
+		      </ul>
+		    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> 자료분석 </h2>
+	  <h3 align="center"> 최대값 검증 </h3>	  
+		<table width="100%" style="font-size:50%"> 
+		<tr align="center">
+			<td>데이터</td>
+			<td>분석1(tail)</td>
+			<td>분석2(grep)</td>
+			<td>차이(diff)</td>
+		</tr>
+	    <tr>
+			<td><hr/></td>
+			<td></td>
+			<td><hr/></td>
+			<td></td>
+		</tr>
+		<tr>
+		    <td>
+				Site/Date/Evil <br/>
+				Davison/May 23, 2010/1724.7 <br/>
+				Pertwee/May 24, 2010/2103.8 <br/>
+				Davison/June 19, 2010/1731.9 <br/>
+				Davison/July 6, 2010/2010.7 <br/>
+				Pertwee/Aug 4, 2010/1731.3 <br/>
+				Pertwee/Sept 3, 2010/4981.0 <br/>
+				Pertwee/June 20, 2011/2103.8 <br/>
+				Davison/June 5, 2011/1731.9 <br/>
+				Davison/Dec 14, 2011/2200.4 <br/>
+				Pertwee/Nov 2, 2011/930.1 <br/>
+				Pertwee/Sept 5, 2011/5000.9 <br/>
+		    </td>
+		    <td align="left">
+			  <ul>
+			    <li>
+				  <code> $ cut -d / -f 1 notebook-1.txt</code>				  
+			    </li>
+			    <li>
+				  <code> $ cut -d / -f 1 notebook-1.txt  | tail +2 </code>
+			    </li>
+			    <li>
+				  <code> $ cut -d / -f 1 notebook-1.txt  | tail +2 | sort | uniq -c </code>
+			    </li>
+		      </ul>
+		    </td>
+   		    <td align="left">
+			  <ul>
+			    <li>
+				  <code> $ grep Pertwee notebook-2.txt </code>				  
+			    </li>
+			    <li>
+				  <code> $ grep -v Site notebook-2.txt </code>
+			    </li>
+			    <li>
+				  <code> $ grep -v Site notebook-2.txt | cut -d / -f 1 | sort | uniq -c </code>
+			    </li>
+		      </ul>
+		    </td>
+   		    <td align="left">
+			  <ul>
+			    <li>
+				  <code> $ grep -v Site notebook-2.txt | cut -d / -f 1 | sort | uniq -c </code>				  
+			    </li>
+		      </ul>
+		    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> 자료분석 </h2>
+	  <h3 align="center"> 실제 데이터 </h3>	  
+		<table width="100%" style="font-size:50%"> 
+		<tr align="center">
+			<td>데이터</td>
+			<td>와일드 카드</td>
+		</tr>
+	    <tr>
+			<td><hr/></td>
+			<td><hr/></td>
+		</tr>
+		<tr>
+		    <td>
+				parisgirl@PARISGIR7 /C/_swc_instructor/shell-novice/filesystem/users/nelle/data/pdb (gh-pages) <br/>
+				$ ls <br/>
+				aldrin.pdb          cyclopropane.pdb      methane.pdb        quinine.pdb <br/>
+				ammonia.pdb         ethane.pdb            methanol.pdb       strychnine.pdb <br/>
+				ascorbic-acid.pdb   ethanol.pdb           mint.pdb           styrene.pdb <br/>
+				benzaldehyde.pdb    ethylcyclohexane.pdb  morphine.pdb       sucrose.pdb <br/>
+				camphene.pdb        glycol.pdb            mustard.pdb        testosterone.pdb <br/>
+				cholesterol.pdb     heme.pdb              nerol.pdb          thiamine.pdb <br/>
+				cinnamaldehyde.pdb  lactic-acid.pdb       norethindrone.pdb  tnt.pdb <br/>
+				citronellal.pdb     lactose.pdb           octane.pdb         tuberin.pdb <br/>
+				codeine.pdb         lanoxin.pdb           pentane.pdb        tyrian-purple.pdb <br/>
+				cubane.pdb          lsd.pdb               piperine.pdb       vanillin.pdb <br/>
+				cyclobutane.pdb     maltose.pdb           propane.pdb        vinyl-chloride.pdb <br/>
+				cyclohexanol.pdb    menthol.pdb           pyridoxal.pdb      vitamin-a.pdb <br/>
+		    </td>
+		    <td align="left">
+			  <ul>
+			    <li>
+				  <code> $ wc -l *.pdb | sort </code>				  
+			    </li>
+			    <li>
+				  <code> $ wc *.pdb | sort -n | head -1 </code>
+			    </li>
+			    <li>
+				  <code> $ wc *.pdb | sort -r | tail +2 | head -1 </code>
+				  <code> $ wc *.pdb | sort -r | grep -v total | head -1 </code>
+			    </li>
+		      </ul>
+		    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> 자료분석 </h2>
+	  <h3 align="center"> 쉘 스크립트 </h3>	  
+		<table width="100%" style="font-size:50%"> 
+		<tr align="center">
+			<td>데이터</td>
+			<td>와일드 카드</td>
+		</tr>
+	    <tr>
+			<td><hr/></td>
+			<td><hr/></td>
+		</tr>
+		<tr>
+		    <td>
+		    	<strong>steve-2012.txt</strong> <br/>
+		    	Date, Species, Count <br/>
+		    	2012-07-11, cod, 11 <br/>
+		    	2012-09-10, shark, 1 <br/>
+		    	2012-10-20, turtle, 5 <br/>
+		    	<hr/>
+		    	<strong>victor-2011.txt</strong> <br/>
+		    	Date, Species, Count <br/>
+		    	2011-02-11, cod, 5 <br/>
+		    	2011-01-10, cod, 2 <br/>
+		    	2011-11-20, squid, 15 <br/>
+		    	<hr/>
+		    	<strong>steve-2011.txt</strong> <br/>
+		    	Date, Species, Count <br/>
+		    	2011-12-11, salmon, 21 <br/>
+		    	2011-01-10, shark, 10 <br/>
+		    	2011-04-20, turtle, 51 <br/>
+		    	<hr/>
+		    </td>
+		    <td align="left">
+			  <ul>
+			    <li>
+				  <code> $ grep -v Species steve-2011.txt | cut -d , -f 2 | sort | uniq -c</code>				  
+			    </li>
+			    <li>
+				  <code> $ for species in steve-2011.txt steve-2012.txt victor-2011.txt <br/>
+						 > do  <br/>
+						 > &nbsp&nbsp&nbsp&nbsp grep -v Species $species | cut -d , -f 2 | sort | uniq -c  <br/>
+						 > done 
+				  </code>
+			    </li>
+			    <li>
+				  <code> $ grep -v Species *.txt | cut -d , -f 2 | sort | uniq -c </code>
+			    </li>
+  			    <li>
+				  <code> $ nano count.sh </code>
+			    </li>
+		    	<strong>count.sh</strong> <br/>
+		    		grep -v Species *.txt | cut -d , -f 2 | sort | uniq -c
+		    	<hr/>
+  			    <li>
+				  <code> $ bash count.sh </code>
+			    </li>
+		    	<strong>count.sh</strong> <br/>
+		    		for filename in *.txt <br/>
+		    		do <br/>
+		    		echo $filename <br/>
+		    		&nbsp&nbsp&nbsp&nbsp grep -v Species $filename | cut -d, -f 2 | sort | uniq -c <br/>
+                    done <br/>
+		    	<hr/>
+  			    <li>
+				  <code> $ bash count.sh </code>
+			    </li>
+		      </ul>
+		    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+  </div>
+  </body>
+</html>
+
+
+
+

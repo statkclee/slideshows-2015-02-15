@@ -1,193 +1,25 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
-
-    <title>유닉스 쉘(Shell) </title>
-    <meta name="author" content="Greg Wilson" />
-    <!-- <meta name="narrator" content="Katy Huff" />
-    <meta name="audio" content="voiceover.ogg" />
-    <meta name="timings" content="timings.json" /> -->
-
-    <script src="../js/deckjs-custom.js"></script>
-    <script>includedeck(["../css/software-carpentry.css"],{});</script>
-    <style type="text/css">
-      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
-      a {text-decoration: underline;} /* make links clearer */
-      pre {font-size: 75%;} /* make code blocks smaller */
-      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
-    </style>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>XWMOOC소프트웨어 카펜트리 유닉스 쉘 슬라이드</title>
   </head>
   <body>
-    <div class="deck-container">
-
-      <section class="slide title-slide" data-container-class="no-status">
-        <h2 class="var-title"></h2>
-        <p>2015년 2월 </p>
-        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
-	<aside class="notes">
-	  Over the next two and a half hours,
-	  we will introduce you to the Unix shell.
-	  It's older than most people in this room,
-	  but there are good reasons why it's lasted forty-five years.
-	</aside>
-      </section>
-
-      <section class="slide">
-	<h2>쉘(Shell)이 무엇일까요?</h2>
-	  <ul>
-	    <li class="slide" id="extensions-goto">
-		  컴퓨터에 있는 일반적인 텍스트 인터페이스
-	    </li>
-	    <li class="slide" id="extensions-goto">
-		  여러분을 대신하여 다른 프로그램을 실행
-	    </li>
-	    <li class="slide" id="extensions-goto">
-		  여러분의 시간을 절약
-	    </li>
+    <h1>XWMOOC 소프트웨어 카펜트리 유닉스 쉘 슬라이드</h1>
+      <ol>
+        <li><a href="00-pitch.html">왜 유닉스 쉘(shell)인가?</a></li>
+        <li><a href="00-intro.html">쉘(shell) 소개</a></li>
+        <li><a href="01-filedir.html">파일과 디렉토리</a></li>
+        <li><a href="02-programming.html">쉘 프로그래밍</a></li>
+      </ol>
+   <h2>고급 유닉스 쉘 슬라이드</h1>      
+      <ul>
+        <li><a href="11-perm.html">Permissions</a></li>
+        <li><a href="12-job.html">Job Control</a></li>
+        <li><a href="13-var.html">Variables</a></li>
+        <li><a href="14-ssh.html">Secure Shell</a></li>
+        <li><a href="15-advanced.html">Advanced Tricks</a></li>
       </ul>
-	<aside class="notes">
-	  The shell is basically a generic textual interface for your computer.
-	  When you type the name of a program,
-	  the shell finds it for you,
-	  runs it,
-	  and shows you its output.
-	  Once you're familiar with it,
-	  this lets you do complex things with a few keystrokes.
-	</aside>
-      </section>
-
-     <section class="slide">
-	<h2>재현성(Reproducibility) </h2>
-	  <ul>
-	    <li class="slide" id="extensions-goto">
-		  타이핑한 명령어를 기록한다.
-	    </li>
-	    <li class="slide" id="extensions-goto">
-		  그래서, 나중에 명령어를 검사하고 반복할 수 있다.
-	    </li>
-	    <li class="slide" id="extensions-goto">
-		  연구실 전자 노트북(electronic lab notebook)
-	    </li>
-      </ul>
-	<aside class="notes">
-	  But the shell does more than that.
-	  For example,
-	  it saves all the commands that you type
-	  so that you can look at them later to figure out what you did,
-	  or ask the computer to repeat them.
-	  It can therefore be used as a simple electronic lab notebook
-	  without any extra effort.
-	</aside>
-      </section>
-
-     <section class="slide">
-	<h2>자동화(Automation) </h2>
-	  <ul>
-	    <li class="slide" id="extensions-goto">
-		  매개변수를 달리 해서 파일마다(file/per), 시간마다(hour/per)<br/>
-		  명령어을 반복할 수 있다. 
-	    </li>
-	    <li class="slide" id="extensions-goto">
-		  여러분이 잠든 사이 컴퓨터가 대신 과학을 합니다. 
-	    </li>
-      </ul>
-	<aside class="notes">
-	  And if the computer can repeat a command once,
-	  it can repeat it many times
-	  to process different data files,
-	  explore variations in parameters,
-	  or do something at regular intervals.
-	  This means that the computer can do science for you while you're asleep
-	  or catching up on your reading.
-
-	</aside>
-      </section>
-      
-
-      <section class="slide">
-	<h2>글루 (Glue, 접착) </h2>
-	<ul>
-	    <li class="slide" id="extensions-goto">
-		다른 프로그램과 결합하는 간단한 방법  
-	    </li>
-	    <li class="slide" id="extensions-goto">
-		다시 작성하는 대신에 재사용(Re-use)한다. 
-	    </li>
-	</ul>
-	<aside class="notes">
-	  Finally,
-	  the shell is often used to combine programs written by different people,
-	  at different times,
-	  in different languages.
-	  This means that you don't have to learn Fortran, Perl, or C++
-	  to use tools written in those languages.
-	  Instead,
-	  you can concentrate on building new things that do new kinds of science.
-	</aside></section>
-
-      <section class="slide">
-	<h2>하지만,  </h2>
-	<ul>
-	  <li class="slide" id="extensions-goto">
-	    구분(syntax)이 간단하거나 일관되지 못하다.
-	  </li>
-	  <li class="slide" id="extensions-goto">
-	    큰 힘에는 큰 책임이 따른다.
-	    <blockquote> With Great Power Comes Great Responsibility </blockquote>
-	  </li>
-	</ul>
-	<aside class="notes">
-	  Nothing's perfect, though.
-	  Many of the shell's commands have cryptic two- and three-letter names,
-	  and the online help is written for people who already understand how it works.
-	  More importantly,
-	  the shell is a power tool:
-	  if you accidentally tell it to delete your thesis,
-	  it will.
-        </aside>
-      </section>
-
-      <section class="slide">
-	<h2>교육과정 </h2>
-	  <ol>
-	      <li class="slide" id="extensions-goto">
-		쉘(shell) 소개
-	      </li>
-	      <li class="slide" id="extensions-goto">
-		  파일과 디렉토리  
-	      </li>
-	      <li class="slide" id="extensions-goto">
-		  파일과 디렉토리 생성  
-	      </li>
-	      <li class="slide" id="extensions-goto">
-		  파이프(pipe)와 필터(filter)
-	      </li>
-	      <li class="slide" id="extensions-goto">
-		  루프(Loops)
-	      </li>
-	      <li class="slide" id="extensions-goto">
-		  쉘 스크립트(shell script)
-	      </li>
-	      <li class="slide" id="extensions-goto">
-		  파일, 문자, 디렉토리 등 찾기    
-	      </li>
-	  </ol>
-
-	<aside class="notes">    
-	    We will only explore a dozen or so commands in this lesson.
-	    Our real goal is to teach you how the shell works
-	    and how best to use it.
-	    If you'd like to know more,
-	    we recommend Deborah and Eric Ray's
-	    <em>Unix and Linux: Visual QuickStart Guide</em>,
-	    which is good both as a tutorial and as a reference.
-	</aside>
-      </section>
-
+    </ul>
+    <p><img src="../img/software-carpentry-banner.png" alt="Software Carpentry logo" /></p>
   </body>
-</html>
-
-
+<html>
