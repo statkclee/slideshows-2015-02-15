@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>버젼 제어 (version control) </title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="voiceover.ogg" />
+    <meta name="timings" content="timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+    <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> svn </h3>
+        <p>2015년 2월 </p>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+	<aside class="notes">
+	</aside>
+      </section>
+
+    <section class="slide">
+	<h2>SVN</h2>
+  	  <img src='img/02-svn-install.png' height="100%">
+  	  <a href="http://tortoisesvn.net/downloads.html">SVN download</a>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	<h2>Git, GitHub</h2>
+	<table width="100%" style="font-size:50%"> 
+		<tr align="center">
+			<td><h4>Git</h4></td>
+			<td><h4>GitHub</h4></td>
+		</tr>
+		<tr align="center">
+			<td><hr/></td>
+			<td><hr/></td>
+		</tr>		
+	    <tr>
+			<td><img src='img/02-git.png' height="30%"></td>
+			<td><img src='img/02-github.png' height="30%"></td>
+	    </tr>
+	    <tr>
+			<td><a href="http://git-scm.com">http://git-scm.com/</a></td>
+			<td><a href="http://github.com">http://github.com/</a></td>
+	    </tr>
+    </table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	  <h2> Git </h2>
+	  <h3 align="center"> 시간여행 </h3>	  
+	<table width="100%" style="font-size:50%"> 
+		<tr align="center">
+			<td><h4>환경설정</h4></td>
+			<td><h4>add, commit, log</h4></td>
+		</tr>
+	    <tr>
+			<td><hr/></td>
+			<td><hr/></td>
+		</tr>
+		<tr>
+	    <td>
+		  <ul>
+		    <li>
+			  <code> $ mkdir laptop </code> <br/>
+			  <code> $ mkdir desktop </code>				  
+		    </li>
+		    <li>
+			  <code> $ mkdir planets </code> <br/>
+			  <code> $ cd planets </code>
+		    </li>
+		    <hr/>
+		    <li>
+			  <code> $ git config --global user.name "Kwangchun Lee" </code> <br/>
+			  <code> $ git config --global user.email "kwangchun.7@gmail.com" </code>				  
+		    </li>
+			  <code> $ git init . </code> <br/>
+			  <code> $ git status </code> 
+		    </li>
+	      </ul>
+	    </td>
+		    <td align="left">
+		  <ul>
+		    <li>
+			  <code> $ echo "Cold and dry, but everythinkg is my favorate color" > mars.txt </code> <br/>
+			  <code> $ git status </code><br/>
+			  <code> $ git add mars.txt </code><br/>
+			  <code> $ git commit -m "Starting to think about Mars" </code><br/>
+			  <code> $ git log </code>		  
+		    </li>
+		    <hr/>
+	      </ul>
+	    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	  <h2> Git </h2>
+	  <h3 align="center"> 시간여행 </h3>	  
+	<table width="100%" style="font-size:50%"> 
+		<tr align="center">
+			<td><h4>diff</h4></td>
+			<td><h4>revert</h4></td>
+		</tr>
+	    <tr>
+			<td><hr/></td>
+			<td><hr/></td>
+		</tr>
+		<tr>
+	    <td>
+		  <ul>
+		    <li>
+			  <code> $ echo "Two moons might be a problem for Wolfman" >> mars.txt </code> <br/>
+			  <code> $ git diff mars.txt </code> <br/>
+              <code> $ git commit -m "Concerns about Wolfman" </code> <br/>
+			  <code> $ git diff mars.txt </code> <br/>
+		    </li>
+		    <hr/>
+		    <li>
+			  <code> $ echo "The Mummy will appreciate the lack of humidity" >> mars.txt </code> <br/>
+			  <code> $ git diff  </code> <br/>
+			  <code> $ git diff --staged </code> <br/>
+			  <code> $ git commit -m "some thoughts on climate"  </code> <br/>
+			  <code> $ git log  </code> <br/>
+		    </li>
+		    <hr/>
+		    <li>
+			  <code> $ git diff HEAD~1 mars.txt </code> <br/>
+			  <code> $ git log  </code> <br/>
+			  <code> $ git diff 9c41b63fbef46df5164811db94b68203e162dc91 </code> <br/>
+		    </li>
+	      </ul>
+	    </td>
+		    <td align="left">
+		  <ul>
+		    <li>
+			  <code> $ echo "We will need to make our Oxygen" > mars.txt </code> <br/>
+			  <code> $ git status </code><br/>
+			  <code> $ git reset --hard  HEAD </code><br/>
+		    </li>
+		    <hr/>
+	      </ul>
+	    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	<h2>GitHub</h2>
+	<h3 align="center"> 협업 (Collaboration) </h3>
+	<table align="center" width="100%" style="font-size:70%">
+		<tr>
+			<td align="center"><strong> GitHub 저장소 </strong> </td>
+			<td align="center"><strong> GitHub 주소 </strong> </td>
+ 		</tr>
+ 		
+		<tr align="center">
+			<td><img src='img/02-github-repository.png' height="40%"></td>
+			<td><img src='img/02-github-repository-address.png' height="40%"></td>
+		</tr>
+    </table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	  <h2> GitHub </h2>
+	  <h3 align="center"> 협업 (Collaboration) </h3>	  
+	<table width="100%" style="font-size:50%"> 
+		<tr align="center">
+			<td><h4>원격 저장소 연결</h4></td>
+			<td><h4>Push, Pull</h4></td>
+		</tr>
+	    <tr>
+			<td><hr/></td>
+			<td><hr/></td>
+		</tr>
+		<tr>
+	    <td align="left">
+		  <ul>
+		    <li>
+			  <code> $ git remote add origin https://github.com/statkclee/planets.git </code> <br/>
+		    </li>
+		    <li>
+			  <code> $ git remote -v </code>
+		    </li>
+		  </ul>
+		  <hr/>
+	    </td>
+	    <td align="left">
+		  <ul>
+		    <li>
+			  <code> $ git push origin master </code> <br/>
+		    </li>
+		    <li>
+			  <code> $ git pull origin master  </code> <br/>
+		    </li>
+	      </ul>
+	      <hr/>
+	    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	  <h2> GitHub </h2>
+	  <h3 align="center"> 협업 (Collaboration) </h3>	  
+	<table width="100%" style="font-size:50%"> 
+		<tr align="center">
+			<td><h4>Clone</h4></td>
+			<td><h4>Sync</h4></td>
+		</tr>
+	    <tr>
+			<td><hr/></td>
+			<td><hr/></td>
+		</tr>
+		<tr>
+	    <td align="left">
+		  <ul>
+		    <li>
+			  <code> $ cd desktop </code> <br/>
+		    </li>
+		    <hr/>
+		    <li>
+			  <code> $ git clone https://github.com/statkclee/planets.git </code>
+		    </li>
+		    <hr>
+		    <li>
+			  <code> $ echo "It is so a planet" > pluto.txt </code> <br/>
+			  <code> $ git add pluto.txt </code> <br>
+			  <code> $ git commit -m "An outside chance" </code> <br>
+			  <code> $ git push origin master </code>
+		    </li>
+		  </ul>
+		  <hr/>
+	    </td>
+	    <td align="left">
+		  <ul>
+		    <li>
+			  <code> $ git pull origin master  </code> <br/>
+		    </li>
+	      </ul>
+	      <hr/>
+	    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	  <h2> GitHub </h2>
+	  <h3 align="center"> 충돌 (Conflict) </h3>	  
+	<table width="100%" style="font-size:50%"> 
+		<tr align="center">
+			<td><h4>노트북 컴퓨터</h4></td>
+			<td><h4>데스크탑 컴퓨터</h4></td>
+			<td><h4>충돌(Conflict)</h4></td>
+		</tr>
+	    <tr>
+			<td><hr/></td>
+			<td> </td>
+			<td><hr/></td>
+		</tr>
+		<tr>
+	    <td align="left">
+		  <ul>
+		    <li>
+			  <code> $ echo "This line was added from Laptop" >> mars.txt </code> <br/>
+			  <code> $ git add mars.txt </code> <br/>
+			  <code> $ git commit -m "Added from our laptop" </code> <br/>
+			  <code> $ git push origin master </code>
+		    </li>
+		    <hr/>
+		  </ul>
+		  <hr/>
+	    </td>
+	    <td align="left">
+		  <ul>
+		    <li>
+			  <code> $ echo "This line was added from Desktop" >> mars.txt </code> <br/>
+			  <code> $ git add mars.txt </code> <br/>
+			  <code> $ git commit -m "Added from our desktop" </code> <br/>
+			  <code> $ git push origin master </code>
+		    </li>
+		    <hr/>
+	    </td>
+	    <td align="left">
+		  <ul>
+		    <li>
+			  <code> $ git pull </code> <br/>
+			  <code> $ cat mars.txt </code> <br/>
+			  <code> $ vi mars.txt </code> <br/>
+			  <code> $ git add mars.txt </code> <br/>
+			  <code> $ git commit -m "Fixed a conflict" </code> <br/>
+			  <code> $ git push origin master </code>
+		    </li>
+		    <hr/>
+	    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+   </div>
+  </body>
+</html>
+
+
