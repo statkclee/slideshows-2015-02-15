@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>파이썬(python)</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> XWMOOC </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />        
+	<aside class="notes">
+	</aside>
+      </section>
+
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> 파이썬 실행 </h2>
+		<table width="100%" >
+		<tr style="font-size:70%">
+			<td align="center"><strong>파이썬 인터프리터</strong><br><br></td>
+			<td align="center"><strong>아이파이썬 노트북(ipython notebook)</strong><br><br></td>
+		</tr>
+		<tr>
+		    <td>
+		    	<code style="font-size:50%"> $ python </code> <br>
+		    	<blockquote style="font-size:50%">
+				Python 3.4.2 (v3.4.2:ab2c023a9432, Oct  6 2014, 22:15:05) [MSC v.1600 32 bit (I <br>
+				tel)] on win32                                                                  <br>
+				Type "help", "copyright", "credits" or "license" for more information.          <br>
+				>>>                                                                             <br>
+		    	</blockquote>		    	
+			</td>
+    	    <td>
+		    	<code style="font-size:50%"> $ ipython </code> <br>
+		    	<blockquote style="font-size:50%">
+				Python 2.7.8 |Anaconda 2.1.0 (32-bit)| (default, Jul  2 2014, 15:13:35) [MSC v.1 <br>
+				500 32 bit (Intel)]                                                              <br> 
+				Type "copyright", "credits" or "license" for more information.                   <br>
+                                                                                                 <br>
+				IPython 2.3.0 -- An enhanced Interactive Python.                                 <br>
+				Anaconda is brought to you by Continuum Analytics.                               <br>
+				Please check out: http://continuum.io/thanks and https://binstar.org             <br>
+				?         -> Introduction and overview of IPython's features.                    <br>
+				%quickref -> Quick reference.                                                    <br>
+				help      -> Python's own help system.                                           <br>
+				object?   -> Details about 'object', use 'object??' for extra details.           <br>
+                                                                                                 <br>
+				In [1]:		    	                                                             <br>
+				</blockquote>		    	
+			</td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> 연산과 인덱싱 </h2>
+		<table width="100%" style="table-layout: fixed">
+		<tr style="font-size:70%">
+			<td align="center"><strong>나눗셈(/)</strong><br><br></td>
+			<td align="center"><strong>인덱스</strong><br><br></td>
+		</tr>
+		<tr>
+		    <td>
+		    	<code style="font-size:77%"> 
+									In [1]: 1/2   		<br>
+				<font color="blue">	Out[1]: 0 </font>   <br>
+	                              						<br>
+									In [2]: 1.0/2 		<br>
+				<font color="blue">	Out[2]: 0.5 </font> <br>
+	 			</code> <br>
+			</td>
+    	    <td>
+		    	<code style="font-size:77%"> 
+									In [3]: hi = 'hello' <br>
+									In [4]: hi[0]        <br>
+				<font color="blue">	Out[4]: 'h'  </font> <br>
+									In [5]: hi[4]        <br>
+				<font color="blue">	Out[5]: 'o'  </font> <br>
+				                                         <br>
+									In [9]: len(hi)      <br>
+				<font color="blue">	Out[9]: 5    </font> <br>		
+	 			</code> <br>
+			</td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> for 루프 </h2>
+		<table width="100%" style="table-layout: fixed">
+		<tr style="font-size:70%">
+			<td align="center"><strong>collection</strong><br><br></td>
+			<td align="center"><strong>range 함수</strong><br><br></td>
+		</tr>
+		<tr>
+		    <td>
+		    	<code style="font-size:55%"> 
+									In [6]: for i in hi:      <br>
+									   ...:                   <br>
+									   ...:     print i       <br>
+									   ...:                   <br>
+				<font color="blue">	h                 </font> <br>
+				<font color="blue">	e                 </font> <br>
+				<font color="blue">	l                 </font> <br>
+				<font color="blue">	l                 </font> <br>
+				<font color="blue">	o                 </font> <br>
+				</code> <br>
+			</td>
+    	    <td>
+		    	<code style="font-size:55%"> 
+	                					In [7]: range(5)                <br>
+					<font color="blue">	Out[7]: [0, 1, 2, 3, 4] </font> <br>
+
+									In [6]: for i in range(5):<br>
+									   ...:                   <br>
+									   ...:     print i       <br>
+									   ...:                   <br>
+				<font color="blue">	0                 </font> <br>
+				<font color="blue">	1                 </font> <br>
+				<font color="blue">	2                 </font> <br>
+				<font color="blue">	3                 </font> <br>
+				<font color="blue">	4                 </font> <br>
+				</code> <br>
+
+			</td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> for 루프 </h2>
+		<table width="100%" style="table-layout: fixed">
+		<tr style="font-size:70%">
+			<td align="center"><strong>합계 구하기 (3)</strong><br><br></td>
+			<td align="center"><strong>합계 구하기 (10)</strong><br><br></td>
+		</tr>
+		<tr>
+		    <td>
+		    	<code style="font-size:55%"> 
+									In [10]: total = 0                     <br>
+									In [11]: for i in range(3):            <br>
+									   ....:                               <br>
+									   ....:     total = total + i         <br>
+									   ....:                               <br>
+									In [12]: total                         <br>
+				<font color="blue">	Out[12]: 3                     </font> <br>
+				</code> <br>
+			</td>
+    	    <td>
+		    	<code style="font-size:55%"> 
+									In [10]: total = 0                     <br>
+									In [11]: for i in range(10):            <br>
+									   ....:                               <br>
+									   ....:     total = total + i         <br>
+									   ....:                               <br>
+									In [12]: total                         <br>
+				<font color="blue">	Out[12]: 48                     </font> <br>
+				</code> <br>
+			</td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> 파이썬 프로그램(total.py) </h2>
+		<table width="100%" style="table-layout: fixed">
+		<tr style="font-size:70%">
+			<td align="center"><strong>텍스트 편집기(.py)</strong><br><br></td>
+			<td align="center"><strong>실행하기</strong><br><br></td>
+		</tr>
+		<tr>
+		    <td>
+		    	<code style="font-size:55%"> 
+		    		# Add up the number 0..9                                     <br>
+					total = 0                                                    <br>
+					<font color="blue">for</font> n <font color="blue">in</font> 
+					<font color="blue">range</font>(10):                         <br>
+					&nbsp;&nbsp;&nbsp;&nbsp;total = total + n                                        <br>   
+					<font color="blue">print</font>  total                       <br>
+				</code> <br>
+			</td>
+    	    <td>
+		    	<code style="font-size:55%"> 
+					$ python total.py <br>
+					45
+				</code> <br>
+			</td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> 개수(count) 프로그램 </h2>
+		<table width="100%" style="table-layout: fixed">
+		<tr style="font-size:70%">
+			<td align="center"><strong>데이터</strong><br><br></td>
+			<td align="center"><strong>프로그램</strong><br><br></td>
+		</tr>
+		<tr>
+		    <td>
+		    	<code style="font-size:50%"> 
+				Date,Species,Count        <br>
+				2012-08-29,marlin,3       <br> 
+				2012-08-29,shark,1        <br>
+				2012-08-29,tuna,15        <br>
+				2012-08-30,shark,2        <br>
+				2012-08-30,flying fish,1  <br> 
+				2012-08-30,cod,4          <br>
+				2012-08-30,turtle,1       <br>
+				2012-08-31,marlin,2       <br>
+				2012-08-31,shark,1        <br>
+				</code> <br>
+			</td>
+    	    <td>
+		    	<h4 style="font-size:50%">count-fish.py</h4>    	    	
+		    	<blockquote style="font-size:50%"> 
+				#Add up the number of creatures in a data file. <br>
+				filename = 'temp.txt'                           <br>
+				reader = open(filename, 'r')                    <br>  
+				for line in reader:                             <br> 
+				&nbsp;&nbsp;&nbsp;&nbsp;print  line                                 <br>
+				reader.close()                                  <br>
+				</blockquote>
+		    	<h4 style="font-size:50%">count-fish.py, line.strip()</h4>    	    	
+		    	<blockquote style="font-size:50%"> 
+				#Add up the number of creatures in a data file. <br>
+				filename = 'temp.txt'                           <br>
+				reader = open(filename, 'r')                    <br>  
+				for line in reader:                             <br> 
+				&nbsp;&nbsp;&nbsp;&nbsp;temp = line.strip()                         <br>
+				print temp                                  <br>
+				reader.close()                                  <br>
+				</blockquote>
+			</td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> 개수(count) 프로그램 </h2>
+		<table width="100%" style="table-layout: fixed">
+		<tr style="font-size:70%">
+			<td align="center"><strong>ipython 노트북</strong><br><br></td>
+			<td align="center"><strong>프로그램</strong><br><br></td>
+		</tr>
+		<tr>
+		    <td>
+		    	<h4 style="font-size:50%">구분자, split</h4>    	    	
+		    	<blockquote style="font-size:50%"> 
+							    	In [3]: help(str)     <br>
+							    	In [4]: hi = 'hello'  <br>
+									In [5]: hi.find('e')  <br>
+				<font color="blue"> Out[5]: 1             </font><br>
+									In [6]: hi[1]         <br>
+				<font color="blue"> Out[6]: 'e'	          </font><br>
+				</blockquote>
+		    	<h4 style="font-size:50%">구분자, split</h4>
+		    	<blockquote style="font-size:50%"> 
+									In [8]: atom = 'Fe, Al, H'   <br>
+									In [9]: atom                 <br>
+				<font color="blue"> Out[9]: 'Fe, Al, H'          </font><br>
+									In [12]: atom.split(',')     <br>
+				<font color="blue"> Out[12]: ['Fe', ' Al', ' H'] </font><br>			 	
+				</blockquote>
+			</td>
+    	    <td>
+    	        <code style="font-size:50%"> $ python count-fish.py 			    </code> <br>
+			    <blockquote style="font-size:55%"> $ python count-fish.py 			    
+					#Add up the number of creatures in a data file. <br>
+					filename = 'temp.txt'                           <br>
+					reader = open(filename, 'r')                    <br>
+					for line in reader:                             <br> 
+						temp = line.strip()                         <br> 
+						print (temp.split(','))                     <br>
+					reader.close()                                  <br>
+			    </blockquote>
+    	        <h4 style="font-size:50%">출력 결과</h4>    	    				    
+		    	<blockquote style="font-size:50%"> 
+					['2012-08-29', 'marlin', '3']      <br>
+					['2012-08-29', 'shark', '1']       <br>
+					['2012-08-29', 'tuna', '15']       <br>
+					['2012-08-30', 'shark', '2']       <br>
+					['2012-08-30', 'flying fish', '1'] <br> 
+					['2012-08-30', 'cod', '4']         <br>
+					['2012-08-30', 'turtle', '1']      <br>
+					['2012-08-31', 'marlin', '2']      <br>
+					['2012-08-31', 'shark', '1']       <br>
+				</blockquote>
+			</td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> 개수(count) 프로그램 </h2>
+		<table width="100%" style="table-layout: fixed">
+		<tr style="font-size:70%">
+			<td align="center"><strong>프로그램</strong><br><br></td>
+			<td align="center"><strong>출력</strong><br><br></td>
+		</tr>
+		<tr>
+		    <td>
+		    	<h4 style="font-size:50%">프로그램</h4>    	    	
+		    	<blockquote style="font-size:50%"> 
+					#Add up the number of creatures in a data file. <br>
+                                                                    <br>
+					filename = 'temp.txt'                           <br> 
+					reader = open(filename, 'r')                    <br>
+					total = 0                                       <br>
+					for line in reader:                             <br>
+					&nbsp;&nbsp;&nbsp;&nbsp;temp = line.strip()                         <br>
+					&nbsp;&nbsp;&nbsp;&nbsp;field = temp.split(',')                     <br> 
+					&nbsp;&nbsp;&nbsp;&nbsp;total = total + int(field[2])               <br>
+                                                                    <br>
+					print ('total is', total)                       <br>
+					reader.close()
+				</blockquote>
+		    	<h4 style="font-size:50%">출력결과</h4>
+    	        <code style="font-size:50%"> $ python count-fish.py   <br>
+    	                                       total is 30 			    </code>
+			</td>
+    	    <td>
+    	        <h4 style="font-size:50%">테스트 케이스</h4>    	    				    
+		    	<blockquote style="font-size:50%"> 
+					['2012-08-29', 'marlin', '3']      <br>
+					['2012-08-29', 'shark', '1']
+				</blockquote>
+    	        <code style="font-size:50%"> $ python count-fish.py   <br>
+    	                                       total is 4 			    </code>
+    	        <h4 style="font-size:50%">테스트 프로그램</h4>    	    				    
+		    	<blockquote style="font-size:50%"> 
+					#Add up the number of creatures in a data file. <br>
+                                                                    <br>
+					filename = <strong>'test.txt'</strong>                           <br> 
+					reader = open(filename, 'r')                    <br>
+					total = 0                                       <br>
+					for line in reader:                             <br>
+					&nbsp;&nbsp;&nbsp;&nbsp;temp = line.strip()                         <br>
+					&nbsp;&nbsp;&nbsp;&nbsp;field = temp.split(',')                     <br> 
+					&nbsp;&nbsp;&nbsp;&nbsp;total = total + int(field[2])               <br>
+                                                                    <br>
+					print ('total is', total)                       <br>
+					reader.close()
+				</blockquote>
+			</td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> 개수(count) 프로그램 </h2>
+		<table width="100%" style="table-layout: fixed">
+		<tr style="font-size:70%">
+			<td align="center"><strong>if문, else</strong><br><br></td>
+			<td align="center"><strong>for문+if문, startswith() 함수</strong><br><br></td>
+		</tr>
+		<tr>
+		    <td>
+		    	<h4 style="font-size:50%">간단한 if문 </h4>
+		    	<blockquote style="font-size:50%"> 
+					In [1]: if 0 > 1:            <br>
+					   ...:                      <br>
+					   ...:     print "Wrong"    <br>
+					   ...:                      <br>
+					In [2]:                      <br>
+					In [2]: if 0 < 1:            <br> 
+					   ...:                      <br>
+					   ...:     print "Correct"  <br> 
+					Correct
+				</blockquote>
+		    	<h4 style="font-size:50%">똑똑한 if문 </h4>
+		    	<blockquote style="font-size:50%"> 
+					In [6]: if 1 > 10:           <br>
+					   ...:                      <br> 
+					   ...:     print "Wrong"    <br>
+					   ...:                      <br>
+					   ...: else:                <br> 
+					   ...:                      <br>
+					   ...:     print "Correct"  <br> 
+					Correct                      
+				</blockquote>
+			</td>
+    	    <td>
+		    	<h4 style="font-size:50%">for문과 함께 </h4>
+		    	<blockquote style="font-size:50%"> 
+					In [7]: for i in range(10):    <br>
+					   ...:     if i > 5:          <br>
+					   ...:         print "big"    <br>
+					   ...:     else:              <br>
+					   ...:         print "small"  <br> 
+					small                          <br> 
+					small                          <br>
+					small                          <br> 
+					small                          <br>
+					small                          <br>
+					small                          <br> 
+					big                            <br>
+					big                            <br> 
+					big                            <br>
+					big				             
+				</blockquote>
+		    	<h4 style="font-size:50%">startswith() 함수 </h4>
+		    	<blockquote style="font-size:50%"> 
+					In [8]: hi = "hello"           <br>
+					In [10]: hi.startswith('h')    <br>
+					<font color="blue"> Out[10]: True                 </font>
+				</blockquote>
+			</td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> 개수(count) 프로그램 </h2>
+		<table width="100%" style="table-layout: fixed">
+		<tr style="font-size:70%">
+			<td align="center"><strong>초보 프로그래머(?)</strong><br><br></td>
+			<td align="center"><strong>고급 프로그래머(?)</strong><br><br></td>
+		</tr>
+		<tr>
+		    <td>
+		    	<h4 style="font-size:50%">이해하기 쉬운 프로그램 </h4>
+		    	<blockquote style="font-size:50%"> 
+				#Add up the number of creatures in a data file.  <br>
+				filename = 'steve-2012.txt'						 <br>
+				reader = open(filename, 'r')					 <br>	
+				total = 0 										 <br>
+				for line in reader:								 <br>	
+				&nbsp;&nbsp;&nbsp;&nbsp;    if line.startswith('#'):					 <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass # Don't do anything				 <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;elif line.startswith('Date'):				 <br>	
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass # Don't do anything				 <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;else:										 <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;temp = line.strip()						 <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;field = temp.split(',')					 <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total = total + int(field[2])			 <br>
+				reader.close()									 <br>
+				print ('total is', total)						 
+				</blockquote>
+			</td>
+    	    <td>
+		    	<h4 style="font-size:45%">이해하는데 시간이 걸리는 프로그램 </h4>
+		    	<blockquote style="font-size:50%"> 
+				#Add up the number of creatures in a data file.  <br>
+				filename = 'steve-2012.txt'						 <br>
+				reader = open(filename, 'r')					 <br>	
+				total = 0 										 <br>
+				for line in reader:								 <br>	
+				&nbsp;&nbsp;&nbsp;&nbsp;if line.startswith('#') or line.startswith('Date'):					 <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass # Don't do anything				 <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;else:										 <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filed = line.strip().split(',')			 <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total = total + int(field[2])			 <br>
+				reader.close()									 <br>
+				print ('total is', total)						 
+				</blockquote>
+		    	<h4 style="font-size:50%">시간이 정말 걸리는 프로그램 </h4>
+		    	<blockquote style="font-size:45%"> 
+				#Add up the number of creatures in a data file. <br>
+				filename = 'steve-2012.txt'						<br>
+				reader = open(filename, 'r')					<br>
+				total = 0                                       <br>
+				for line in reader:	                            <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;if not (line.startswith('#') or line.startswith('Date')): <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total = total + int(line.strip().split(',')[2]) <br>
+				reader.close() 									<br>
+				print ('total is', total) 						<br>
+			</td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+
+  </div>
+  </body>
+</html>
+
+
+
+

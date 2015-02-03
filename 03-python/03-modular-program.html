@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>파이썬(python)</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> XWMOOC </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />        
+	<aside class="notes">
+	</aside>
+      </section>
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> 시스템 프로그래밍 </h2>
+		<table width="100%" style="table-layout: fixed">
+		<tr style="font-size:70%">
+			<td align="center"><strong>import</strong><br><br></td>
+			<td align="center"><strong>import sys</strong><br><br></td>
+		</tr>
+		<tr>
+		    <td>
+                <h4 style="font-size:45%">import math</h4>
+                <blockquote style="font-size:50%"> 
+					In [1]: import math             <br>
+					In [2]: math.pi                 <br>
+					<font color="blue"> Out[2]: 3.141592653589793       </font><br>
+					In [4]: math.sin(math.pi*2)     <br>
+					<font color="blue"> Out[4]: -2.4492935982947064e-16 </font><br>
+					In [5]: math.sin(math.pi/2)     <br>
+					<font color="blue"> Out[5]: 1.0				        </font><br>
+				</blockquote>
+			</td>
+    	    <td>
+		    	<h4 style="font-size:45%">import sys</h4>
+		    	<blockquote style="font-size:50%"> 
+                    In [6]: import sys                          <br>
+                    In [8]: sys.version                         <br>
+                    <font color="blue">  Out[8]: '2.7.8 |Anaconda 2.1.0 (32-bit)| (default, Jul  2 2014, 15:13:35) [MSC v.1500 32 bit (Intel)]'   </font><br>
+                    In [9]: print 'version', sys.version        <br>
+                    version 2.7.8 |Anaconda 2.1.0 (32-bit)| (default, Jul  2 2014, 15:13:35) [MSC v.1500 32 bit (Intel)]                                     <br>
+                    In [10]: sys.maxint                         <br>
+                    <font color="blue"> Out[10]: 2147483647	</font><br>			
+				</blockquote>
+                <h4 style="font-size:45%">arguments.py</h4>
+                <blockquote style="font-size:50%"> 
+                    #Show the command-line arguments.   <br>
+                    import sys                          <br>
+                    print ('sys.argv is', sys.argv)
+                </blockquote>
+                <h4 style="font-size:45%">실행결과</h4>
+                <blockquote style="font-size:50%"> 
+                    $ python arguments.py               <br>
+                    sys.argv is ['arguments.py']        <br>
+                    $ python arguments.py <strong> first.txt second.txt </strong>               <br>
+                    sys.argv is ['arguments.py', 'first.txt', 'second.txt']
+                </blockquote>
+			</td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+    <table width="100%">
+      <h2> 시스템 프로그래밍 </h2>
+        <table width="100%" style="table-layout: fixed">
+        <tr style="font-size:70%">
+            <td align="center"><strong>argv[0], argv[1]</strong><br></td>
+            <td align="center"><strong>argv 루프</strong><br></td>
+        </tr>
+        <tr>
+            <td>
+                <blockquote style="font-size:50%"> 
+                    #Add up the number of creatures in a data file.     <br>
+                    import sys                                          <br>
+                    progname = sys.argv[0]                              <br>    
+                    filename = sys.argv[1]                              <br>
+                    reader = open(filename, 'r')                        <br>    
+                    total = 0                                           <br>
+                    for line in reader:                                 <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;if line.startswith('#') or line.startswith('Date'):     <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass # Don't do anything        <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;else:                                                   <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total = total + int(line.strip().split(',')[2])<br>
+                    reader.close()                                      <br>
+                    print ('total is', total)
+                </blockquote>
+            </td>
+            <td>
+                <blockquote style="font-size:50%"> 
+                    #Add up the number of creatures in a data file.     <br>
+                    import sys                                          <br>
+                    for filename in sys.argv[1:]                        <br>    
+                    reader = open(filename, 'r')                        <br>    
+                    total = 0                                           <br>
+                    for line in reader:                                 <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;if line.startswith('#') or line.startswith('Date'):     <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass # Don't do anything        <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;else:                                                   <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total = total + int(line.strip().split(',')[2])<br>
+                    reader.close()                                      <br>
+                    print ('total is', total)
+                </blockquote>
+                <h4 style="font-size:45%">출력결과</h4>
+                <blockquote style="font-size:50%"> 
+                    $ python count-fish.py steve-2012.txt test.txt  <br>
+                    total is 30                                     <br>
+                    total is 4                                      <br>
+                </blockquote>
+            </td>
+        </tr>
+        </table>
+    <aside class="notes">
+    </aside>
+    </section>
+
+    <section class="slide">
+    <table width="100%">
+      <h2> 시스템 프로그래밍 </h2>
+        <table width="100%" style="table-layout: fixed">
+        <tr style="font-size:70%">
+            <td align="center"><strong>파이썬 프로그램</strong><br></td>
+            <td align="center"><strong>쉘 프로그램</strong><br></td>
+        </tr>
+        <tr>
+            <td>
+                <blockquote style="font-size:50%"> 
+                    #Add up the number of creatures in a data file.     <br>
+                    import sys                                          <br>
+                    for filename in sys.argv[1:]                        <br>    
+                    reader = open(filename, 'r')                        <br>    
+                    total = 0                                           <br>
+                    for line in reader:                                 <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;if line.startswith('#') or line.startswith('Date'):     <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass # Don't do anything        <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;else:                                                   <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total = total + int(line.strip().split(',')[2])<br>
+                    reader.close()                                      <br>
+                    print ('total is', total)
+                </blockquote>
+                <h4 style="font-size:45%">출력결과</h4>
+                <blockquote style="font-size:50%"> 
+                    $ python count-fish.py steve-2012.txt test.txt  <br>
+                    total is 30                                     <br>
+                    total is 4                                      <br>
+                </blockquote>
+            </td>
+            <td>
+                <blockquote style="font-size:50%"> 
+                    $ for filename in steve-2012.txt test.txt temp.txt <br>
+                    > do                                               <br>
+                    >     python count-fish.py $filename               <br>
+                    > done                                             <br>
+                    total is 30                                        <br>
+                    total is 4                                         <br>
+                    total is 30                                      
+                </blockquote>
+            </td>
+        </tr>
+        </table>
+    <aside class="notes">
+    </aside>
+    </section>
+
+  </div>
+  </body>
+</html>
+
+
+
+
