@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>데이터베이스(SQL)</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> XWMOOC </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />        
+	<aside class="notes">
+	</aside>
+    </section>
+
+ 
+   <section class="slide">
+	<table width="100%">
+	  <h2> SQL </h2>
+		<table width="100%" style="table-layout: fixed">
+		<tr>
+			<td align="center"><strong>쉘 프로그래밍</strong><br><br></td>
+			<td align="center" style="font-size:60%"><strong>파이썬 프로그래밍</strong><br><br></td>
+		</tr >
+
+		<tr>
+		    <td>
+		    	<h4 style="font-size:100%"> sql 스크립트</h4>
+		    	<code style="font-size:80%">
+		    	$ sqlite3 survey.db < survey-site.sql
+		    	</code>
+		    	<article style="font-size:70%">		 
+		    	DR-1|-49.85|-128.57|1927-02-08 <br>
+				DR-1|-49.85|-128.57|1927-02-10 <br>
+				DR-1|-49.85|-128.57|1932-03-22 <br>
+				DR-3|-47.15|-126.72|           <br> 
+				DR-3|-47.15|-126.72|1930-01-12 <br>
+				DR-3|-47.15|-126.72|1930-02-26 <br>
+				DR-3|-47.15|-126.72|1939-01-07 <br>
+				MSK-4|-48.87|-123.4|1932-01-14  <br>
+			    </article>
+
+		    	<h4 style="font-size:100%"> 파이프-필터</h4>
+		    	<code style="font-size:80%"> $ sqlite3 survey.db < survey-site.sql <br>
+		    		| grep DR-1 | wc
+		    	</code> <br>		    	
+            <article>
+            	3
+            </article>
+		    </td>
+
+		    <td align="left" style="font-size:50%">
+	    	<h4 style="font-size:100%"> 파이썬 파일</h4>
+	    	<code style="font-size:80%"> $ cat all-names.py <br>
+	    	</code> <br>		    	
+		    <blockquote style="font-size:90%">
+			from sqlite3 import dbapi2 as sqlite  <br>
+                                                  <br>
+			connection = sqlite.connect("survey.db")  <br>
+			cursor = connection.cursor()              <br>
+			cursor.execute("SELECT * from Person")    <br>
+			results = cursor.fetchall();              <br>
+			for r in results:                         <br>
+			    print r[0], r[1]                      <br>
+			cursor.close();                           <br>
+			connection.close();                       <br>
+			</blockquote>
+	    	<code style="font-size:80%"> $ python all-names.py <br>
+	    	</code> <br>		    	
+			<article style="font-size:90%">
+			dyer William  <br>
+			pb Frank      <br>
+			lake Anderson <br>
+			roe Valentina <br>
+			danforth Frank <br>
+		    </article>                     
+		    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+  </div>
+  </body>
+</html>
+
+
+
+

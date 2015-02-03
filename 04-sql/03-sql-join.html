@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>데이터베이스(SQL)</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> XWMOOC </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />        
+	<aside class="notes">
+	</aside>
+    </section>
+
+ 
+    <section class="slide">
+	<table width="100%">
+	  <h2> SQL </h2>
+		<table width="100%" style="table-layout: fixed">
+		<tr>
+			<td align="center"><strong>데이터베이스</strong><br><br></td>
+			<td align="center" style="font-size:60%"><strong>NULL</strong><br><br></td>
+		</tr >
+
+		<tr>
+		    <td>
+				<table style="font-size:30%">
+				<tr>
+				<td valign="top">
+				<strong>Person</strong>: 판독한 사람.
+
+				<table>
+				  <tr> <th>ident</th> <th>personal</th> <th>family</th> </tr>
+				  <tr> <td>dyer</td> <td>William</td> <td>Dyer</td> </tr>
+				  <tr> <td>pb</td> <td>Frank</td> <td>Pabodie</td> </tr>
+				  <tr> <td>lake</td> <td>Anderson</td> <td>Lake</td> </tr>
+				  <tr> <td>roe</td> <td>Valentina</td> <td>Roerich</td> </tr>
+				  <tr> <td>danforth</td> <td>Frank</td> <td>Danforth</td> </tr>
+				</table>
+				<hr>
+
+				<strong>Site</strong>: 판독한 장소.
+
+				<table>
+				  <tr> <th>name</th> <th>lat</th> <th>long</th> </tr>
+				  <tr> <td>DR-1</td> <td>-49.85</td> <td>-128.57</td> </tr>
+				  <tr> <td>DR-3</td> <td>-47.15</td> <td>-126.72</td> </tr>
+				  <tr> <td>MSK-4</td> <td>-48.87</td> <td>-123.4</td> </tr>
+				</table>
+				<hr>
+
+				<strong>Visited</strong>: 특정 사이트에서 판독한 시점.
+
+				<table>
+				  <tr> <th>ident</th> <th>site</th> <th>dated</th> </tr>
+				  <tr> <td>619</td> <td>DR-1</td> <td>1927-02-08</td> </tr>
+				  <tr> <td>622</td> <td>DR-1</td> <td>1927-02-10</td> </tr>
+				  <tr> <td>734</td> <td>DR-3</td> <td>1939-01-07</td> </tr>
+				  <tr> <td>735</td> <td>DR-3</td> <td>1930-01-12</td> </tr>
+				  <tr> <td>751</td> <td>DR-3</td> <td>1930-02-26</td> </tr>
+				  <tr> <td>752</td> <td>DR-3</td> <td bgcolor="red">&nbsp;</td> </tr>
+				  <tr> <td>837</td> <td>MSK-4</td> <td>1932-01-14</td> </tr>
+				  <tr> <td>844</td> <td>DR-1</td> <td>1932-03-22</td> </tr>
+				</table>
+				</td>
+				<td valign="top">
+				<strong>Survey</strong>: 실제 판독.
+
+				<table>
+				  <tr> <th>taken</th> <th>person</th> <th>quant</th> <th>reading</th> </tr>
+				  <tr> <td>619</td> <td>dyer</td> <td>rad</td> <td>9.82</td> </tr>
+				  <tr> <td>619</td> <td>dyer</td> <td>sal</td> <td>0.13</td> </tr>
+				  <tr> <td>622</td> <td>dyer</td> <td>rad</td> <td>7.8</td> </tr>
+				  <tr> <td>622</td> <td>dyer</td> <td>sal</td> <td>0.09</td> </tr>
+				  <tr> <td>734</td> <td>pb</td> <td>rad</td> <td>8.41</td> </tr>
+				  <tr> <td>734</td> <td>lake</td> <td>sal</td> <td>0.05</td> </tr>
+				  <tr> <td>734</td> <td>pb</td> <td>temp</td> <td>-21.5</td> </tr>
+				  <tr> <td>735</td> <td>pb</td> <td>rad</td> <td>7.22</td> </tr>
+				  <tr> <td>735</td> <td bgcolor="red">&nbsp;</td> <td>sal</td> <td>0.06</td> </tr>
+				  <tr> <td>735</td> <td bgcolor="red">&nbsp;</td> <td>temp</td> <td>-26.0</td> </tr>
+				  <tr> <td>751</td> <td>pb</td> <td>rad</td> <td>4.35</td> </tr>
+				  <tr> <td>751</td> <td>pb</td> <td>temp</td> <td>-18.5</td> </tr>
+				  <tr> <td>751</td> <td>lake</td> <td>sal</td> <td>0.1</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>rad</td> <td>2.19</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>sal</td> <td>0.09</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>temp</td> <td>-16.0</td> </tr>
+				  <tr> <td>752</td> <td>roe</td> <td>sal</td> <td>41.6</td> </tr>
+				  <tr> <td>837</td> <td>lake</td> <td>rad</td> <td>1.46</td> </tr>
+				  <tr> <td>837</td> <td>lake</td> <td>sal</td> <td>0.21</td> </tr>
+				  <tr> <td>837</td> <td>roe</td> <td>sal</td> <td>22.5</td> </tr>
+				  <tr> <td>844</td> <td>roe</td> <td>rad</td> <td>11.25</td> </tr>
+				</table>
+				</td>
+				</tr>
+				</table>
+		    </td>
+
+		    <td align="left" style="font-size:50%">
+		    	<code style="font-size:80%"> 
+				sqlite> select * from visited <br>
+ 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   ...> where dated >= '1930-01-01';
+		    	</code>
+		    	<article style="font-size:50%">		   
+					734|DR-3|1939-01-07 <br>
+					735|DR-3|1930-01-12 <br>
+					751|DR-3|1930-02-26 <br>
+					837|MSK-4|1932-01-14<br>
+					844|DR-1|1932-03-22<br>
+		    	</article>
+		    	<br>
+		    	<code style="font-size:80%"> 
+				sqlite> select * from visited <br>
+ 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   ...> where dated < '1930-01-01';
+		    	</code> <br>
+		    	<article style="font-size:50%">		   
+				619|DR-1|1927-02-08 <br>
+				622|DR-1|1927-02-10
+		    	</article>
+                <br>
+		    	<code style="font-size:80%"> 
+				sqlite> select * from visited <br>
+ 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   ...> where dated is NULL;
+		    	</code> <br>
+		    	<article style="font-size:50%">		   
+				752|DR-3|
+		    	</article>
+		    	<br>
+		    	<h4 style="font-size:70%"> 참(true), 거짓(false) </h4> <br>
+		    	<h4 style="font-size:70%"> 참(true), 알수없다(null), 거짓(false) </h4>
+		    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> SQL </h2>
+		<table width="100%" style="table-layout: fixed">
+		<tr>
+			<td align="center"><strong>데이터베이스</strong><br><br></td>
+			<td align="center" style="font-size:60%"><strong>Join (outer)</strong><br><br></td>
+		</tr >
+
+		<tr>
+		    <td>
+				<table style="font-size:30%">
+				<tr>
+				<td valign="top">
+				<strong>Person</strong>: 판독한 사람.
+
+				<table>
+				  <tr> <th>ident</th> <th>personal</th> <th>family</th> </tr>
+				  <tr> <td>dyer</td> <td>William</td> <td>Dyer</td> </tr>
+				  <tr> <td>pb</td> <td>Frank</td> <td>Pabodie</td> </tr>
+				  <tr> <td>lake</td> <td>Anderson</td> <td>Lake</td> </tr>
+				  <tr> <td>roe</td> <td>Valentina</td> <td>Roerich</td> </tr>
+				  <tr> <td>danforth</td> <td>Frank</td> <td>Danforth</td> </tr>
+				</table>
+				<hr>
+
+				<strong>Site</strong>: 판독한 장소.
+
+				<table>
+				  <tr> <th>name</th> <th>lat</th> <th>long</th> </tr>
+				  <tr> <td>DR-1</td> <td>-49.85</td> <td>-128.57</td> </tr>
+				  <tr> <td>DR-3</td> <td>-47.15</td> <td>-126.72</td> </tr>
+				  <tr> <td>MSK-4</td> <td>-48.87</td> <td>-123.4</td> </tr>
+				</table>
+				<hr>
+
+				<strong>Visited</strong>: 특정 사이트에서 판독한 시점.
+
+				<table>
+				  <tr> <th>ident</th> <th>site</th> <th>dated</th> </tr>
+				  <tr> <td>619</td> <td>DR-1</td> <td>1927-02-08</td> </tr>
+				  <tr> <td>622</td> <td>DR-1</td> <td>1927-02-10</td> </tr>
+				  <tr> <td>734</td> <td>DR-3</td> <td>1939-01-07</td> </tr>
+				  <tr> <td>735</td> <td>DR-3</td> <td>1930-01-12</td> </tr>
+				  <tr> <td>751</td> <td>DR-3</td> <td>1930-02-26</td> </tr>
+				  <tr> <td>752</td> <td>DR-3</td> <td bgcolor="red">&nbsp;</td> </tr>
+				  <tr> <td>837</td> <td>MSK-4</td> <td>1932-01-14</td> </tr>
+				  <tr> <td>844</td> <td>DR-1</td> <td>1932-03-22</td> </tr>
+				</table>
+				</td>
+				<td valign="top">
+				<strong>Survey</strong>: 실제 판독.
+
+				<table>
+				  <tr> <th>taken</th> <th>person</th> <th>quant</th> <th>reading</th> </tr>
+				  <tr> <td>619</td> <td>dyer</td> <td>rad</td> <td>9.82</td> </tr>
+				  <tr> <td>619</td> <td>dyer</td> <td>sal</td> <td>0.13</td> </tr>
+				  <tr> <td>622</td> <td>dyer</td> <td>rad</td> <td>7.8</td> </tr>
+				  <tr> <td>622</td> <td>dyer</td> <td>sal</td> <td>0.09</td> </tr>
+				  <tr> <td>734</td> <td>pb</td> <td>rad</td> <td>8.41</td> </tr>
+				  <tr> <td>734</td> <td>lake</td> <td>sal</td> <td>0.05</td> </tr>
+				  <tr> <td>734</td> <td>pb</td> <td>temp</td> <td>-21.5</td> </tr>
+				  <tr> <td>735</td> <td>pb</td> <td>rad</td> <td>7.22</td> </tr>
+				  <tr> <td>735</td> <td bgcolor="red">&nbsp;</td> <td>sal</td> <td>0.06</td> </tr>
+				  <tr> <td>735</td> <td bgcolor="red">&nbsp;</td> <td>temp</td> <td>-26.0</td> </tr>
+				  <tr> <td>751</td> <td>pb</td> <td>rad</td> <td>4.35</td> </tr>
+				  <tr> <td>751</td> <td>pb</td> <td>temp</td> <td>-18.5</td> </tr>
+				  <tr> <td>751</td> <td>lake</td> <td>sal</td> <td>0.1</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>rad</td> <td>2.19</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>sal</td> <td>0.09</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>temp</td> <td>-16.0</td> </tr>
+				  <tr> <td>752</td> <td>roe</td> <td>sal</td> <td>41.6</td> </tr>
+				  <tr> <td>837</td> <td>lake</td> <td>rad</td> <td>1.46</td> </tr>
+				  <tr> <td>837</td> <td>lake</td> <td>sal</td> <td>0.21</td> </tr>
+				  <tr> <td>837</td> <td>roe</td> <td>sal</td> <td>22.5</td> </tr>
+				  <tr> <td>844</td> <td>roe</td> <td>rad</td> <td>11.25</td> </tr>
+				</table>
+				</td>
+				</tr>
+				</table>
+		    </td>
+
+		    <td align="left" style="font-size:50%">
+		    	<code style="font-size:80%"> 
+				sqlite> select * from site join visited;
+		    	</code>
+		    	<article style="font-size:50%">		   
+				sqlite> select * from site join visted; <br>
+				Error: no such table: visted            <br>
+				sqlite> select * from site join visited;<br>
+				DR-1|-49.85|-128.57|619|DR-1|1927-02-08 <br>
+				DR-1|-49.85|-128.57|622|DR-1|1927-02-10 <br>
+				DR-1|-49.85|-128.57|734|DR-3|1939-01-07 <br>
+				DR-1|-49.85|-128.57|735|DR-3|1930-01-12 <br>
+				DR-1|-49.85|-128.57|751|DR-3|1930-02-26 <br>
+				DR-1|-49.85|-128.57|752|DR-3|           <br>
+				DR-1|-49.85|-128.57|837|MSK-4|1932-01-14 <br>
+				DR-1|-49.85|-128.57|844|DR-1|1932-03-22 <br>
+				DR-3|-47.15|-126.72|619|DR-1|1927-02-08 <br>
+				DR-3|-47.15|-126.72|622|DR-1|1927-02-10 <br>
+				DR-3|-47.15|-126.72|734|DR-3|1939-01-07 <br>
+				DR-3|-47.15|-126.72|735|DR-3|1930-01-12 <br>
+				DR-3|-47.15|-126.72|751|DR-3|1930-02-26 <br>
+				DR-3|-47.15|-126.72|752|DR-3|           <br>
+				DR-3|-47.15|-126.72|837|MSK-4|1932-01-14 <br>
+				DR-3|-47.15|-126.72|844|DR-1|1932-03-22 <br>
+				MSK-4|-48.87|-123.4|619|DR-1|1927-02-08 <br>
+				MSK-4|-48.87|-123.4|622|DR-1|1927-02-10 <br>
+				MSK-4|-48.87|-123.4|734|DR-3|1939-01-07 <br>
+				MSK-4|-48.87|-123.4|735|DR-3|1930-01-12 <br>
+				MSK-4|-48.87|-123.4|751|DR-3|1930-02-26 <br>
+				MSK-4|-48.87|-123.4|752|DR-3|           <br>
+				MSK-4|-48.87|-123.4|837|MSK-4|1932-01-14 <br>
+				MSK-4|-48.87|-123.4|844|DR-1|1932-03-22 <br>
+		    	</article>
+		    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+    <section class="slide">
+	<table width="100%">
+	  <h2> SQL </h2>
+		<table width="100%" style="table-layout: fixed">
+		<tr>
+			<td align="center"><strong>데이터베이스</strong><br><br></td>
+			<td align="center" style="font-size:60%"><strong>Join (inner)</strong><br><br></td>
+		</tr >
+
+		<tr>
+		    <td>
+				<table style="font-size:30%">
+				<tr>
+				<td valign="top">
+				<strong>Person</strong>: 판독한 사람.
+
+				<table>
+				  <tr> <th>ident</th> <th>personal</th> <th>family</th> </tr>
+				  <tr> <td>dyer</td> <td>William</td> <td>Dyer</td> </tr>
+				  <tr> <td>pb</td> <td>Frank</td> <td>Pabodie</td> </tr>
+				  <tr> <td>lake</td> <td>Anderson</td> <td>Lake</td> </tr>
+				  <tr> <td>roe</td> <td>Valentina</td> <td>Roerich</td> </tr>
+				  <tr> <td>danforth</td> <td>Frank</td> <td>Danforth</td> </tr>
+				</table>
+				<hr>
+
+				<strong>Site</strong>: 판독한 장소.
+
+				<table>
+				  <tr> <th>name</th> <th>lat</th> <th>long</th> </tr>
+				  <tr> <td>DR-1</td> <td>-49.85</td> <td>-128.57</td> </tr>
+				  <tr> <td>DR-3</td> <td>-47.15</td> <td>-126.72</td> </tr>
+				  <tr> <td>MSK-4</td> <td>-48.87</td> <td>-123.4</td> </tr>
+				</table>
+				<hr>
+
+				<strong>Visited</strong>: 특정 사이트에서 판독한 시점.
+
+				<table>
+				  <tr> <th>ident</th> <th>site</th> <th>dated</th> </tr>
+				  <tr> <td>619</td> <td>DR-1</td> <td>1927-02-08</td> </tr>
+				  <tr> <td>622</td> <td>DR-1</td> <td>1927-02-10</td> </tr>
+				  <tr> <td>734</td> <td>DR-3</td> <td>1939-01-07</td> </tr>
+				  <tr> <td>735</td> <td>DR-3</td> <td>1930-01-12</td> </tr>
+				  <tr> <td>751</td> <td>DR-3</td> <td>1930-02-26</td> </tr>
+				  <tr> <td>752</td> <td>DR-3</td> <td bgcolor="red">&nbsp;</td> </tr>
+				  <tr> <td>837</td> <td>MSK-4</td> <td>1932-01-14</td> </tr>
+				  <tr> <td>844</td> <td>DR-1</td> <td>1932-03-22</td> </tr>
+				</table>
+				</td>
+				<td valign="top">
+				<strong>Survey</strong>: 실제 판독.
+
+				<table>
+				  <tr> <th>taken</th> <th>person</th> <th>quant</th> <th>reading</th> </tr>
+				  <tr> <td>619</td> <td>dyer</td> <td>rad</td> <td>9.82</td> </tr>
+				  <tr> <td>619</td> <td>dyer</td> <td>sal</td> <td>0.13</td> </tr>
+				  <tr> <td>622</td> <td>dyer</td> <td>rad</td> <td>7.8</td> </tr>
+				  <tr> <td>622</td> <td>dyer</td> <td>sal</td> <td>0.09</td> </tr>
+				  <tr> <td>734</td> <td>pb</td> <td>rad</td> <td>8.41</td> </tr>
+				  <tr> <td>734</td> <td>lake</td> <td>sal</td> <td>0.05</td> </tr>
+				  <tr> <td>734</td> <td>pb</td> <td>temp</td> <td>-21.5</td> </tr>
+				  <tr> <td>735</td> <td>pb</td> <td>rad</td> <td>7.22</td> </tr>
+				  <tr> <td>735</td> <td bgcolor="red">&nbsp;</td> <td>sal</td> <td>0.06</td> </tr>
+				  <tr> <td>735</td> <td bgcolor="red">&nbsp;</td> <td>temp</td> <td>-26.0</td> </tr>
+				  <tr> <td>751</td> <td>pb</td> <td>rad</td> <td>4.35</td> </tr>
+				  <tr> <td>751</td> <td>pb</td> <td>temp</td> <td>-18.5</td> </tr>
+				  <tr> <td>751</td> <td>lake</td> <td>sal</td> <td>0.1</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>rad</td> <td>2.19</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>sal</td> <td>0.09</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>temp</td> <td>-16.0</td> </tr>
+				  <tr> <td>752</td> <td>roe</td> <td>sal</td> <td>41.6</td> </tr>
+				  <tr> <td>837</td> <td>lake</td> <td>rad</td> <td>1.46</td> </tr>
+				  <tr> <td>837</td> <td>lake</td> <td>sal</td> <td>0.21</td> </tr>
+				  <tr> <td>837</td> <td>roe</td> <td>sal</td> <td>22.5</td> </tr>
+				  <tr> <td>844</td> <td>roe</td> <td>rad</td> <td>11.25</td> </tr>
+				</table>
+				</td>
+				</tr>
+				</table>
+		    </td>
+
+		    <td align="left" style="font-size:50%">
+		    	<code style="font-size:80%">
+		    	sqlite> select * from site join visited <br>
+   				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...> where site.name = visited.site;
+		    	</code> <br>
+		    	<article style="font-size:50%">		   
+				DR-1|-49.85|-128.57|619|DR-1|1927-02-08  <br>
+				DR-1|-49.85|-128.57|622|DR-1|1927-02-10 <br>
+				DR-1|-49.85|-128.57|844|DR-1|1932-03-22 <br>
+				DR-3|-47.15|-126.72|734|DR-3|1939-01-07 <br>
+				DR-3|-47.15|-126.72|735|DR-3|1930-01-12 <br>
+				DR-3|-47.15|-126.72|751|DR-3|1930-02-26 <br>
+				DR-3|-47.15|-126.72|752|DR-3|           <br>
+				MSK-4|-48.87|-123.4|837|MSK-4|1932-01-14 <br>
+		    	</article>
+                <br>
+		    	<code style="font-size:80%">
+		    	sqlite> select site.name, site.lat, site.long, visited.dated <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   ...> from site join visited <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   ...> where site.name = visited.site; 
+		    	</code> 
+		    	<article style="font-size:50%">		   
+				DR-1|-49.85|-128.57|1927-02-08 <br>
+				DR-1|-49.85|-128.57|1927-02-10 <br>
+				DR-1|-49.85|-128.57|1932-03-22 <br>
+				DR-3|-47.15|-126.72| <br>
+				DR-3|-47.15|-126.72|1930-01-12 <br>
+				DR-3|-47.15|-126.72|1930-02-26 <br>
+				DR-3|-47.15|-126.72|1939-01-07 <br>
+				MSK-4|-48.87|-123.4|1932-01-14
+		    	</article>
+		    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+   <section class="slide">
+	<table width="100%">
+	  <h2> SQL </h2>
+		<table width="100%" style="table-layout: fixed">
+		<tr>
+			<td align="center"><strong>데이터베이스</strong><br><br></td>
+			<td align="center" style="font-size:60%"><strong>sql 스크립트</strong><br><br></td>
+		</tr >
+
+		<tr>
+		    <td>
+				<table style="font-size:30%">
+				<tr>
+				<td valign="top">
+				<strong>Person</strong>: 판독한 사람.
+
+				<table>
+				  <tr> <th>ident</th> <th>personal</th> <th>family</th> </tr>
+				  <tr> <td>dyer</td> <td>William</td> <td>Dyer</td> </tr>
+				  <tr> <td>pb</td> <td>Frank</td> <td>Pabodie</td> </tr>
+				  <tr> <td>lake</td> <td>Anderson</td> <td>Lake</td> </tr>
+				  <tr> <td>roe</td> <td>Valentina</td> <td>Roerich</td> </tr>
+				  <tr> <td>danforth</td> <td>Frank</td> <td>Danforth</td> </tr>
+				</table>
+				<hr>
+
+				<strong>Site</strong>: 판독한 장소.
+
+				<table>
+				  <tr> <th>name</th> <th>lat</th> <th>long</th> </tr>
+				  <tr> <td>DR-1</td> <td>-49.85</td> <td>-128.57</td> </tr>
+				  <tr> <td>DR-3</td> <td>-47.15</td> <td>-126.72</td> </tr>
+				  <tr> <td>MSK-4</td> <td>-48.87</td> <td>-123.4</td> </tr>
+				</table>
+				<hr>
+
+				<strong>Visited</strong>: 특정 사이트에서 판독한 시점.
+
+				<table>
+				  <tr> <th>ident</th> <th>site</th> <th>dated</th> </tr>
+				  <tr> <td>619</td> <td>DR-1</td> <td>1927-02-08</td> </tr>
+				  <tr> <td>622</td> <td>DR-1</td> <td>1927-02-10</td> </tr>
+				  <tr> <td>734</td> <td>DR-3</td> <td>1939-01-07</td> </tr>
+				  <tr> <td>735</td> <td>DR-3</td> <td>1930-01-12</td> </tr>
+				  <tr> <td>751</td> <td>DR-3</td> <td>1930-02-26</td> </tr>
+				  <tr> <td>752</td> <td>DR-3</td> <td bgcolor="red">&nbsp;</td> </tr>
+				  <tr> <td>837</td> <td>MSK-4</td> <td>1932-01-14</td> </tr>
+				  <tr> <td>844</td> <td>DR-1</td> <td>1932-03-22</td> </tr>
+				</table>
+				</td>
+				<td valign="top">
+				<strong>Survey</strong>: 실제 판독.
+
+				<table>
+				  <tr> <th>taken</th> <th>person</th> <th>quant</th> <th>reading</th> </tr>
+				  <tr> <td>619</td> <td>dyer</td> <td>rad</td> <td>9.82</td> </tr>
+				  <tr> <td>619</td> <td>dyer</td> <td>sal</td> <td>0.13</td> </tr>
+				  <tr> <td>622</td> <td>dyer</td> <td>rad</td> <td>7.8</td> </tr>
+				  <tr> <td>622</td> <td>dyer</td> <td>sal</td> <td>0.09</td> </tr>
+				  <tr> <td>734</td> <td>pb</td> <td>rad</td> <td>8.41</td> </tr>
+				  <tr> <td>734</td> <td>lake</td> <td>sal</td> <td>0.05</td> </tr>
+				  <tr> <td>734</td> <td>pb</td> <td>temp</td> <td>-21.5</td> </tr>
+				  <tr> <td>735</td> <td>pb</td> <td>rad</td> <td>7.22</td> </tr>
+				  <tr> <td>735</td> <td bgcolor="red">&nbsp;</td> <td>sal</td> <td>0.06</td> </tr>
+				  <tr> <td>735</td> <td bgcolor="red">&nbsp;</td> <td>temp</td> <td>-26.0</td> </tr>
+				  <tr> <td>751</td> <td>pb</td> <td>rad</td> <td>4.35</td> </tr>
+				  <tr> <td>751</td> <td>pb</td> <td>temp</td> <td>-18.5</td> </tr>
+				  <tr> <td>751</td> <td>lake</td> <td>sal</td> <td>0.1</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>rad</td> <td>2.19</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>sal</td> <td>0.09</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>temp</td> <td>-16.0</td> </tr>
+				  <tr> <td>752</td> <td>roe</td> <td>sal</td> <td>41.6</td> </tr>
+				  <tr> <td>837</td> <td>lake</td> <td>rad</td> <td>1.46</td> </tr>
+				  <tr> <td>837</td> <td>lake</td> <td>sal</td> <td>0.21</td> </tr>
+				  <tr> <td>837</td> <td>roe</td> <td>sal</td> <td>22.5</td> </tr>
+				  <tr> <td>844</td> <td>roe</td> <td>rad</td> <td>11.25</td> </tr>
+				</table>
+				</td>
+				</tr>
+				</table>
+		    </td>
+
+		    <td align="left" style="font-size:50%">
+		    	<h4 style="font-size:100%"> survey-site.sql 파일</h4>
+		    	<code style="font-size:80%"> $ cat survey-site.sql 
+		    	</code>		    	
+		    	<blockquote style="font-size:50%">
+				-- 조사 장소 위치 <br>
+				select site.name, site.lat, site.long, visited.dated <br>
+				from site join visited <br>
+				where site.name = visited.site; 
+		    	</blockquote>
+		    	<h4 style="font-size:100%"> sql 스크립트 실행</h4>
+		    	<code style="font-size:80%">
+		    	$ sqlite3 survey.db < survey-site.sql
+		    	</code>
+		    	<article style="font-size:50%">		   
+				DR-1|-49.85|-128.57|619|DR-1|1927-02-08  <br>
+				DR-1|-49.85|-128.57|622|DR-1|1927-02-10 <br>
+				DR-1|-49.85|-128.57|844|DR-1|1932-03-22 <br>
+				DR-3|-47.15|-126.72|734|DR-3|1939-01-07 <br>
+				DR-3|-47.15|-126.72|735|DR-3|1930-01-12 <br>
+				DR-3|-47.15|-126.72|751|DR-3|1930-02-26 <br>
+				DR-3|-47.15|-126.72|752|DR-3|           <br>
+				MSK-4|-48.87|-123.4|837|MSK-4|1932-01-14 <br>
+		    	</article>
+		    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+
+  </div>
+  </body>
+</html>
+
+
+
+

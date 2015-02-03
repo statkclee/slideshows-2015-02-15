@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>데이터베이스(SQL)</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> XWMOOC </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />        
+	<aside class="notes">
+	</aside>
+    </section>
+
+ 
+   <section class="slide">
+	<table width="100%">
+	  <h2> SQL </h2>
+		<table width="100%" style="table-layout: fixed">
+		<tr>
+			<td align="center"><strong>데이터베이스</strong><br><br></td>
+			<td align="center" style="font-size:60%"><strong>sql 스키마(schema)</strong><br><br></td>
+		</tr >
+
+		<tr>
+		    <td>
+				<table style="font-size:30%">
+				<tr>
+				<td valign="top">
+				<strong>Person</strong>: 판독한 사람.
+
+				<table>
+				  <tr> <th>ident</th> <th>personal</th> <th>family</th> </tr>
+				  <tr> <td>dyer</td> <td>William</td> <td>Dyer</td> </tr>
+				  <tr> <td>pb</td> <td>Frank</td> <td>Pabodie</td> </tr>
+				  <tr> <td>lake</td> <td>Anderson</td> <td>Lake</td> </tr>
+				  <tr> <td>roe</td> <td>Valentina</td> <td>Roerich</td> </tr>
+				  <tr> <td>danforth</td> <td>Frank</td> <td>Danforth</td> </tr>
+				</table>
+				<hr>
+
+				<strong>Site</strong>: 판독한 장소.
+
+				<table>
+				  <tr> <th>name</th> <th>lat</th> <th>long</th> </tr>
+				  <tr> <td>DR-1</td> <td>-49.85</td> <td>-128.57</td> </tr>
+				  <tr> <td>DR-3</td> <td>-47.15</td> <td>-126.72</td> </tr>
+				  <tr> <td>MSK-4</td> <td>-48.87</td> <td>-123.4</td> </tr>
+				</table>
+				<hr>
+
+				<strong>Visited</strong>: 특정 사이트에서 판독한 시점.
+
+				<table>
+				  <tr> <th>ident</th> <th>site</th> <th>dated</th> </tr>
+				  <tr> <td>619</td> <td>DR-1</td> <td>1927-02-08</td> </tr>
+				  <tr> <td>622</td> <td>DR-1</td> <td>1927-02-10</td> </tr>
+				  <tr> <td>734</td> <td>DR-3</td> <td>1939-01-07</td> </tr>
+				  <tr> <td>735</td> <td>DR-3</td> <td>1930-01-12</td> </tr>
+				  <tr> <td>751</td> <td>DR-3</td> <td>1930-02-26</td> </tr>
+				  <tr> <td>752</td> <td>DR-3</td> <td bgcolor="red">&nbsp;</td> </tr>
+				  <tr> <td>837</td> <td>MSK-4</td> <td>1932-01-14</td> </tr>
+				  <tr> <td>844</td> <td>DR-1</td> <td>1932-03-22</td> </tr>
+				</table>
+				</td>
+				<td valign="top">
+				<strong>Survey</strong>: 실제 판독.
+
+				<table>
+				  <tr> <th>taken</th> <th>person</th> <th>quant</th> <th>reading</th> </tr>
+				  <tr> <td>619</td> <td>dyer</td> <td>rad</td> <td>9.82</td> </tr>
+				  <tr> <td>619</td> <td>dyer</td> <td>sal</td> <td>0.13</td> </tr>
+				  <tr> <td>622</td> <td>dyer</td> <td>rad</td> <td>7.8</td> </tr>
+				  <tr> <td>622</td> <td>dyer</td> <td>sal</td> <td>0.09</td> </tr>
+				  <tr> <td>734</td> <td>pb</td> <td>rad</td> <td>8.41</td> </tr>
+				  <tr> <td>734</td> <td>lake</td> <td>sal</td> <td>0.05</td> </tr>
+				  <tr> <td>734</td> <td>pb</td> <td>temp</td> <td>-21.5</td> </tr>
+				  <tr> <td>735</td> <td>pb</td> <td>rad</td> <td>7.22</td> </tr>
+				  <tr> <td>735</td> <td bgcolor="red">&nbsp;</td> <td>sal</td> <td>0.06</td> </tr>
+				  <tr> <td>735</td> <td bgcolor="red">&nbsp;</td> <td>temp</td> <td>-26.0</td> </tr>
+				  <tr> <td>751</td> <td>pb</td> <td>rad</td> <td>4.35</td> </tr>
+				  <tr> <td>751</td> <td>pb</td> <td>temp</td> <td>-18.5</td> </tr>
+				  <tr> <td>751</td> <td>lake</td> <td>sal</td> <td>0.1</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>rad</td> <td>2.19</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>sal</td> <td>0.09</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>temp</td> <td>-16.0</td> </tr>
+				  <tr> <td>752</td> <td>roe</td> <td>sal</td> <td>41.6</td> </tr>
+				  <tr> <td>837</td> <td>lake</td> <td>rad</td> <td>1.46</td> </tr>
+				  <tr> <td>837</td> <td>lake</td> <td>sal</td> <td>0.21</td> </tr>
+				  <tr> <td>837</td> <td>roe</td> <td>sal</td> <td>22.5</td> </tr>
+				  <tr> <td>844</td> <td>roe</td> <td>rad</td> <td>11.25</td> </tr>
+				</table>
+				</td>
+				</tr>
+				</table>
+		    </td>
+
+		    <td align="left" style="font-size:50%">
+		    	<h4 style="font-size:100%"> sql 도움말</h4>
+		    	<code style="font-size:80%"> sqlite> .help </code>		    	
+
+		    	<h4 style="font-size:100%"> sql 스키마(schema)</h4>
+		    	<code style="font-size:80%">
+		    	sqlite> .schema
+		    	</code>
+		    	<article style="font-size:70%">		   
+				CREATE TABLE Person(   <br>
+				        ident    text, <br>
+				        personal text, <br>
+				        family   text  <br>
+				);                     <br>
+				CREATE TABLE Site(     <br>
+				        name text,     <br>
+				        lat  real,     <br>
+				        long real      <br>
+				);                     <br>
+				CREATE TABLE Visited(  <br>
+				        ident integer, <br>
+				        site  text,    <br>
+				        dated text     <br>
+				);                     <br>
+				CREATE TABLE Survey(   <br>
+				        taken   integer, <br>
+				        person  text,    <br>
+				        quant   text,    <br>
+				        reading real     <br>
+				);		    	         <br>
+			    </article>
+		    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+   <section class="slide">
+	<table width="100%">
+	  <h2> SQL </h2>
+		<table width="100%" style="table-layout: fixed">
+		<tr>
+			<td align="center"><strong>데이터베이스</strong><br><br></td>
+			<td align="center" style="font-size:60%"><strong>생성(create), 삭제(drop)</strong><br><br></td>
+		</tr >
+
+		<tr>
+		    <td>
+				<table style="font-size:30%">
+				<tr>
+				<td valign="top">
+				<strong>Person</strong>: 판독한 사람.
+
+				<table>
+				  <tr> <th>ident</th> <th>personal</th> <th>family</th> </tr>
+				  <tr> <td>dyer</td> <td>William</td> <td>Dyer</td> </tr>
+				  <tr> <td>pb</td> <td>Frank</td> <td>Pabodie</td> </tr>
+				  <tr> <td>lake</td> <td>Anderson</td> <td>Lake</td> </tr>
+				  <tr> <td>roe</td> <td>Valentina</td> <td>Roerich</td> </tr>
+				  <tr> <td>danforth</td> <td>Frank</td> <td>Danforth</td> </tr>
+				</table>
+				<hr>
+
+				<strong>Site</strong>: 판독한 장소.
+
+				<table>
+				  <tr> <th>name</th> <th>lat</th> <th>long</th> </tr>
+				  <tr> <td>DR-1</td> <td>-49.85</td> <td>-128.57</td> </tr>
+				  <tr> <td>DR-3</td> <td>-47.15</td> <td>-126.72</td> </tr>
+				  <tr> <td>MSK-4</td> <td>-48.87</td> <td>-123.4</td> </tr>
+				</table>
+				<hr>
+
+				<strong>Visited</strong>: 특정 사이트에서 판독한 시점.
+
+				<table>
+				  <tr> <th>ident</th> <th>site</th> <th>dated</th> </tr>
+				  <tr> <td>619</td> <td>DR-1</td> <td>1927-02-08</td> </tr>
+				  <tr> <td>622</td> <td>DR-1</td> <td>1927-02-10</td> </tr>
+				  <tr> <td>734</td> <td>DR-3</td> <td>1939-01-07</td> </tr>
+				  <tr> <td>735</td> <td>DR-3</td> <td>1930-01-12</td> </tr>
+				  <tr> <td>751</td> <td>DR-3</td> <td>1930-02-26</td> </tr>
+				  <tr> <td>752</td> <td>DR-3</td> <td bgcolor="red">&nbsp;</td> </tr>
+				  <tr> <td>837</td> <td>MSK-4</td> <td>1932-01-14</td> </tr>
+				  <tr> <td>844</td> <td>DR-1</td> <td>1932-03-22</td> </tr>
+				</table>
+				</td>
+				<td valign="top">
+				<strong>Survey</strong>: 실제 판독.
+
+				<table>
+				  <tr> <th>taken</th> <th>person</th> <th>quant</th> <th>reading</th> </tr>
+				  <tr> <td>619</td> <td>dyer</td> <td>rad</td> <td>9.82</td> </tr>
+				  <tr> <td>619</td> <td>dyer</td> <td>sal</td> <td>0.13</td> </tr>
+				  <tr> <td>622</td> <td>dyer</td> <td>rad</td> <td>7.8</td> </tr>
+				  <tr> <td>622</td> <td>dyer</td> <td>sal</td> <td>0.09</td> </tr>
+				  <tr> <td>734</td> <td>pb</td> <td>rad</td> <td>8.41</td> </tr>
+				  <tr> <td>734</td> <td>lake</td> <td>sal</td> <td>0.05</td> </tr>
+				  <tr> <td>734</td> <td>pb</td> <td>temp</td> <td>-21.5</td> </tr>
+				  <tr> <td>735</td> <td>pb</td> <td>rad</td> <td>7.22</td> </tr>
+				  <tr> <td>735</td> <td bgcolor="red">&nbsp;</td> <td>sal</td> <td>0.06</td> </tr>
+				  <tr> <td>735</td> <td bgcolor="red">&nbsp;</td> <td>temp</td> <td>-26.0</td> </tr>
+				  <tr> <td>751</td> <td>pb</td> <td>rad</td> <td>4.35</td> </tr>
+				  <tr> <td>751</td> <td>pb</td> <td>temp</td> <td>-18.5</td> </tr>
+				  <tr> <td>751</td> <td>lake</td> <td>sal</td> <td>0.1</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>rad</td> <td>2.19</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>sal</td> <td>0.09</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>temp</td> <td>-16.0</td> </tr>
+				  <tr> <td>752</td> <td>roe</td> <td>sal</td> <td>41.6</td> </tr>
+				  <tr> <td>837</td> <td>lake</td> <td>rad</td> <td>1.46</td> </tr>
+				  <tr> <td>837</td> <td>lake</td> <td>sal</td> <td>0.21</td> </tr>
+				  <tr> <td>837</td> <td>roe</td> <td>sal</td> <td>22.5</td> </tr>
+				  <tr> <td>844</td> <td>roe</td> <td>rad</td> <td>11.25</td> </tr>
+				</table>
+				</td>
+				</tr>
+				</table>
+		    </td>
+
+		    <td align="left" style="font-size:50%">
+		    	<h4 style="font-size:100%"> 테이블 생성(create)</h4>
+		    	<code style="font-size:80%"> 
+		    	sqlite> create table Stat( <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;   ...>  MeanValue integer, <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;   ...>  MeanLabel text, <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;   ...>  ValueYN bool); <br>
+			    </code>
+		    	<code style="font-size:80%">
+		    	sqlite> .schema
+		    	</code>
+		    	<article style="font-size:70%">		   
+				CREATE TABLE Person(   <br>
+				        ident    text, <br>
+				        personal text, <br>
+				        family   text  <br>
+				);                     <br>
+				CREATE TABLE Site(     <br>
+				        name text,     <br>
+				        lat  real,     <br>
+				        long real      <br>
+				);                     <br>
+				CREATE TABLE Visited(  <br>
+				        ident integer, <br>
+				        site  text,    <br>
+				        dated text     <br>
+				);                     <br>
+				CREATE TABLE Survey(   <br>
+				        taken   integer, <br>
+				        person  text,    <br>
+				        quant   text,    <br>
+				        reading real     <br>
+				CREATE TABLE Stat(       <br>
+				 MeanValue integer,      <br>
+				 MeanLabel text,         <br>
+				 ValueYN bool);          <br>
+				);		    	         
+			    </article>
+		    	<code style="font-size:80%">
+		    	sqlite> drop table Stat;
+		    	</code>
+
+		    	<h4 style="font-size:100%"> sql 스키마(schema)</h4>
+		    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+
+   <section class="slide">
+	<table width="100%">
+	  <h2> SQL </h2>
+		<table width="100%" style="table-layout: fixed">
+		<tr>
+			<td align="center"><strong>데이터베이스</strong><br><br></td>
+			<td align="center" style="font-size:60%"><strong>레코드 삽입(insert)</strong><br><br></td>
+		</tr >
+
+		<tr>
+		    <td>
+				<table style="font-size:30%">
+				<tr>
+				<td valign="top">
+				<strong>Person</strong>: 판독한 사람.
+
+				<table>
+				  <tr> <th>ident</th> <th>personal</th> <th>family</th> </tr>
+				  <tr> <td>dyer</td> <td>William</td> <td>Dyer</td> </tr>
+				  <tr> <td>pb</td> <td>Frank</td> <td>Pabodie</td> </tr>
+				  <tr> <td>lake</td> <td>Anderson</td> <td>Lake</td> </tr>
+				  <tr> <td>roe</td> <td>Valentina</td> <td>Roerich</td> </tr>
+				  <tr> <td>danforth</td> <td>Frank</td> <td>Danforth</td> </tr>
+				</table>
+				<hr>
+
+				<strong>Site</strong>: 판독한 장소.
+
+				<table>
+				  <tr> <th>name</th> <th>lat</th> <th>long</th> </tr>
+				  <tr> <td>DR-1</td> <td>-49.85</td> <td>-128.57</td> </tr>
+				  <tr> <td>DR-3</td> <td>-47.15</td> <td>-126.72</td> </tr>
+				  <tr> <td>MSK-4</td> <td>-48.87</td> <td>-123.4</td> </tr>
+				</table>
+				<hr>
+
+				<strong>Visited</strong>: 특정 사이트에서 판독한 시점.
+
+				<table>
+				  <tr> <th>ident</th> <th>site</th> <th>dated</th> </tr>
+				  <tr> <td>619</td> <td>DR-1</td> <td>1927-02-08</td> </tr>
+				  <tr> <td>622</td> <td>DR-1</td> <td>1927-02-10</td> </tr>
+				  <tr> <td>734</td> <td>DR-3</td> <td>1939-01-07</td> </tr>
+				  <tr> <td>735</td> <td>DR-3</td> <td>1930-01-12</td> </tr>
+				  <tr> <td>751</td> <td>DR-3</td> <td>1930-02-26</td> </tr>
+				  <tr> <td>752</td> <td>DR-3</td> <td bgcolor="red">&nbsp;</td> </tr>
+				  <tr> <td>837</td> <td>MSK-4</td> <td>1932-01-14</td> </tr>
+				  <tr> <td>844</td> <td>DR-1</td> <td>1932-03-22</td> </tr>
+				</table>
+				</td>
+				<td valign="top">
+				<strong>Survey</strong>: 실제 판독.
+
+				<table>
+				  <tr> <th>taken</th> <th>person</th> <th>quant</th> <th>reading</th> </tr>
+				  <tr> <td>619</td> <td>dyer</td> <td>rad</td> <td>9.82</td> </tr>
+				  <tr> <td>619</td> <td>dyer</td> <td>sal</td> <td>0.13</td> </tr>
+				  <tr> <td>622</td> <td>dyer</td> <td>rad</td> <td>7.8</td> </tr>
+				  <tr> <td>622</td> <td>dyer</td> <td>sal</td> <td>0.09</td> </tr>
+				  <tr> <td>734</td> <td>pb</td> <td>rad</td> <td>8.41</td> </tr>
+				  <tr> <td>734</td> <td>lake</td> <td>sal</td> <td>0.05</td> </tr>
+				  <tr> <td>734</td> <td>pb</td> <td>temp</td> <td>-21.5</td> </tr>
+				  <tr> <td>735</td> <td>pb</td> <td>rad</td> <td>7.22</td> </tr>
+				  <tr> <td>735</td> <td bgcolor="red">&nbsp;</td> <td>sal</td> <td>0.06</td> </tr>
+				  <tr> <td>735</td> <td bgcolor="red">&nbsp;</td> <td>temp</td> <td>-26.0</td> </tr>
+				  <tr> <td>751</td> <td>pb</td> <td>rad</td> <td>4.35</td> </tr>
+				  <tr> <td>751</td> <td>pb</td> <td>temp</td> <td>-18.5</td> </tr>
+				  <tr> <td>751</td> <td>lake</td> <td>sal</td> <td>0.1</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>rad</td> <td>2.19</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>sal</td> <td>0.09</td> </tr>
+				  <tr> <td>752</td> <td>lake</td> <td>temp</td> <td>-16.0</td> </tr>
+				  <tr> <td>752</td> <td>roe</td> <td>sal</td> <td>41.6</td> </tr>
+				  <tr> <td>837</td> <td>lake</td> <td>rad</td> <td>1.46</td> </tr>
+				  <tr> <td>837</td> <td>lake</td> <td>sal</td> <td>0.21</td> </tr>
+				  <tr> <td>837</td> <td>roe</td> <td>sal</td> <td>22.5</td> </tr>
+				  <tr> <td>844</td> <td>roe</td> <td>rad</td> <td>11.25</td> </tr>
+				</table>
+				</td>
+				</tr>
+				</table>
+		    </td>
+
+		    <td align="left" style="font-size:50%">
+		    	<h4 style="font-size:100%"> 테이블 생성(create)</h4>
+		    	<code style="font-size:80%"> 
+		    	sqlite> create table Success( <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;   ...>  sitename text, <br>
+				&nbsp;&nbsp;&nbsp;&nbsp;   ...>  status bool); <br>
+			    </code>
+		    	<code style="font-size:80%">
+		    	sqlite> insert into Success values ('usa', 1);   <br>
+		    	sqlite> insert into Success values ('china', 0); <br>
+		    	sqlite> insert into Success values ('korea', 1); <br>
+		    	</code>
+		    	<code style="font-size:80%">
+		    	sqlite> select * from success; <br>
+		    	</code>
+		    	<article style="font-size:70%">		   
+				usa|1 <br>
+				china|0 <br>
+				korea|1
+				</article>
+		    </td>
+		</tr>
+		</table>
+	<aside class="notes">
+	</aside>
+    </section>
+  </div>
+  </body>
+</html>
+
+
+
+
