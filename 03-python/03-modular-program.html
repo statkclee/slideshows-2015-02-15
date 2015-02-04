@@ -78,6 +78,332 @@
     </aside>
     </section>
 
+  <section class="slide">
+  <table width="100%">
+    <h2> 리팩터링(refactoring) </h2>
+    <table width="100%" style="table-layout: fixed">
+    <tr>
+        <td>
+                <h4 style="font-size:45%">기능이 완성된 프로그램</h4>
+                <blockquote style="font-size:50%"> 
+                    #Add up the number of creatures in a data file.     <br>
+                    import sys                                          <br>
+                    for filename in sys.argv[1:]                        <br>    
+                    reader = open(filename, 'r')                        <br>    
+                    total = 0                                           <br>
+                    for line in reader:                                 <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;if line.startswith('#') or line.startswith('Date'):     <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass # Don't do anything        <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;else:                                                   <br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total = total + int(line.strip().split(',')[2])<br>
+                    reader.close()                                      <br>
+                    print ('total is', total)
+                </blockquote>
+      </td>
+          <td>
+                <h4 style="font-size:45%">1차 리팩터링된 프로그램</h4>
+                <blockquote style="font-size:50%"> 
+                    #Add up the number of creatures in a data file. <br>
+                    import sys                                      <br> 
+                                                                    <br> 
+                    # Extract the count portion of a data record and return as a number.<br> 
+                    def get_count(line):                  <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;temp = line.strip()               <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;fields = temp.split(',')          <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;count = int(fields[2])            <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;return count                      <br> 
+                                                          <br> 
+                    for filename in sys.argv[1:]:         <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;reader = open(filename, 'r')      <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;total = 0                         <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;for line in reader:               <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if line.startswith('#') or line.startswith('Date'): <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass # Don't do anything                        <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:                                               <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total = total + <strong>get_count(line)</strong>  <br> 
+                    reader.close()                                              <br> 
+                    print ('total is', total)                                   <br> 
+                </blockquote>
+      </td>
+    </tr>
+    </table>
+  <aside class="notes">
+  </aside>
+    </section>
+
+  <section class="slide">
+  <table width="100%">
+    <h2> 리팩터링(refactoring) </h2>
+    <table width="100%" style="table-layout: fixed">
+    <tr>
+        <td>
+                <h4 style="font-size:45%">1차 리팩터링된 프로그램</h4>
+                <blockquote style="font-size:50%"> 
+                    #Add up the number of creatures in a data file. <br>
+                    import sys                                      <br> 
+                                                                    <br> 
+                    # Extract the count portion of a data record and return as a number.<br> 
+                    def get_count(line):                  <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;temp = line.strip()               <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;fields = temp.split(',')          <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;count = int(fields[2])            <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;return count                      <br> 
+                                                          <br> 
+                    for filename in sys.argv[1:]:         <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;reader = open(filename, 'r')      <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;total = 0                         <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;for line in reader:               <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if line.startswith('#') or line.startswith('Date'): <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass # Don't do anything                        <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:                                               <br> 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total = total + <strong>get_count(line)</strong>  <br> 
+                    reader.close()                                              <br> 
+                    print ('total is', total)                                   <br> 
+                </blockquote>
+      </td>
+      <td>
+                <h4 style="font-size:45%">2차 리팩터링된 프로그램</h4>
+                <blockquote style="font-size:50%"> 
+                  #Add up the number of creatures in a data file.       <br>
+                  import sys                                            <br>
+                                                                        <br>
+                  # Extract the count portion of a data record and return as a number. <br>
+                  def get_count(line):           <br>
+                      &nbsp;&nbsp;&nbsp;&nbsp;temp = line.strip()        <br>
+                      &nbsp;&nbsp;&nbsp;&nbsp;fields = temp.split(',')   <br>
+                      &nbsp;&nbsp;&nbsp;&nbsp;count = int(fields[2])     <br>
+                      &nbsp;&nbsp;&nbsp;&nbsp;return count               <br>
+                  # Count the total number of creatures in a data file.  <br>
+                  def get_total(source):                                 <br>   
+                  &nbsp;&nbsp;&nbsp;&nbsp;total = 0                      <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;for line in reader: <br> 
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if line.startswith('#') or line.startswith('Date'): <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            pass # Don't do anything                        <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        else:                                               <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            total = total + get_count(line)                 <br>    
+                  &nbsp;&nbsp;&nbsp;&nbsp;    return total                                            <br>
+                  # Show total number of creatures in each file given on the command line <br>
+                  all_filenames = sys.argv[1:]      <br>
+                  for filename in all_filenames:    <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;    reader = open(filename, 'r')  <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;    total = <strong> get_total(reader) </strong>     <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;    reader.close()                <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;    print ('total is', total)     <br>
+                </blockquote>
+
+      </td>
+    </tr>
+    </table>
+  <aside class="notes">
+  </aside>
+    </section>
+
+  <section class="slide">
+  <table width="100%">
+    <h2> 리팩터링(refactoring) </h2>
+    <table width="100%" style="table-layout: fixed">
+    <tr>
+        <td>
+                <h4 style="font-size:45%">3차 리팩터링된 프로그램</h4>
+                <blockquote style="font-size:45%"> 
+                  #Add up the number of creatures in a data file.       <br>
+                  import sys                                            <br>
+                                                                        <br>
+                  # Extract the count portion of a data record and return as a number. <br>
+                  def get_count(line):           <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;temp = line.strip()        <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;fields = temp.split(',')   <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;count = int(fields[2])     <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;return count               <br>
+                  def should_skip_line(line):                                <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;return line.startswith('#') or line.startswith('Date') <br>
+
+                  # Count the total number of creatures in a data file.  <br>
+                  def get_total(source):                                 <br>   
+                  &nbsp;&nbsp;&nbsp;&nbsp;total = 0                      <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;for line in reader: <br> 
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if should_skip_line(line): <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            pass                        <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        else:                                               <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            total = total + get_count(line)                 <br>    
+                  &nbsp;&nbsp;&nbsp;&nbsp;    return total                                            <br>
+                  # Show total number of creatures in each file given on the command line <br>
+                  all_filenames = sys.argv[1:]      <br>
+                  for filename in all_filenames:    <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;    reader = open(filename, 'r')  <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;    total = <strong> get_total(reader) </strong>     <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;    reader.close()                <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;    print (filename + ' : ', total)     <br>
+                </blockquote>
+      </td>
+
+      <td>
+          <code style="font-size:45%"> Single Responsibility Principle </code>
+          <h4 style="font-size:45%"> 쉘 프로그래밍 출력</h4>
+          <blockquote style="font-size:45%"> 
+            $ python count-fish.py steve-2012.txt test.txt temp.txt <br>
+            steve-2012.txt :  30                                    <br>
+            test.txt :  4                                           <br>
+            temp.txt :  30                                          <br>
+          </blockquote>
+          <h4 style="font-size:45%"> 파이프 출력</h4>
+          <blockquote style="font-size:45%"> 
+            $ python count-fish.py steve-2012.txt test.txt temp.txt | cut -d ' ' -f4 <br>
+            30                                                                       <br>
+            4                                                                        <br> 
+            30                                                                       <br>
+          </blockquote>
+          <h4 style="font-size:45%"> 파이프 입력</h4>
+          <blockquote style="font-size:45%"> 
+            $ cat steve-2012.txt test.txt temp.txt | python count-fish.py  <br>
+          </blockquote>
+
+      </td>
+    </tr>
+    </table>
+  <aside class="notes">
+  </aside>
+    </section>
+
+  <section class="slide">
+  <table width="100%">
+    <h2> 자동화 완성 </h2>
+    <table width="100%" style="table-layout: fixed">
+    <tr>
+        <td>
+                <h4 style="font-size:45%">표준입력(stdin)</h4>
+                <code style="font-size:60%">pipeline.py<code>
+                <blockquote style="font-size:45%"> 
+                import sys                <br>
+
+                for line in sys.stdin:    <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;print ('I read:', line)  <br>
+                </blockquote>
+                <blockquote style="font-size:45%"> 
+                  $ python pipeline.py  <br>
+                  hello                 <br>
+                  I read: hello         <br> 
+                </blockquote>
+                <blockquote style="font-size:45%"> 
+                  $ cat test.txt | python pipeline.py  <br>
+                  I read: 2012-08-29,marlin,3          <br> 
+                                                       <br>
+                  I read: 2012-08-29,shark,1           <br>
+                </blockquote>
+                <blockquote style="font-size:45%"> 
+                  $ python pipeline.py < test.txt      <br>
+                  I read: 2012-08-29,marlin,3          <br> 
+                                                       <br>
+                  I read: 2012-08-29,shark,1           <br>
+                </blockquote>
+
+      </td>
+
+      <td>
+                <h4 style="font-size:45%">pipeline.py version 2</h4>
+                <blockquote style="font-size:45%"> 
+                  import sys                     <br>
+                                                 <br>
+                  filenames = sys.argv[1:]       <br>
+                                                 <br>
+                  if len(sys.argv[1:]) ==0:      <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;  for line in sys.stdin:       <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    print (len(line))          <br>
+                  else:                          <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;  for name in filenames:       <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    reader = open(name, 'r')   <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    for line in reader:        <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      print (len(line))        <br> 
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    reader.close()             <br>
+                </blockquote>
+                <blockquote style="font-size:45%"> 
+                  $ python pipeline.py <test.txt  <br>
+                  20                              <br>
+                  18                              <br>
+                                                     <br>
+                  $ cat test.txt | python pipeline.py  <br>
+                  20                                   <br>
+                  18                                   <br>
+                </blockquote>
+      </td>
+    </tr>
+    </table>
+  <aside class="notes">
+  </aside>
+    </section>
+
+  <section class="slide">
+  <table width="100%">
+    <h2> 자동화 완성 </h2>
+    <table width="100%">
+    <tr width="30%">
+        <td>
+                <h4 style="font-size:45%">pipeline.py v2 리팩터링</h4>
+                <blockquote style="font-size:45%"> 
+                  import sys                      <br>
+                                                  <br>
+                  def process(file):              <br>  
+                  &nbsp;&nbsp;&nbsp;&nbsp;  for line in file:             <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    print (len(line))           <br>
+                                                  <br>
+                  filenames = sys.argv[1:]        <br>
+                                                  <br>    
+                  if len(sys.argv[1:]) ==0:       <br>  
+                  &nbsp;&nbsp;&nbsp;&nbsp;  process(sys.stdin)            <br>
+                  else:                           <br>  
+                  &nbsp;&nbsp;&nbsp;&nbsp;  for name in filenames:        <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    reader = open(name, 'r')    <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    process(reader)             <br>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    reader.close()              <br>
+                </blockquote>
+      </td>
+
+      <td>
+          <h4 style="font-size:45%">최종 버젼</h4>
+          <blockquote style="font-size:40%"> 
+          #Add up the number of creatures in a data file.                  <br>
+          import sysv  <br>
+ <br>
+          # Extract the count portion of a data record and return as a number. <br>
+          def get_count(line): <br>
+&nbsp;&nbsp;&nbsp;&nbsp;              temp = line.strip() <br>
+&nbsp;&nbsp;&nbsp;&nbsp;              fields = temp.split(',') <br>
+&nbsp;&nbsp;&nbsp;&nbsp;              count = int(fields[2]) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;              return count <br>
+ <br>
+          def should_skip_line(line): <br>
+&nbsp;&nbsp;&nbsp;&nbsp;              return line.startswith('#') or line.startswith('Date') <br>
+ <br>
+          # Count the total number of creatures in a data file. <br>
+          def get_total(source): <br>
+&nbsp;&nbsp;&nbsp;&nbsp;              total = 0 <br>
+&nbsp;&nbsp;&nbsp;&nbsp;              for line in source:  <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  if should_skip_line(line): <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      pass <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                  else: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                      total = total + get_count(line) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;              return total <br>
+ <br>
+          # Show total number of creatures in each file given on the command line <br>
+          all_filenames = sys.argv[1:] <br>
+          if len(all_filenames) == 0: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;              total = get_total(sys.stdin) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;              print('--', total) <br>
+          else:  <br>
+&nbsp;&nbsp;&nbsp;&nbsp;              for filename in all_filenames: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                  reader = open(filename, 'r') <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                  total = get_total(reader) <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                  reader.close() <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                  print (filename + ' : ', total) <br>
+          </blockquote> 
+        </td> 
+    </tr>
+    </table>
+  <aside class="notes">
+  </aside>
+    </section>
+
+
   </div>
   </body>
 </html>
