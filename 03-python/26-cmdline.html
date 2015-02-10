@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>파이썬(python)</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> 6. 명령어 라인 프로그래밍 </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />        
+  <aside class="notes">
+  </aside>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+      <h2> 파이썬 실습(6): 도전과제(1)</h2>
+        <ol>
+          <li>
+            <p>덧셈과 뺄셈을 수행하는 명령-라인 프로그램을 작성하세요.</p>
+
+            <pre>
+      $ python arith.py 1 + 2
+      3
+      $ python arith.py 3 - 4
+      -1</pre>
+
+            <p>만약 프로그램에 <code>*</code>을 사용해서 곱셈을 추가하려고 한다면 무슨 잘못이 있을까요?</p>
+          </li>
+          <li>
+            <p><a href="earlier">03-loop.ipynb</a>에서 소개된 <code>glob</code> 모듈을 사용해서, 특정 확장자를 가진 파일을 현재 디렉토리에서 출력하는 <code>ls</code> 의 간단한 버젼을 작성하세요.</p>
+
+            <pre>
+      $ python my_ls.py py
+      left.py
+      right.py
+      zero.py</pre>
+          </li>
+        </ol>
+    </section>
+
+    <section class="slide" style="font-size:60%">
+      <h2> 파이썬 실습(6): 도전과제(1) 토론</h2>
+        <ol>
+          <li>
+            <p>덧셈과 뺄셈을 수행하는 명령-라인 프로그램을 작성하세요.</p>
+            <pre>
+import sys
+
+def arith():
+  if sys.argv[2] =='+':
+    print int(sys.argv[1]) + int(sys.argv[3])
+  elif sys.argv[2] == '-':
+    print int(sys.argv[1]) - int(sys.argv[3])
+
+arith()</pre>
+
+            <p>만약 프로그램에 <code>*</code>을 사용해서 곱셈을 추가하려고 한다면 무슨 잘못이 있을까요?</p>
+          </li>
+          <li>
+            <p><a href="earlier">03-loop.ipynb</a>에서 소개된 <code>glob</code> 모듈을 사용해서, 특정 확장자를 가진 파일을 현재 디렉토리에서 출력하는 <code>ls</code> 의 간단한 버젼을 작성하세요.</p>
+
+            <pre>
+import sys
+import glob
+
+def ms_ls():
+
+  ls_str = '*.' + sys.argv[1]
+  print glob.glob(ls_str)
+
+ms_ls()</pre>
+          </li>
+        </ol>
+    </section>
+
+    <section class="slide" style="font-size:60%">
+      <h2> 파이썬 실습(6): 도전과제(2)</h2>
+        <ol>
+          <li>
+            <p><code>check.R</code> 프로그램을 작성해서 인자로 하나 혹은 그 이상의 염증 데이터 파일 이름을 가지고 모든 파일이 동일한 행과 열을 가지는지 검증하게 하세요. 프로그램을 시험하는 가장 최선의 방법은 무엇인가요?</p>
+    </section>
+
+    <section class="slide" style="font-size:60%">
+      <h2> 파이썬 실습(6): 도전과제(2) 토론</h2>
+        <ol>
+          <li>
+            <p><code>check.R</code> 프로그램을 작성해서 인자로 하나 혹은 그 이상의 염증 데이터 파일 이름을 가지고 모든 파일이 동일한 행과 열을 가지는지 검증하게 하세요. 프로그램을 시험하는 가장 최선의 방법은 무엇인가요?</p>
+    <pre>
+import sys
+import glob
+import numpy as np
+
+def check():
+  for argv in sys.argv[1:]:
+    data = np.loadtxt(argv,delimiter=',')
+    print data.shape
+
+check()
+
+%run check.py inflammation-01.csv inflammation-02.csv
+%run check.py inf*.csv</pre>
+    </section>
+
+    <section class="slide" style="font-size:60%">
+      <h2> 파이썬 실습(6): 도전과제(3)</h2>
+        <ol>
+          <li>
+             <p>상기 프로그래을 다시 작성해서 <code>--min</code>, <code>--mean</code>, <code>--max</code> 대신에 <code>-n</code>, <code>-m</code>, <code>-x</code>을 각각 사용하게 하세요. 
+             코드가 가독성이 좋습니까? 
+             프로그램이 더 이해하기 좋습니까? </p>
+          </li>
+          <li>
+            <p>이와는 별도로, 프로그램을 변경해서 만약 어떤 행동(action)이 명기되지 않거나 혹은 잘못된 동작이 주어지면, 어떻게 사용되어야 하는지 설명하는 메시지를 출력하게 하세요.</p>
+          </li>
+          <li>
+            <p>이와는 별도로, 프로그램을 수정해서 만약 어떤 행동(action)도 명기되지 않으면,
+            데이터의 평균을 화면에 출력하게 코드를 작성하세요.</p>
+          </li>
+        </ol>
+    </section>
+
+    <section class="slide" style="font-size:60%">
+      <h2> 파이썬 실습(6): 도전과제(3) 토론</h2>
+        <ol>
+          <li>
+             <p>상기 프로그래을 다시 작성해서 <code>--min</code>, <code>--mean</code>, <code>--max</code> 대신에 <code>-n</code>, <code>-m</code>, <code>-x</code>을 각각 사용하게 하세요. 
+             코드가 가독성이 좋습니까? 
+             프로그램이 더 이해하기 좋습니까? </p>
+             <pre>
+import sys
+import numpy as np
+
+def main():
+    script = sys.argv[0]
+    action = sys.argv[1]
+    filenames = sys.argv[2:]
+    assert action in ['--n', '--m', '--x'], \
+           'Action is not one of --n, --m, or --x: ' + action
+    for f in filenames:
+        process(f, action)
+
+def process(filename, action):
+    data = np.loadtxt(filename, delimiter=',')
+
+    if action == '--n':
+        values = data.min(axis=1)
+    elif action == '--m':
+        values = data.mean(axis=1)
+    elif action == '--x':
+        values = data.max(axis=1)
+
+    for m in values:
+        print m</pre>
+          </li>
+        </ol>
+    </section>
+
+    <section class="slide" style="font-size:60%">
+      <h2> 파이썬 실습(6): 도전과제(3) 토론</h2>
+        <ol>
+          <li>
+            <p>이와는 별도로, 프로그램을 변경해서 만약 어떤 행동(action)이 명기되지 않거나 혹은 잘못된 동작이 주어지면, 어떻게 사용되어야 하는지 설명하는 메시지를 출력하게 하세요.</p>
+          </li>
+          <li>
+            <p>이와는 별도로, 프로그램을 수정해서 만약 어떤 행동(action)도 명기되지 않으면,
+            데이터의 평균을 화면에 출력하게 코드를 작성하세요.</p>
+          </li>
+          <pre style="font-size:60%">
+import sys
+import numpy as np
+
+def main():
+    script = sys.argv[0]
+    action = sys.argv[1]
+    filenames = sys.argv[2:]
+
+    for f in filenames:
+        if action in ['--min', '--mean', '--max']:
+            process(f, action)
+        elif action.startswith('-') and action not in ['--min', '--mean', '--max']:
+            print 'Check Flag !!!'
+        else:
+            process(f,'--mean')
+            
+def process(filename, action):
+    data = np.loadtxt(filename, delimiter=',')
+
+    if action == '--min':
+        values = data.min(axis=1)
+    elif action == '--mean':
+        values = data.mean(axis=1)
+    elif action == '--max':
+        values = data.max(axis=1)
+
+    for m in values:
+        print m</pre>
+        </ol>
+    </section>
+  </body>
+</html>
+
+
+
+
