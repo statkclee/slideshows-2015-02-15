@@ -217,6 +217,61 @@ def process(filename, action):
         print m</pre>
         </ol>
     </section>
+
+    <section class="slide" style="font-size:60%">
+      <h2> 파이썬 실습(6): 도전과제(4)</h2>
+        <ol>
+          <li>
+            <p><code>line-count.py</code>프로그램을 작성해서 유닉스 <code>wc</code> 명령어처럼 동작하게 하세요.</p>
+          </li>
+        <ul>
+          <li>
+            만약 어떤 파일이름도 주어지지 않는다면, 표준 입력에 행 숫자만을 보고한다.
+          </li>
+          <li>
+            만약 하나 혹은 그 이상의 파일이름이 주어지면, 각 파일의 행 숫자와 전체 행 숫자를 보고한다.
+          </li>
+        </ul>
+      </ol>
+
+    </section>
+
+    <section class="slide" style="font-size:60%">
+      <h2> 파이썬 실습(6): 도전과제(4) 토론</h2>
+        <ol>
+          <li>
+            <p><code>line-count.py</code>프로그램을 작성해서 유닉스 <code>wc</code> 명령어처럼 동작하게 하세요.</p>
+          </li>
+        <ul>
+          <li>
+            만약 어떤 파일이름도 주어지지 않는다면, 표준 입력에 행 숫자만을 보고한다.
+          </li>
+          <li>
+            만약 하나 혹은 그 이상의 파일이름이 주어지면, 각 파일의 행 숫자와 전체 행 숫자를 보고한다.
+          </li>
+        </ul>
+      </ol>
+      <pre>
+import sys
+
+filenames = sys.argv[1:]
+line_total = 0
+
+if len(sys.argv[1:]) == 0:
+    for line in sys.stdin:
+        line_total += 1
+        print 'current line is', line_total
+    print line_total
+else:
+    for name in filenames:
+        reader = open(name, 'r')
+        for line in reader:
+            line_total += 1
+        reader.close()
+        print name, line_total</pre>
+
+    </section>
+
   </body>
 </html>
 
