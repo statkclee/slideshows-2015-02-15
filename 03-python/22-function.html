@@ -126,10 +126,10 @@
       <h2> 파이썬 실습(2): 도전과제(3) 해답</h2>
       <table  style="font-size:60%">
         <tr>
-          <td>
+          <td align="center">
             도전과제 1 (analyze함수)
           </td>
-          <td>
+          <td align="center">
             도전과제 2 (rescale함수)
           </td>
         </tr>
@@ -168,18 +168,21 @@
           </td>
           <td>
             <pre>
-  def rescale(tinput):
-  '''rescale(input_filename) 입력 데이터로 정렬된 리스트를 받아 스케일을 조정하여 표준화한다.
-     사용법 rescale([3,1,2]) --> [0.0,0.5,1.0]'''
-  Max = tinput[0]
-  Min = tinput[-1]
-  print Max, Min
-  for idx in range(len(tinput)):
-      tinput[idx] = (tinput[idx]-Min)/(Max-Min*1.0)
-      print tinput[idx]
-  return tinput
+def rescale(ivalue):
+    ''' 입력값으로 벡터를 받고, 0.0에서 1.0사이의 범위로 조정되게 해당 벡터를 반환한다.
+        사용례 rescale([1,2,3]) --> [0.0, 0.5, 1.0]'''
+    ivalue.sort()
+    H = ivalue[-1]
+    L = ivalue[0]
+    for item in range(len(ivalue)):
+        ivalue[item] = float((ivalue[item]-L)/(H-L))
+    return ivalue
 
-  print rescale(tinput)</pre>
+help (rescale)
+
+rslt = rescale([1,5,3])
+
+print (rslt)</pre>
           </td>
         </tr>
       </table>
