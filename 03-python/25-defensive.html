@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>파이썬(python)</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> 5. 방어적 프로그래밍 </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />        
+  <aside class="notes">
+  </aside>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+      <h2> 파이썬 실습(5): 도전과제(1)</h2>
+      <ol>
+        <li>
+          <p>리스트 숫자의 평균을 계산하는 함수 <code>average</code>를 작성한다고 가정하자.
+            사전 조건과 사후 조건으로 함수 <code>average</code>에 대해 무엇을 작성할까요?
+            여러분이 작성한 것과 주위 동료의 것과 비교하세요. 
+            여러분의 테스트를 통과했으나 동료의 테스트는 통과하지 못한 혹은 반대 경우의 함수를 생각할 수 있나요?</p>
+        </li>
+        <li>
+          <p>코드에 사전 설정문이 확인하는 것이 무엇인지 일상적인 말로 설명하세요. 그리고, 각각에 대해서 사전 설정문이 실패하게 되는 입력값의 예를 주세요.</p>
+<pre>
+def running(values):
+    assert len(values) &gt; 0
+    result = [values[0]]
+    for v in values[1:]:
+        assert result[-1] &gt;= 0
+        result.append(result[-1] + v)
+        assert result[-1] &gt;= result[0]
+    return result</pre>
+        </li>
+      </ol>
+    </section>
+
+    <section class="slide" style="font-size:60%">
+      <h2> 파이썬 실습(5): 도전과제(1) 토론</h2>
+      <ol>
+        <li>
+          <p>리스트 숫자의 평균을 계산하는 함수 <code>average</code>를 작성한다고 가정하자.
+            사전 조건과 사후 조건으로 함수 <code>average</code>에 대해 무엇을 작성할까요?
+            여러분이 작성한 것과 주위 동료의 것과 비교하세요. 
+            여러분의 테스트를 통과했으나 동료의 테스트는 통과하지 못한 혹은 반대 경우의 함수를 생각할 수 있나요?</p>
+<pre>
+def average(ivalue):
+    assert len(ivalue) > 0
+    assert type(ivalue) is list
+    tot = 0
+    ivalue.sort()
+    for idx in range(len(ivalue)):
+        tot += ivalue[idx]
+        avg = float(tot)/len(ivalue)
+    assert avg >= ivalue[0] and avg <= ivalue[1] 
+    return avg
+average([1,2,3])</pre>
+        </li>
+        <li>
+          <p>코드에 사전 설정문이 확인하는 것이 무엇인지 일상적인 말로 설명하세요. 그리고, 각각에 대해서 사전 설정문이 실패하게 되는 입력값의 예를 주세요.</p>
+<pre>
+def running(values):
+    assert len(values) &gt; 0
+    result = [values[0]]
+    for v in values[1:]:
+        assert result[-1] &gt;= 0
+        result.append(result[-1] + v)
+        assert result[-1] &gt;= result[0]
+    return result</pre>
+        </li>
+      </ol>
+    </section>
+
+
+
+
+    <section class="slide" style="font-size:60%">
+      <h2> 파이썬 실습(5): 도전과제(2)</h2>
+        <ol>
+          <li><code>range_overlap</code>을 고치시오. 변경을 한 후에 <code>test_range_overlap</code>을 다시 실행하세요.</li>
+        </ol>
+    </section>
+
+    <section class="slide" style="font-size:60%">
+      <h2> 파이썬 실습(5): 도전과제(2) 토론</h2>
+        <ol>
+          <li><code>range_overlap</code>을 고치시오. 변경을 한 후에 <code>test_range_overlap</code>을 다시 실행하세요.</li>
+        </ol>
+        <pre>
+def range_overlap(ranges):
+    '''Return common overlap among a set of [low, high] ranges.'''
+    lowest = ranges[0][0]
+    highest = ranges[0][1]
+    for (low, high) in ranges:
+        lowest = max(lowest, low)
+        highest = min(highest, high)
+        if lowest >= highest:
+            return None
+        else:
+            print lowest, highest
+            return (lowest, highest)</pre>
+          <pre>
+          def test_range_overlap():
+              assert range_overlap([ (0.0, 1.0), (5.0, 6.0) ]) == None
+              assert range_overlap([ (0.0, 1.0), (1.0, 2.0) ]) == None
+              assert range_overlap([ (0.0, 1.0) ]) == (0.0, 1.0)
+              assert range_overlap([ (2.0, 3.0), (2.0, 4.0) ]) == (2.0, 3.0)
+              assert range_overlap([ (0.0, 1.0), (0.0, 2.0), (-1.0, 1.0) ]) == (0.0, 1.0)</pre>
+    </section>
+
+  </body>
+</html>
+
+
+
+
