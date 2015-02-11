@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>유닉스 쉘(Unix Shell)</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> 03. 파일과 디렉토리 생성 </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+    <aside class="notes">
+    </aside>
+      </section>
+
+    <section class="slide">
+        <h2> 연습문제 1. </h2>
+
+          <p>아래 보여진 일련의 명령문에 끝에 <code>ls</code>명령어의 출력값은 무엇일까요?</p>
+
+          <pre>$ pwd
+        /home/jamie/data
+        $ ls
+        proteins.dat
+        $ mkdir recombine
+        $ mv proteins.dat recombine
+        $ cp recombine/proteins.dat ../proteins-saved.dat
+        $ ls</pre>
+    </section>
+
+    <section class="slide">
+        <h2> 연습문제 1. 토론</h2>
+
+          <p>아래 보여진 일련의 명령문에 끝에 <code>ls</code>명령어의 출력값은 무엇일까요?</p>
+<table> 
+<tr>
+    <td>
+<pre style="font-size:70%">
+$ pwd
+/home/jamie/data
+$ ls
+proteins.dat
+$ mkdir recombine
+$ mv proteins.dat recombine
+$ cp recombine/proteins.dat ../proteins-saved.dat
+$ ls</pre>
+    </td>
+    <td>
+    <pre style="font-size:70%">
+$ pwd
+/c/_swc_instructor/shell-novice/filesystem/users/jamie
+
+parisgirl@PARISGIR7 /c/_swc_instructor/shell-novice/filesystem/users/jamie (gh-p
+ages)
+$ ls -R
+.:
+data  proteins-saved.dat
+
+./data:
+recombine
+
+./data/recombine:
+proteins.dat</pre>
+    </td>
+</tr>         
+</table>
+    </section>
+
+    <section class="slide">
+        <h2> 연습문제 2. </h2>
+
+  <p>다음이 주어졌다고 가정합니다.</p>
+
+  <pre><code>$ ls -F
+analyzed/  fructose.dat    raw/   sucrose.dat
+</code></pre>
+
+  <p>무슨 명령어를 실행해야 아래 명령어를 실행했을 때 다음에 보여지는 출력을 생성할까요?</p>
+
+  <pre><code>$ ls
+analyzed   raw
+$ ls analyzed
+fructose.dat    sucrose.dat
+</code></pre>
+    </section>
+
+    <section class="slide" style="font-size:80%">
+        <h2> 연습문제 2. 토론 </h2>
+
+  <p>다음이 주어졌다고 가정합니다.</p>
+
+  <pre><code>$ ls -F
+analyzed/  fructose.dat    raw/   sucrose.dat
+</code></pre>
+
+  <p>무슨 명령어를 실행해야 아래 명령어를 실행했을 때 다음에 보여지는 출력을 생성할까요?</p>
+
+  <pre><code>$ ls
+analyzed   raw
+$ ls analyzed
+fructose.dat    sucrose.dat
+</code></pre>
+
+<strong> $ mv *.dat ./analyzed/ </strong>
+    </section>
+
+
+    <section class="slide" style="font-size:80%">
+        <h2> 연습문제 3.</h2>
+  <p>다음과 같이 몇개의 파일 이름과 디렉토리 이름이 주어졌을 때 <code>cp</code> 명령어는 무엇을 수행할까요?</p>
+
+  <pre><code>$ mkdir backup
+$ cp thesis/citations.txt thesis/quotations.txt backup
+</code></pre>
+
+  <p>다음과 같이 세개 혹은 그 이상의 파일 이름이 주어졌을 때 <code>cp</code>는 무엇을 수행할까요?</p>
+
+  <pre><code>$ ls -F
+intro.txt    methods.txt    survey.txt
+$ cp intro.txt methods.txt survey.txt
+</code></pre>
+
+    </section>
+
+    <section class="slide" style="font-size:80%">
+        <h2> 연습문제 3. 토론</h2>
+  <p>다음과 같이 몇개의 파일 이름과 디렉토리 이름이 주어졌을 때 <code>cp</code> 명령어는 무엇을 수행할까요?</p>
+
+  <pre><code>$ mkdir backup
+$ cp thesis/citations.txt thesis/quotations.txt backup
+</code></pre>
+<strong> thesis 디렉토리에 있는 파일 두개를 backup 폴더로 복사한다. </strong>
+
+  <p>다음과 같이 세개 혹은 그 이상의 파일 이름이 주어졌을 때 <code>cp</code>는 무엇을 수행할까요?</p>
+
+  <pre><code>$ ls -F
+intro.txt    methods.txt    survey.txt
+$ cp intro.txt methods.txt survey.txt
+</code></pre>
+<pre>
+$ cp intro.txt methods.txt survey.txt
+cp: copying multiple files, but last argument `survey.txt' is not a directory
+Try `cp --help' for more information.</pre>
+    </section>
+
+    <section class="slide" style="font-size:80%">
+        <h2> 연습문제 4.</h2>
+          <p><code>ls -R</code> 명령어는 디렉토리의 내용을 재귀적으로 화면에 출력한다. 즉, 하위 디렉토리, 하위의 하위 디렉토리 등등 알파벳 순으로 계층적 수준으로 뿌려준다. <code>ls -t</code> 명령어는 마지막 변경사항의 시간 순으로 내용을 화면에 출력한다. 즉, 가장 최근에 변경된 파일 혹은 디렉토리를 먼저 정렬하여 화면에 뿌려준다. <code>ls -R -t</code>은 파일과 디렉토리를 어떤 순서로 화면에 보여줄까요?</p>
+    </section>
+
+    <section class="slide" style="font-size:80%">
+        <h2> 연습문제 4. 토론</h2>
+          <p><code>ls -R</code> 명령어는 디렉토리의 내용을 재귀적으로 화면에 출력한다. 즉, 하위 디렉토리, 하위의 하위 디렉토리 등등 알파벳 순으로 계층적 수준으로 뿌려준다. <code>ls -t</code> 명령어는 마지막 변경사항의 시간 순으로 내용을 화면에 출력한다. 즉, 가장 최근에 변경된 파일 혹은 디렉토리를 먼저 정렬하여 화면에 뿌려준다. <code>ls -R -t</code>은 파일과 디렉토리를 어떤 순서로 화면에 보여줄까요?</p>
+<pre>
+$ ls -R -t
+.:
+tmp  quotations.txt  citations.txt
+
+./tmp:
+c.txt  b.txt  a.txt</pre>
+    </section>
+
+  </div>
+  </body>
+</html>
+
+
+
+

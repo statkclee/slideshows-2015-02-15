@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>유닉스 쉘(Unix Shell)</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> 04. 파이프와 필터 </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+    <aside class="notes">
+    </aside>
+      </section>
+
+    <section class="slide">
+        <h2> 연습문제 1. </h2>
+
+  <p>파일에 <code>sort</code>를 실행하면,</p>
+
+  <pre><code>
+10
+2
+19
+22
+6
+</code></pre>
+
+  <p>출력은 다음과 같다.</p>
+
+  <pre><code>
+10
+19
+2
+22
+6
+</code></pre>
+
+  <p>동일한 입력에 <code>sort -n</code>을 실행하면, 대신에 다음을 얻게된다.</p>
+
+  <pre><code>
+2
+6
+10
+19
+22
+</code></pre>
+
+    <section class="slide">
+        <h2> 연습문제 2.</h2>
+
+  <p>다음 명령문과</p>
+
+  <pre><code>wc -l &lt; mydata.dat
+</code></pre>
+
+  <p>다음 명령문의 차이점은 무엇인지 설명하세요.</p>
+
+  <pre><code>wc -l mydata.dat
+</code></pre>
+    </section>
+
+    <section class="slide">
+        <h2> 연습문제 2. 토론</h2>
+
+  <p>다음 명령문과</p>
+
+  <pre><code>wc -l &lt; mydata.dat
+</code></pre>
+
+  <p>다음 명령문의 차이점은 무엇인지 설명하세요.</p>
+
+  <pre><code>wc -l mydata.dat
+</code></pre>
+    </section>
+
+    <section class="slide">
+        <h2> 연습문제 3.</h2>
+  <p>명령문 <code>uniq</code>은 입력으로부터 인접한 중복된 행을 제거한다. 예를 들어, <code>salmon.txt</code> 파일이 다음을 포함한다면,</p>
+
+  <pre><code>
+coho
+coho
+steelhead
+coho
+steelhead
+steelhead
+</code></pre>
+
+  <p><code>uniq salmon.txt</code> 명령문 실행은 다음을 출력한다.</p>
+
+  <pre><code>
+coho
+steelhead
+coho
+steelhead
+</code></pre>
+
+  <p><code>uniq</code>가 왜 인접한 중복 행만을 단지 제거한다고 생각합니까? (힌트: 매우 큰 파일을 생각해보세요.) 모든 중복된 행을 제거하기 위해서 파이프로 무슨 다른 명령어를 조합할 수 있을까요?</p>
+    </section>
+
+    <section class="slide">
+        <h2> 연습문제 3. 토론</h2>
+  <p>명령문 <code>uniq</code>은 입력으로부터 인접한 중복된 행을 제거한다. 예를 들어, <code>salmon.txt</code> 파일이 다음을 포함한다면,</p>
+
+  <pre><code>
+coho
+coho
+steelhead
+coho
+steelhead
+steelhead
+</code></pre>
+
+  <p><code>uniq salmon.txt</code> 명령문 실행은 다음을 출력한다.</p>
+
+  <pre><code>
+coho
+steelhead
+coho
+steelhead
+</code></pre>
+
+  <p><code>uniq</code>가 왜 인접한 중복 행만을 단지 제거한다고 생각합니까? (힌트: 매우 큰 파일을 생각해보세요.) 모든 중복된 행을 제거하기 위해서 파이프로 무슨 다른 명령어를 조합할 수 있을까요?</p>
+    </section>
+
+
+
+
+  </div>
+  </body>
+</html>
+
+
+
+

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>유닉스 쉘(Unix Shell)</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> 04. 파이프와 필터 </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+    <aside class="notes">
+    </aside>
+      </section>
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 1. (토론/h2>
+
+  <p>파일에 <code>sort</code>를 실행하면,</p>
+
+  <pre>
+10
+2
+19
+22
+6</pre>
+
+  <p>출력은 다음과 같다.</p>
+
+  <pre>
+10
+19
+2
+22
+6</pre>
+
+  <p>동일한 입력에 <code>sort -n</code>을 실행하면, 대신에 다음을 얻게된다.</p>
+
+  <pre>
+2
+6
+10
+19
+22</pre>
+  <p>인수 <code>-n</code>가 왜 이런 효과를 가지는지 설명하세요.</p>
+  </section>  
+
+    <section class="slide">
+        <h2> 연습문제 2. (토론)</h2>
+
+  <p>다음 명령문과</p>
+
+  <pre><code>wc -l &lt; mydata.dat
+</code></pre>
+
+  <p>다음 명령문의 차이점은 무엇인지 설명하세요.</p>
+
+  <pre><code>wc -l mydata.dat
+</code></pre>
+    </section>
+
+    <section class="slide" style="font-size:70%">
+        <h2> 연습문제 3.</h2>
+  <p>명령문 <code>uniq</code>은 입력으로부터 인접한 중복된 행을 제거한다. 예를 들어, <code>salmon.txt</code> 파일이 다음을 포함한다면,</p>
+
+  <pre>
+coho
+coho
+steelhead
+coho
+steelhead
+steelhead</pre>
+
+  <p><code>uniq salmon.txt</code> 명령문 실행은 다음을 출력한다.</p>
+
+  <pre>
+coho
+steelhead
+coho
+steelhead</pre>
+
+  <p><code>uniq</code>가 왜 인접한 중복 행만을 단지 제거한다고 생각합니까? (힌트: 매우 큰 파일을 생각해보세요.) 모든 중복된 행을 제거하기 위해서 파이프로 무슨 다른 명령어를 조합할 수 있을까요?</p>
+    </section>
+
+    <section class="slide">
+        <h2> 연습문제 3. 토론</h2>
+  <p><code>uniq</code>가 왜 인접한 중복 행만을 단지 제거한다고 생각합니까? (힌트: 매우 큰 파일을 생각해보세요.) 모든 중복된 행을 제거하기 위해서 파이프로 무슨 다른 명령어를 조합할 수 있을까요?</p>
+  <strong>
+  <pre>
+$ sort -n salmon.txt | uniq</pre>
+</strong>
+    </section>
+
+
+    <section class="slide" style="font-size:70%">
+        <h2> 연습문제 4.</h2>
+<p><code>animals.txt</code>로 불리는 파일은 다음 데이터를 포함한다</p>
+
+  <pre><code>2012-11-05,deer
+2012-11-05,rabbit
+2012-11-05,raccoon
+2012-11-06,rabbit
+2012-11-06,deer
+2012-11-06,fox
+2012-11-07,rabbit
+2012-11-07,bear
+</code></pre>
+
+  <p>다음 아래 파이프라인에 각 파이프를 통과하고 마지막 되돌리기를 마친  텍스트는 무엇일까요?</p>
+
+  <pre><code>cat animals.txt | head -5 | tail -3 | sort -r &gt; final.txt
+</code></pre>
+    </section>
+
+    <section class="slide" style="font-size:70%">
+        <h2> 연습문제 4. 토론</h2>
+<p><code>animals.txt</code>로 불리는 파일은 다음 데이터를 포함한다</p>
+
+  <pre><code>2012-11-05,deer
+2012-11-05,rabbit
+2012-11-05,raccoon
+2012-11-06,rabbit
+2012-11-06,deer
+2012-11-06,fox
+2012-11-07,rabbit
+2012-11-07,bear
+</code></pre>
+
+  <p>다음 아래 파이프라인에 각 파이프를 통과하고 마지막 되돌리기를 마친  텍스트는 무엇일까요?</p>
+
+  <pre>cat animals.txt | head -5 | tail -3 | sort -r &gt; final.txt</pre>
+  <pre>
+$ cat final.txt
+2012-11-06,rabbit
+2012-11-06,deer
+2012-11-05,raccoon</pre>
+    </section>
+
+    <section class="slide" style="font-size:70%">
+        <h2> 연습문제 5. </h2>
+  <p>다음 명령문을 실행하면,</p>
+
+  <pre><code>$ cut -d , -f 2 animals.txt
+</code></pre>
+
+  <p>다음 출력결과를 만들어 낸다.</p>
+
+  <pre><code>deer
+rabbit
+raccoon
+rabbit
+deer
+fox
+rabbit
+bear
+</code></pre>
+
+  <p>파일이 담고 있는 동물이 무엇인지를 알아내기 위해서 무슨 다른 명령어가 파이프라인에 추가되어야 하나요? (동물 이름에 어떠한 중복도 없어야 합니다.)
+    </section>
+
+    <section class="slide" style="font-size:70%">
+        <h2> 연습문제 5. 토론 </h2>
+  <p>다음 명령문을 실행하면,</p>
+
+  <pre><code>$ cut -d , -f 2 animals.txt
+</code></pre>
+
+  <p>다음 출력결과를 만들어 낸다.</p>
+
+  <pre><code>deer
+rabbit
+raccoon
+rabbit
+deer
+fox
+rabbit
+bear
+</code></pre>
+
+  <p>파일이 담고 있는 동물이 무엇인지를 알아내기 위해서 무슨 다른 명령어가 파이프라인에 추가되어야 하나요? (동물 이름에 어떠한 중복도 없어야 합니다.)
+    <strong><pre>$ cut -d ',' -f 2 animals.txt  | sort -n | uniq</pre></strong>
+    </section>
+
+  </div>
+  </body>
+</html>
+
+
+
+

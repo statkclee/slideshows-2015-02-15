@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>유닉스 쉘(Unix Shell)</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> 02. 파일과 디렉토리 </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+    <aside class="notes">
+    </aside>
+      </section>
+
+    <section class="slide">
+        <h2> 연습문제 1. </h2>
+          <p>만약 <code>pwd</code> 명령어를 쳤을 때 화면에 <code>/users/thing</code>이 출력된다면, <code>ls ../backup</code>은 무엇을 출력할까요?</p>
+          <ol>
+            <li><code>../backup: No such file or directory</code></li>
+            <li><code>2012-12-01 2013-01-08 2013-01-27</code></li>
+            <li><code>2012-12-01/ 2013-01-08/ 2013-01-27/</code></li>
+            <li><code>original pnas_final pnas_sub</code></li>
+          </ol>
+    </section>
+
+    <section class="slide">
+        <h2> 연습문제 1. 토론 </h2>
+          <p>만약 <code>pwd</code> 명령어를 쳤을 때 화면에 <code>/users/thing</code>이 출력된다면, <code>ls ../backup</code>은 무엇을 출력할까요?</p>
+          <ol>
+            <li><code>../backup: No such file or directory</code></li>
+            <li><code>2012-12-01 2013-01-08 2013-01-27</code></li>
+            <li><code>2012-12-01/ 2013-01-08/ 2013-01-27/</code></li>
+            <li><code><strong>original pnas_final pnas_sub</strong></code></li>
+          </ol>
+    </section>
+
+
+    <section class="slide">
+        <h2> 연습문제 2. </h2>        
+        <p>만약 <code>pwd</code> 명령어를 쳤을 때 화면에 <code>/users/thing</code>이 출력되고, 
+        <code>-r</code>은 <code>ls</code> 명령어가 역순으로 화면에 출력하게 한다면, 무슨 명령어가 다음을 화면에 출력할까요?</p>
+
+          <pre><code>pnas-sub/ pnas-final/ original/
+        </code></pre>
+
+          <ol>
+            <li><code>ls pwd</code></li>
+            <li><code>ls -r -F</code></li>
+            <li><code>ls -r -F /users/backup</code></li>
+            <li>위 #2 혹은 #3, 하지만, #1은 아님.</li>
+          </ol>
+    </section>
+
+    <section class="slide">
+        <h2> 연습문제 2. 토론</h2>        
+        <p>만약 <code>pwd</code> 명령어를 쳤을 때 화면에 <code>/users/thing</code>이 출력되고, 
+        <code>-r</code>은 <code>ls</code> 명령어가 역순으로 화면에 출력하게 한다면, 무슨 명령어가 다음을 화면에 출력할까요?</p>
+
+        <pre>ls -r -F ../backup
+        <code>pnas-sub/ pnas-final/ original/
+        </code></pre>
+
+          <ol>
+            <li><code>ls pwd</code></li>
+            <li><code>ls -r -F</code></li>
+            <li><code>ls -r -F /users/backup</code></li>
+            <li><strong>위 #2 혹은 #3, 하지만, #1은 아님.</strong></li>
+          </ol>
+    </section>
+
+    <section class="slide">
+        <h2> 연습문제 3. </h2>        
+          <p>디렉토리 이름없는 <code>cd</code> 명령어는 무엇을 수행할까요?</p>
+
+          <ol>
+            <li>아무 것도 하지 않는다.</li>
+            <li>작업 디렉토리를 루트 <code>/</code>으로 변경한다.</li>
+            <li>작업 디렉토리를 사용자의 홈 디렉토리로 변경한다.</li>
+            <li>오류 메시지를 출력한다.</li>
+          </ol>
+    </section>
+
+    <section class="slide">
+        <h2> 연습문제 3. 토론</h2>        
+          <p>디렉토리 이름없는 <code>cd</code> 명령어는 무엇을 수행할까요?</p>
+
+          <ol>
+            <li>아무 것도 하지 않는다.</li>
+            <li>작업 디렉토리를 루트 <code>/</code>으로 변경한다.</li>
+            <li><strong>작업 디렉토리를 사용자의 홈 디렉토리로 변경한다.</strong></li>
+            <li>오류 메시지를 출력한다.</li>
+          </ol>
+    </section>
+
+    <section class="slide">
+        <h2> 연습문제 4. </h2>        
+          <p><code>ls</code> 명령어가 -s과 -h 을 인수로 사용되면 무슨 작업을 수행할까요?</p>
+    </section>
+
+    <section class="slide">
+        <h2> 연습문제 4. 토론</h2>
+          <p><code>ls</code> 명령어가 -s과 -h 을 인수로 사용되면 무슨 작업을 수행할까요?</p>
+          <pre>
+$ pwd
+/c/_swc_instructor/shell-novice/filesystem/users/nelle            
+$ ls -sh
+total 12k
+   0 Desktop       0 molecules            512 pizza.cfg
+   0 creatures     0 north-pacific-gyre   11k solar.pdf
+   0 data        512 notes.txt              0 writing</pre>
+    </section>
+
+
+  </div>
+  </body>
+</html>
+
+
+
+
