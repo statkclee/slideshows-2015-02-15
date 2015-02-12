@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>데이터베이스 및 SQL</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> 01. 데이터 선택하기 </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+    <aside class="notes">
+    </aside>
+      </section>
+
+    <section class="slide" style="font-size:85%">
+        <h2> 준비 (survey.db) </h2>
+    <table width="100%" >
+    <tr>
+      <td align="center"><strong>데이터베이스</strong><br><br></td>
+      <td align="center"><strong>survey.db</strong><br><br></td>
+    </tr>
+
+    <tr>
+        <td>
+        <table style="font-size:50%">
+        <tr>
+        <td valign="top">
+        <strong>Person</strong>: 판독한 사람.
+
+        <table>
+          <tr> <th>ident</th> <th>personal</th> <th>family</th> </tr>
+          <tr> <td>dyer</td> <td>William</td> <td>Dyer</td> </tr>
+          <tr> <td>pb</td> <td>Frank</td> <td>Pabodie</td> </tr>
+          <tr> <td>lake</td> <td>Anderson</td> <td>Lake</td> </tr>
+          <tr> <td>roe</td> <td>Valentina</td> <td>Roerich</td> </tr>
+          <tr> <td>danforth</td> <td>Frank</td> <td>Danforth</td> </tr>
+        </table>
+        <hr>
+
+        <strong>Site</strong>: 판독한 장소.
+
+        <table>
+          <tr> <th>name</th> <th>lat</th> <th>long</th> </tr>
+          <tr> <td>DR-1</td> <td>-49.85</td> <td>-128.57</td> </tr>
+          <tr> <td>DR-3</td> <td>-47.15</td> <td>-126.72</td> </tr>
+          <tr> <td>MSK-4</td> <td>-48.87</td> <td>-123.4</td> </tr>
+        </table>
+        <hr>
+
+        <strong>Visited</strong>: 특정 사이트에서 판독한 시점.
+
+        <table>
+          <tr> <th>ident</th> <th>site</th> <th>dated</th> </tr>
+          <tr> <td>619</td> <td>DR-1</td> <td>1927-02-08</td> </tr>
+          <tr> <td>622</td> <td>DR-1</td> <td>1927-02-10</td> </tr>
+          <tr> <td>734</td> <td>DR-3</td> <td>1939-01-07</td> </tr>
+          <tr> <td>735</td> <td>DR-3</td> <td>1930-01-12</td> </tr>
+          <tr> <td>751</td> <td>DR-3</td> <td>1930-02-26</td> </tr>
+          <tr> <td>752</td> <td>DR-3</td> <td bgcolor="red">&nbsp;</td> </tr>
+          <tr> <td>837</td> <td>MSK-4</td> <td>1932-01-14</td> </tr>
+          <tr> <td>844</td> <td>DR-1</td> <td>1932-03-22</td> </tr>
+        </table>
+        </td>
+        <td valign="top">
+        <strong>Survey</strong>: 실제 판독.
+
+        <table>
+          <tr> <th>taken</th> <th>person</th> <th>quant</th> <th>reading</th> </tr>
+          <tr> <td>619</td> <td>dyer</td> <td>rad</td> <td>9.82</td> </tr>
+          <tr> <td>619</td> <td>dyer</td> <td>sal</td> <td>0.13</td> </tr>
+          <tr> <td>622</td> <td>dyer</td> <td>rad</td> <td>7.8</td> </tr>
+          <tr> <td>622</td> <td>dyer</td> <td>sal</td> <td>0.09</td> </tr>
+          <tr> <td>734</td> <td>pb</td> <td>rad</td> <td>8.41</td> </tr>
+          <tr> <td>734</td> <td>lake</td> <td>sal</td> <td>0.05</td> </tr>
+          <tr> <td>734</td> <td>pb</td> <td>temp</td> <td>-21.5</td> </tr>
+          <tr> <td>735</td> <td>pb</td> <td>rad</td> <td>7.22</td> </tr>
+          <tr> <td>735</td> <td bgcolor="red">&nbsp;</td> <td>sal</td> <td>0.06</td> </tr>
+          <tr> <td>735</td> <td bgcolor="red">&nbsp;</td> <td>temp</td> <td>-26.0</td> </tr>
+          <tr> <td>751</td> <td>pb</td> <td>rad</td> <td>4.35</td> </tr>
+          <tr> <td>751</td> <td>pb</td> <td>temp</td> <td>-18.5</td> </tr>
+          <tr> <td>751</td> <td>lake</td> <td>sal</td> <td>0.1</td> </tr>
+          <tr> <td>752</td> <td>lake</td> <td>rad</td> <td>2.19</td> </tr>
+          <tr> <td>752</td> <td>lake</td> <td>sal</td> <td>0.09</td> </tr>
+          <tr> <td>752</td> <td>lake</td> <td>temp</td> <td>-16.0</td> </tr>
+          <tr> <td>752</td> <td>roe</td> <td>sal</td> <td>41.6</td> </tr>
+          <tr> <td>837</td> <td>lake</td> <td>rad</td> <td>1.46</td> </tr>
+          <tr> <td>837</td> <td>lake</td> <td>sal</td> <td>0.21</td> </tr>
+          <tr> <td>837</td> <td>roe</td> <td>sal</td> <td>22.5</td> </tr>
+          <tr> <td>844</td> <td>roe</td> <td>rad</td> <td>11.25</td> </tr>
+        </table>
+        </td>
+        </tr>
+        </table>
+        </td>
+        <td align="left" style="font-size:70%">
+<pre>
+  -- The `Person` table is used to explain the most basic queries.
+-- Note that `danforth` has no measurements.                     
+create table Person(                                            
+  ident    text, 
+  personal text, 
+  family   text  
+);               
+                             
+insert into Person values('dyer',     'William',   'Dyer');    
+insert into Person values('pb',       'Frank',     'Pabodie'); 
+insert into Person values('lake',     'Anderson',  'Lake');    
+insert into Person values('roe',      'Valentina', 'Roerich'); 
+insert into Person values('danforth', 'Frank',     'Danforth');
+...</pre>         
+<code style="font-size:70%"> $ sqlite3 experiment.db < gen-survey-database.sql </code> <br>
+<a href="img/gen-survey-database.sql" style="font-size:70%"> gen-survey-database.sql </a>
+        </td>
+    </tr>
+    </table>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 1.</h2>
+    <p><code>Site</code> 테이블에서 사이트 이름만 선택하는 쿼리를 작성하세요.</p>
+   </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 1. (토론)</h2>
+    <p><code>Site</code> 테이블에서 사이트 이름만 선택하는 쿼리를 작성하세요.</p>
+    <pre style="font-size:70%">
+sqlite> .schema
+CREATE TABLE Person(
+        ident    text,
+        personal text,
+        family   text
+);
+<strong>CREATE TABLE Site(
+        name text,
+        lat  real,
+        long real
+);</strong>
+CREATE TABLE Visited(
+        ident integer,
+        site  text,
+        dated text
+);
+.......
+sqlite> select name from site;
+DR-1
+DR-3
+MSK-4
+DR-1
+DR-3
+MSK-4</pre>
+   </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 2. (토론)</h2>
+    <p>많은 사람들이 쿼리를 다음과 같은 형식으로 작성한다.</p>
+
+    <pre><code>SELECT personal, family FROM person;
+</code></pre>
+
+    <p>혹은 다음과 같이도 작성한다.</p>
+
+    <pre><code>select Personal, Family from PERSON;
+</code></pre>
+
+    <p>읽기 쉽기 쉬운 스타일은 어느 것인가요? 이유는 무엇일까요?</p>
+   </section>  
+
+  </body>
+</html>
+
+
+
