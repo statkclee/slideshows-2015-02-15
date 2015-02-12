@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>유닉스 쉘(Unix Shell)</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> 07. 파일, 문자, 디렉토리 찾기 </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+    <aside class="notes">
+    </aside>
+      </section>
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 1. (토론)</h2>
+          <p>다음 쉘 스크립트에 대해서 무슨 것을 수행하는지 짧은 설명문을 작성하세요.</p>
+   <pre><code>find . -name '*.dat' | wc -l | sort -n</code></pre>        
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 2. </h2>
+  <p><code>grep</code> 명령어의 <code>-v</code> 옵션은 패턴 매칭을 반전해서 패턴과 매칭하지 <em>않는</em> 행만 출력된다.
+다음 명령어 중에서 어느 것이 <code>ose.dat</code>로 끝나는 (예로, <code>sucrose.dat</code> 혹은 <code>maltose.dat</code>), 하지만 <code>temp</code> 단어는 <em>포함하지 않는</em> <code>/data</code> 디렉토리에 있는 모든 파일을 찾아낼까요?</p>
+
+  <ol>
+    <li>
+      <p><code>find /data -name '*.dat' | grep ose | grep -v temp</code></p>
+    </li>
+    <li>
+      <p><code>find /data -name ose.dat | grep -v temp</code></p>
+    </li>
+    <li>
+      <p><code>grep -v temp $(find /data -name '*ose.dat')</code></p>
+    </li>
+    <li>
+      <p>위 어떤 것도 아님.</p>
+    </li>
+  </ol>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 2. (토론) </h2>
+  <p><code>grep</code> 명령어의 <code>-v</code> 옵션은 패턴 매칭을 반전해서 패턴과 매칭하지 <em>않는</em> 행만 출력된다.
+다음 명령어 중에서 어느 것이 <code>ose.dat</code>로 끝나는 (예로, <code>sucrose.dat</code> 혹은 <code>maltose.dat</code>), 하지만 <code>temp</code> 단어는 <em>포함하지 않는</em> <code>/data</code> 디렉토리에 있는 모든 파일을 찾아낼까요?</p>
+
+  <ol>
+    <li>
+      <p><code>find /data -name '*.dat' | grep ose | grep -v temp</code></p>
+      <pre>
+$ find ./data -name '*.dat' | grep ose | grep -v temp
+./data/maltose.dat
+./data/sucrose.dat</pre>  
+    </li>
+    <li>
+      <p><code>find /data -name ose.dat | grep -v temp</code></p>
+      <pre>
+$ find ./data -name ose.dat | grep -v temp
+</pre>  
+
+    </li>
+    <li>
+      <p><code>grep -v temp $(find /data -name '*ose.dat')</code></p>
+      <pre>
+$ grep -v temp $(find ./data -name '*ose.dat')
+./data/maltose.dat:???
+./data/sucrose.dat:...
+./data/tempose.dat:---</pre>
+    </li>
+    <li>
+      <p>위 어떤 것도 아님.</p>
+    </li>
+  </ol>
+    </section>  
+
+  </body>
+</html>
+
+
+

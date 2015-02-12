@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>유닉스 쉘(Unix Shell)</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> 05. 루프(Loop) </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+    <aside class="notes">
+    </aside>
+      </section>
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 1.</h2>
+  <p><code>ls</code> 명령어가 초기 다음과 같이 화면에 출력한다고 가정하자.</p>
+
+  <pre><code>fructose.dat    glucose.dat   sucrose.dat
+</code></pre>
+
+  <p>다음 스크립트의 출력결과는 무엇인가요?</p>
+
+  <pre><code>for datafile in *.dat
+do
+    ls *.dat
+done
+</code></pre>
+  </section>  
+
+  <section class="slide" style="font-size:60%">
+        <h2> 연습문제 1. (토론)</h2>
+  <p><code>ls</code> 명령어가 초기 다음과 같이 화면에 출력한다고 가정하자.</p>
+
+  <pre><code>fructose.dat    glucose.dat   sucrose.dat
+</code></pre>
+
+  <p>다음 스크립트의 출력결과는 무엇인가요?</p>
+
+  <pre><code>for datafile in *.dat
+do
+    ls *.dat
+done
+</code></pre>
+<pre>
+$ for datafile in *.dat
+> do
+>   ls *.dat
+> done
+fructose.dat    glucose.dat   sucrose.dat
+fructose.dat    glucose.dat   sucrose.dat
+fructose.dat    glucose.dat   sucrose.dat
+</pre>
+  </section>  
+
+  <section class="slide" style="font-size:60%">
+        <h2> 연습문제 2.</h2>
+  <p>같은 디렉토리에서, 다음 루프의 효과는 무엇인가요?</p>
+
+  <pre><code>for sugar in *.dat
+do
+    echo $sugar
+    cat $sugar &gt; xylose.dat
+done
+</code></pre>
+
+  <ol>
+    <li><code>fructose.dat</code>, <code>glucose.dat</code>, <code>sucrose.dat</code>을 출력하고, 
+  <code>sucrose.dat</code>을 복사해서 <code>xylose.dat</code>을 생성한다.</li>
+    <li><code>fructose.dat</code>, <code>glucose.dat</code>, <code>sucrose.dat</code>을 출력하고, 
+ 모든 파일 3개를 합쳐서 <code>xylose.dat</code>을 생성한다.</li>
+    <li><code>fructose.dat</code>, <code>glucose.dat</code>, <code>sucrose.dat</code>, <code>xylose.dat</code>을 출력하고,
+ <code>sucrose.dat</code>을 복사해서 <code>xylose.dat</code>을 생성한다.</li>
+    <li>위 어느 것도 아니다.</li>
+  </ol>
+  </section>  
+
+  <section class="slide" style="font-size:60%">
+        <h2> 연습문제 2. 토론</h2>
+  <p>같은 디렉토리에서, 다음 루프의 효과는 무엇인가요?</p>
+
+  <pre><code>for sugar in *.dat
+do
+    echo $sugar
+    cat $sugar &gt; xylose.dat
+done
+</code></pre>
+
+  <ol>
+    <strong> <li><code>fructose.dat</code>, <code>glucose.dat</code>, <code>sucrose.dat</code>을 출력하고, 
+  <code>sucrose.dat</code>을 복사해서 <code>xylose.dat</code>을 생성한다.</li> </strong>
+    <li><code>fructose.dat</code>, <code>glucose.dat</code>, <code>sucrose.dat</code>을 출력하고, 
+ 모든 파일 3개를 합쳐서 <code>xylose.dat</code>을 생성한다.</li>
+    <li><code>fructose.dat</code>, <code>glucose.dat</code>, <code>sucrose.dat</code>, <code>xylose.dat</code>을 출력하고,
+ <code>sucrose.dat</code>을 복사해서 <code>xylose.dat</code>을 생성한다.</li>
+    <li>위 어느 것도 아니다.</li>
+  </ol>
+  </section>  
+
+  <section class="slide" style="font-size:60%">
+        <h2> 연습문제 3.</h2>
+  <p><code>expr</code> 명령어는 명령-라인 매개변수를 사용하여 간단한 연산을 한다.</p>
+
+  <pre><code>$ expr 3 + 5
+8
+$ expr 30 / 5 - 2
+4
+</code></pre>
+
+  <p>다음이 주어진 상태에서 다음의 출력값은 무엇인가?</p>
+
+  <pre><code>for left in 2 3
+do
+    for right in $left
+    do
+        expr $left + $right
+    done
+done
+</code></pre>
+  </section>  
+
+  <section class="slide" style="font-size:60%">
+        <h2> 연습문제 3. 토론</h2>
+ 
+  <p>다음이 주어진 상태에서 다음의 출력값은 무엇인가?</p>
+
+  <pre><code>for left in 2 3
+do
+    for right in $left
+    do
+        expr $left + $right
+    done
+done
+</code></pre>
+<strong><pre>
+$ for left in 2 3
+> do
+>     for right in $left
+>     do
+>         expr $right + $left
+>     done
+> done
+4
+6</pre></strong>
+  </section>  
+
+ <section class="slide" style="font-size:60%">
+        <h2> 연습문제 4. (토론)</h2>
+ 
+  <p>다음 루프가 무슨 작업을 하는지 말로 설명하세요.</p>
+
+  <pre><code>for how in frog11 prcb redig
+do
+    $how -limit 0.01 NENE01729B.txt
+done
+</code></pre>
+  </section>  
+
+  </body>
+</html>
+
+
+

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>유닉스 쉘(Unix Shell)</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> 06. 스크립트(Script) </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+    <aside class="notes">
+    </aside>
+      </section>
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 1.</h2>
+  <p>Leah는 수백개의 데이터 파일이 있고, 각각은 다음과 같은 형식을 가지고 있다.</p>
+
+  <pre><code>2013-11-05,deer,5
+2013-11-05,rabbit,22
+2013-11-05,raccoon,7
+2013-11-06,rabbit,19
+2013-11-06,deer,2
+2013-11-06,fox,1
+2013-11-07,rabbit,18
+2013-11-07,bear,1
+</code></pre>
+
+  <p>임의의 파일이름을 명령-라인 매개변수로 갖는 <code>species.sh</code> 이름의 쉘 스크립트를 작성하라.
+<code>cut</code>, <code>sort</code>, <code>uniq</code>을 사용해서 각각의 파일별로 나오는 유일한 종의 목록을 화면에 출력하세요.</p>
+  </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 1. 토론</h2>
+  <p>Leah는 수백개의 데이터 파일이 있고, 각각은 다음과 같은 형식을 가지고 있다.</p>
+
+  <pre><code>2013-11-05,deer,5
+2013-11-05,rabbit,22
+2013-11-05,raccoon,7
+2013-11-06,rabbit,19
+2013-11-06,deer,2
+2013-11-06,fox,1
+2013-11-07,rabbit,18
+2013-11-07,bear,1
+</code></pre>
+
+  <p>임의의 파일이름을 명령-라인 매개변수로 갖는 <code>species.sh</code> 이름의 쉘 스크립트를 작성하라.
+<code>cut</code>, <code>sort</code>, <code>uniq</code>을 사용해서 각각의 파일별로 나오는 유일한 종의 목록을 화면에 출력하세요.</p>
+
+  <pre>
+  for datafile in *.txt
+do
+        echo $datafile
+        cut -d ',' -f 2 $datafile | sort -n | uniq
+done
+--------------------------------------------------
+$ bash.exe species.sh
+animals.txt
+bear
+deer
+fox
+rabbit
+raccoon</pre>
+  </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 2. </h2>
+  <p>디렉토리 이름과 파일이름 확장자를 매개변수를 갖는 <code>longest.sh</code>이름의 쉘 스크립트를 작성해서 그 디렉토리에 그 확장자를 가지는 파일 중에 가장 긴 줄을 가진 파일이름을 화면에 출력하세요. 예를 들어, 다음은</p>
+
+  <pre><code>$ bash longest.sh /tmp/data pdb
+</code></pre>
+
+  <p><code>/tmp/data</code> 디렉토리에 <code>.pdb</code> 확장자를 가진 파일 중에 가장 긴 줄을 가진 파일이름을 화면에 출력한다.</p>
+  </section>
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 2. 토론 </h2>
+  <p>디렉토리 이름과 파일이름 확장자를 매개변수를 갖는 <code>longest.sh</code>이름의 쉘 스크립트를 작성해서 그 디렉토리에 그 확장자를 가지는 파일 중에 가장 긴 줄을 가진 파일이름을 화면에 출력하세요. 예를 들어, 다음은</p>
+
+  <p><code>/tmp/data</code> 디렉토리에 <code>.pdb</code> 확장자를 가진 파일 중에 가장 긴 줄을 가진 파일이름을 화면에 출력한다.</p>
+
+  <pre><code>$ bash longest.sh /tmp/data pdb</code>
+    -----------------------------------------------
+$ wc --help
+Usage: wc [OPTION]... [FILE]...
+Print line, word, and byte counts for each FILE, and a total line if
+more than one FILE is specified.  With no FILE, or when FILE is -,
+read standard input.
+  -c, --bytes, --chars   print the byte counts
+  -l, --lines            print the newline counts
+<strong>  -L, --max-line-length  print the length of the longest line </strong>
+  -w, --words            print the word counts
+      --help             display this help and exit
+      --version          output version information and exit
+    -----------------------------------------------
+# Script 
+wc -L $1/*.$2 | sort -n -r | head -2 | tail -1
+    -----------------------------------------------
+$ bash longest.sh /c/_swc_instructor/ex04 pdb
+     47 /c/_swc_instructor/ex04/xyz.sh
+  </pre>
+
+  </section>
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 3. (토론) </h2>
+  <p>다음 명령어를 실행하면,</p>
+
+  <pre><code>history | tail -5 &gt; recent.sh
+</code></pre>
+
+  <p>파일의 마지막 명령어는 <code>history</code> 명령어 자체다. 즉, 쉘은 <code>history</code>에 실질적으로 실행하기 전에 명령어 이력(log)을 추가한다.
+사실, 쉘은 **항상** 명령어를 실행하기 전에 이력(log)에 명령어를 추가한다. 그렇게 하는 이유가 무엇이라고 생각합니까?</p>
+  </section>
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 4. </h2>
+  <p>Joel의 <code>data</code> 디렉토리가 <code>fructose.dat</code>, <code>glucose.dat</code>, <code>sucrose.dat</code> 파일 세개를 담고 있다.
+다음행을 담고 있는 스크립트로 <code>bash example.sh *.dat</code>로 실행할 때 <code>example.sh</code> 이름의 스크립트가 무엇을 수행하는지 설명하세요.</p>
+
+  <pre><code># Script 1
+echo *.*
+</code></pre>
+
+  <pre><code># Script 2
+for filename in $1 $2 $3
+do
+    cat $filename
+done
+</code></pre>
+
+  <pre><code># Script 3
+echo $*.dat
+</code></pre>
+  </section>
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 4. 토론 </h2>
+  <p>Joel의 <code>data</code> 디렉토리가 <code>fructose.dat</code>, <code>glucose.dat</code>, <code>sucrose.dat</code> 파일 세개를 담고 있다.
+다음행을 담고 있는 스크립트로 <code>bash example.sh *.dat</code>로 실행할 때 <code>example.sh</code> 이름의 스크립트가 무엇을 수행하는지 설명하세요.</p>
+
+  <pre><code># Script 1
+echo *.*</code>
+---------------------------------------------------------------------------
+$ bash example.sh *.dat
+example.sh fructose.dat glucose.dat sucrose.dat</pre>
+
+  <pre><code># Script 2
+for filename in $1 $2 $3
+do
+    cat $filename
+done</code>
+---------------------------------------------------------------------------
+$ bash example.sh *.dat
+fructose file contents...
+glucose file contetns...
+sucrose file contents...</pre>
+
+  <pre><code># Script 3
+echo $*.dat</code>
+---------------------------------------------------------------------------
+$ bash example.sh *.dat
+fructose.dat glucose.dat sucrose.dat</pre>
+  </section>
+
+  </body>
+</html>
+
+
+
