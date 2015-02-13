@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>데이터베이스 및 SQL</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> 07. 데이터 조합하기 (Combining Data) </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+    <aside class="notes">
+    </aside>
+      </section>
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 1. </h2>
+  <p>DR-1 사이트의 모든 방사선 측정치를 출력하는 쿼리를 작성하세요.</p>
+    </section>  
+
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 1. 토론</h2>
+  <p>DR-1 사이트의 모든 방사선 측정치를 출력하는 쿼리를 작성하세요.</p>
+  <pre>
+sqlite> select visited.ident, visited.site, survey.reading 
+        from survey join visited 
+        where survey.taken = visited.ident and visited.site = 'DR-1' and survey.quant='rad';
+
+ident       site        reading
+----------  ----------  ----------
+619         DR-1        9.82
+622         DR-1        7.8
+844         DR-1        11.25    </pre>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 2. </h2>
+  <p>people 테이블에서 &quot;Frank&quot; 가 방문한 모든 사이트를 출력하는 쿼리를 작성하세요.</p>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 2. 토론</h2>
+  <p>&quot;Frank&quot; 가 방문한 모든 사이트를 출력하는 쿼리를 작성하세요.</p>
+  <pre>
+sqlite> select distinct p.personal, v.site 
+        from person p join survey s join visited v 
+        where p.personal = 'Frank' and p.ident = s.person and v.ident = s.taken;
+
+personal    site
+----------  ----------
+Frank       DR-3      </pre>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 3. (토론) </h2>
+   <p>다음 쿼리가 무슨 결과를 산출하는지 말로 기술하세요.</p>
+
+    <pre><code>select Site.name from Site join Visited
+on Site.lat&lt;-49.0 and Site.name=Visited.site and Visited.dated&gt;='1932-00-00';
+</code></pre>
+    </section>  
+
+
+  </body>
+</html>
+
+
+

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>데이터베이스 및 SQL</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> 06. 집합 (Aggregation) </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+    <aside class="notes">
+    </aside>
+      </section>
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 1. </h2>
+ <p>Frank Pabodie는 얼마 많이 온도 측정치를 기록했고 평균 값은 얼마인가요?</p>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 1. </h2>
+ <p>Frank Pabodie는 얼마 많이 온도 측정치를 기록했고 평균 값은 얼마인가요?</p>
+ <pre>
+sqlite> select person, count(person), avg(reading)
+   ...> from survey
+   ...> where person in ('pb') and quant = 'rad';
+
+pb|3|6.66  </pre>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 2. </h2>
+<p>집합 값의 평균은 값을 합한 것을 값의 갯수로 나눈 것이다.
+값이 1.0, <code>null</code>, 5.0 으로 주어졌을 때, <code>avg</code> 함수는 2.0 혹은 3.0을 반환하는 것을 의미하나요?</p>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 2. 토론</h2>
+<p>집합 값의 평균은 값을 합한 것을 값의 갯수로 나눈 것이다.
+값이 1.0, <code>null</code>, 5.0 으로 주어졌을 때, <code>avg</code> 함수는 2.0 혹은 3.0을 반환하는 것을 의미하나요?</p>
+  <pre>
+sqlite> create table temp (
+          label text,
+          valueis int);
+sqlite> insert into temp values ('first', 1);
+sqlite> insert into temp values ('second', null);
+sqlite> insert into temp values ('third', 5);
+
+sqlite> select * from temp;
+first|1
+second|
+third|5
+
+sqlite> select * from temp where valueis not null;
+first|1
+third|5
+
+sqlite> select avg(valueis) from temp;
+3.0</pre>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 3. </h2>
+    <p>각 개별 방사선 측정값과 평균값 사이의 차이를 계산하고자 한다. 쿼리를 다음과 같이 작성한다.</p>
+
+    <pre><code>select reading - avg(reading) from Survey where quant='rad';
+</code></pre>
+
+    <p>상기 쿼리가 무엇을 만드나요? 그리고 왜 그런가요?</p>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 3. 토론</h2>
+    <p>각 개별 방사선 측정값과 평균값 사이의 차이를 계산하고자 한다. 쿼리를 다음과 같이 작성한다.</p>
+
+    <pre><code>select reading - avg(reading) from Survey where quant='rad';
+</code></pre>
+
+    <p>상기 쿼리가 무엇을 만드나요? 그리고 왜 그런가요?</p>
+    <pre>
+sqlite> select reading - avg(reading) 
+        from survey 
+        where quant='rad';
+
+4.6875
+
+sqlite> select taken, person, quant, reading, reading - avg(reading) 
+        from surve
+        where quant='rad';
+
+844|roe|rad|11.25|4.6875</pre>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 4. </h2>
+    <p><code>group_concat(field, separator)</code> 함수는 지정된 구분 문자(혹은 만약 구분자가 지정되지 않는다면 &#39;,&#39;)를 사용하여 필드의 모든 값을 결합한다.
+이 함수르 사용해서 과학자의 이름을 한줄 리스트로 다음과 같이 만드세요.</p>
+
+    <pre><code>William Dyer, Frank Pabodie, Anderson Lake, Valentina Roerich, Frank Danforth
+</code></pre>
+
+    <p>성씨(surname)으로 리스트를 정렬하는 방법을 제시할 수 있나요?</p>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 4. 토론</h2>
+    <p><code>group_concat(field, separator)</code> 함수는 지정된 구분 문자(혹은 만약 구분자가 지정되지 않는다면 &#39;,&#39;)를 사용하여 필드의 모든 값을 결합한다.
+이 함수르 사용해서 과학자의 이름을 한줄 리스트로 다음과 같이 만드세요.</p>
+
+    <pre><code>William Dyer, Frank Pabodie, Anderson Lake, Valentina Roerich, Frank Danforth
+</code></pre>
+
+    <pre>
+sqlite> select group_concat(sci_name) 
+        from (select personal || ' ' || family as sci_name 
+        from person);
+
+group_concat(sci_name)
+-------------------------------------------------------------------------
+William Dyer,Frank Pabodie,Anderson Lake,Valentina Roerich,Frank Danforth</pre>
+
+    <p>성씨(surname)으로 리스트를 정렬하는 방법을 제시할 수 있나요?</p>
+    <pre>
+sqlite> select group_concat(sci_name) as sortname from (select personal || ' ' |
+| family as sci_name from person order by family);
+
+sortname
+-------------------------------------------------------------------------
+Frank Danforth,William Dyer,Anderson Lake,Frank Pabodie,Valentina Roerich</pre>
+
+
+    </section>  
+
+
+  </body>
+</html>
+
+
+
