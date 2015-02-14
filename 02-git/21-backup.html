@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Git와 GitHub</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> 02. 더 훌륭한 백업 방법 </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+    <aside class="notes">
+    </aside>
+      </section>
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 1. </h2>
+  <p>컴퓨터에 <code>bio</code>라는 신규 Git 저장소를 생성하세요. <code>me.txt</code> 파일에 3줄 자신의 약력을 작성하고 변경사항을 커밋하세요. 그리고 나서, 한줄을 변경하고 4번째 행을 추가해서 변경상태와 최초 상태의 차이를 화면에 출력하세요.</p>
+   </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 1. 토의</h2>
+  <p>컴퓨터에 <code>bio</code>라는 신규 Git 저장소를 생성하세요. <code>me.txt</code> 파일에 3줄 자신의 약력을 작성하고 변경사항을 커밋하세요. 그리고 나서, 한줄을 변경하고 4번째 행을 추가해서 변경상태와 최초 상태의 차이를 화면에 출력하세요.</p>
+  <pre>
+$ git init
+$ nano me.txt
+$ git status
+$ git add me.txt
+$ git commit -m "first commit"
+$ nano me.txt    
+$ git diff me.txt
+diff --git a/me.txt b/me.txt
+index 6207989..62428d6 100644
+--- a/me.txt
++++ b/me.txt
+@@ -1,3 +1,4 @@
+ i am...
+ my interest is...
+ my dream is ...
++here is another line...
+warning: LF will be replaced by CRLF in me.txt.
+The file will have its original line endings in your working directory.</pre>
+   </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 2. (토의)</h2>
+  <p>다음 일련의 명령어는 Git 저장소 내부에 또다른 Git 저장소를 생성하는 것이다.</p>
+
+  <pre class="in"><code>cd           # return to home directory
+mkdir alpha  # make a new directory alpha
+cd alpha     # go into alpha
+git init     # make the alpha directory a Git repository
+mkdir beta   # make a sub-directory alpha/beta
+cd beta      # go into alpha/beta
+git init     # make the beta sub-directory a Git repository
+</code></pre>
+
+  <p>이렇게 하는 것이 왜 좋은 생각이 아닐까요?</p>
+   </section>  
+
+
+  </body>
+</html>
+
+
+

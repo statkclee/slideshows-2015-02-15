@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>데이터베이스 및 SQL</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> 08. 데이터 생성과 변형(Creating and Modifying Data) </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+    <aside class="notes">
+    </aside>
+      </section>
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 1. </h2>
+ <p><code>Survey.person</code>의 <code>null</code>인 모든 사용자를 문자열 <code>'unknown'</code>으로 대체하는 SQL문을 작성하세요.</p>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 1. 토의</h2>
+ <p><code>Survey.person</code>의 <code>null</code>인 모든 사용자를 문자열 <code>'unknown'</code>으로 대체하는 SQL문을 작성하세요.</p>
+ <table>
+  <tr>
+    <td>
+ <pre>
+sqlite> select * from survey;
+taken       person      quant       reading
+----------  ----------  ----------  ----------
+619         dyer        rad         9.82
+619         dyer        sal         0.13
+622         dyer        rad         7.8
+622         dyer        sal         0.09
+734         pb          rad         8.41
+734         lake        sal         0.05
+734         pb          temp        -21.5
+735         pb          rad         7.22
+735                     sal         0.06
+735                     temp        -26.0
+751         pb          rad         4.35
+751         pb          temp        -18.5
+751         lake        sal         0.1
+752         lake        rad         2.19
+752         lake        sal         0.09
+752         lake        temp        -16.0
+752         roe         sal         41.6
+837         lake        rad         1.46
+837         lake        sal         0.21
+837         roe         sal         22.5
+844         roe         rad         11.25
+735         unknown     sal         0.06
+735         unknown     temp        -26.0</pre>
+    </td>
+    <td>
+ <pre>
+
+sqlite> insert into survey(taken, person, quant, reading)
+        select taken, 'unknow', quant, reading 
+        from survey 
+        where person is null;  
+
+sqlite> delete from survey where person is null;</pre>
+
+    </td>
+  </tr>
+</table>
+    </section>  
+
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 2. </h2>
+    <p>동료중의 한명이 Robert Olmstead가 측정한 온도 측정치를 포함하는 다음과 같은 형식의
+<a href="../../gloss.html#comma-separeted-values">CSV</a> 파일을 보내왔다.</p>
+
+    <pre><code>Taken,Temp
+619,-21.5
+622,-15.5
+</code></pre>
+
+    <p>survey 데이터베이스에 레코드로 추가하려고 CSV 파일을 읽고 SQL <code>insert</code>문을 출력하는 
+작은 파이썬 프로그램을 작성하세요.
+<code>Person</code> 테이블에 Olmstead 항목을 추가할 필요가 있을 것이다.
+반복적으로 프로그램을 테스트하려면, SQL <code>insert or replace</code> 문을 자세히 살펴볼 필요도 있다.</p>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 2. 토의</h2>
+    <p>동료중의 한명이 Robert Olmstead가 측정한 온도 측정치를 포함하는 다음과 같은 형식의
+<a href="../../gloss.html#comma-separeted-values">CSV</a> 파일을 보내왔다.</p>
+
+    <pre><code>Taken,Temp
+619,-21.5
+622,-15.5
+</code></pre>
+
+    <p>survey 데이터베이스에 레코드로 추가하려고 CSV 파일을 읽고 SQL <code>insert</code>문을 출력하는 
+작은 파이썬 프로그램을 작성하세요.
+<code>Person</code> 테이블에 Olmstead 항목을 추가할 필요가 있을 것이다.
+반복적으로 프로그램을 테스트하려면, SQL <code>insert or replace</code> 문을 자세히 살펴볼 필요도 있다.</p>
+
+<pre>
+</pre>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 3. (토의)</h2>
+    <p>SQLite는 SQL 표준이 아닌 몇개 관리 명령어가 있다.
+그중의 하나가 <code>.dump</code>로 데이터베이스를 다시 생성하는데 필요한 SQL 명령문을 출력한다.
+또다른 것은 <code>.load</code>로 <code>.dump</code>에서 생성된 파일을 읽어서 데이터베이스를 복원한다.
+여러분의 동료중의 한명이 텍스트인 dump 파일을 버젼 제어 시스템에 저장하는 것이
+데이터베이스 변경사항을 추적하고 관리하는 좋은 방법이라고 생각한다.
+이러한 접근법의 장점과 단점은 무엇일까요? (힌트: 레코드는 어느 특정한 순서로 저장되지 않는다.)
+<a href="http://www.ibiblio.org/elemental/howto/sqlite-backup.html"> 출처: ibiblio.org</a></p>        
+<pre>
+<strong>-- 샘플 데이터 생성  </strong>
+create table music(artist varchar(40), title varchar(60));
+insert into music values('Beastie Boys','Paul''s Boutique');
+insert into music values('John, Elton','Goodbye Yellow Brick Road');
+insert into music values('Parliment','Mothership Connection');
+<strong>-- 샘플 db 생성 (sample.db)</strong>
+sqlite3 sample.db < music.sql
+<strong>-- 점검</strong>
+sqlite3 sample.db 'select * from music;'
+Beastie Boys|Paul''s Boutique
+John, Elton|Goodbye Yellow Brick Road
+Parliment|Mothership Connection
+<strong>-- 백업</strong>
+sqlite3 sample.db .dump > sample.bak
+<strong>-- db 복원</strong>
+mv sample.db sample.db.old
+sqlite3 sample.db < sample.bak
+<strong>-- 복원 결과 확인</strong>
+sqlite3 sample.db 'select * from music;'
+Beastie Boys|Paul's Boutique
+John, Elton|Goodbye Yellow Brick Road
+Parliment|Mothership Connection</pre>
+
+    </section>  
+
+
+  </body>
+</html>
+
+
+

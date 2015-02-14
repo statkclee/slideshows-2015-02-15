@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>데이터베이스 및 SQL</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> 09. 데이터베이스 프로그래밍 </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+    <aside class="notes">
+    </aside>
+      </section>
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 1. </h2>
+     <p>10.0 에서 25.0 사이의 100,000개 난수를 가지는 레코드를 가지고, 
+<code>reading</code>으로 불리는 단일 필드를 가지고, <code>Pressure</code>라는 단일 테이블을 가지고, 
+<code>original.db</code>이라는 이름을 가지는 신규 데이터베이스를 파일에 생성하는 
+파이썬 프로그램을 작성하세요. </p>
+   </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 1. 토의</h2>
+     <p>10.0 에서 25.0 사이의 100,000개 난수를 가지는 레코드를 가지고, 
+<code>reading</code>으로 불리는 단일 필드를 가지고, <code>Pressure</code>라는 단일 테이블을 가지고, 
+<code>original.db</code>이라는 이름을 가지는 신규 데이터베이스를 파일에 생성하는 
+파이썬 프로그램을 작성하세요. </p>
+<table>
+  <tr>
+    <td>
+<pre>
+1. 파이썬 난수 생성 프로그램 모듈 작성
+import random
+def randrecord(randcnt):
+    result = [0.0] * randcnt
+    for idx in range(randcnt):
+        result[idx] = random.randrange(10.0, 25.0)
+    return result
+print randrecord(10)     
+
+2. 파이썬 DB insert 프로그램 작성
+import sqlite3
+
+connection = sqlite3.connect("original.db")
+cursor = connection.cursor()
+
+for idx in range(0, len(rslt)):
+    cursor.execute('insert into Pressure values(?);', [rslt[idx]])
+
+cursor.execute("select * from Pressure;")
+results = cursor.fetchall()
+for r in results:
+    print(r)
+cursor.close()
+connection.close()</pre>
+    </td>
+    <td>
+<pre>
+3. 쉘 origianl db 생성
+
+$ sqlite3 original.db < gen-original.db
+$ sqlite3 original.db
+SQLite version 3.8.4.3 2014-04-03 16:53:12
+Enter ".help" for usage hints.
+sqlite> .schema
+CREATE TABLE Pressure(
+    reading    int
+);
+
+-- DB 생성
+create table Pressure(
+    reading   text
+);
+
+4. 1~3개 모듈 프로그램 리팩토링 </pre>
+
+    </td>
+  </tr>
+</table>
+   </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 2. (토의)</h2>      
+    <p><code>original.db</code>과 동일한 구조를 가지는 <code>backup.db</code>으로 불리는 새로운 데이터베이스를
+생성하는 파이썬 프로그램을 작성하세요.
+<code>backup.db</code>는 <code>original.db</code>에서 <code>backup.db</code>로 20.0보다 큰 모든 값을 
+복사한 값을 담고 있다. 어느 것이 더 빠른가요?
+쿼리의 값을 필터링하는 것 혹은 주기억장치에 모든 것을 읽어드리고 
+파이썬에서 필터링하는 것 중에서 선택하세요. </p>
+   </section>  
+
+
+  </body>
+</html>
+
+
+

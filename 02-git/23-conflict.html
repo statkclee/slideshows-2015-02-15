@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Git와 GitHub</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> 03. 충돌(Conflicts) </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+    <aside class="notes">
+    </aside>
+      </section>
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 1. </h2>
+  <p>강사가 생성한 저장소를 복제하세요. 저장소에 새 파일을 추가하고, 기존 파일을 변경하세요. (강사가 변경할 기존 파일이 어느 것인지 알려줄 것이다.) 강사의 말에 따라 충돌을 생성하는 연습을 하기 위해서 저장소에서 변경사항을 가져오도록 풀(Pull)하세요. 그리고 해소해서 일치해 보세요.</p>
+
+  <p>버젼 제어 저장소의 이미지 파일이나 혹은 다른 텍스트가 아닌 파일에 충돌이 발생할 때, Git는 무엇을 하나요?</p>        
+   </section>  
+
+    <section class="slide">
+    <h2> 연습문제 1. 토의 </h2>
+    <h3 align="center"> 충돌 (Conflict) </h3>   
+  <table width="100%" style="font-size:50%"> 
+    <tr align="center">
+      <td><h4>노트북 컴퓨터</h4></td>
+      <td><h4>데스크탑 컴퓨터</h4></td>
+      <td><h4>충돌(Conflict)</h4></td>
+    </tr>
+      <tr>
+      <td><hr/></td>
+      <td> </td>
+      <td><hr/></td>
+    </tr>
+    <tr>
+      <td align="left">
+      <ul>
+        <li>
+        <code> $ echo "This line was added from Laptop" >> mars.txt </code> <br/>
+        <code> $ git add mars.txt </code> <br/>
+        <code> $ git commit -m "Added from our laptop" </code> <br/>
+        <code> $ git push origin master </code>
+        </li>
+        <hr/>
+      </ul>
+      <hr/>
+      </td>
+      <td align="left">
+      <ul>
+        <li>
+        <code> $ echo "This line was added from Desktop" >> mars.txt </code> <br/>
+        <code> $ git add mars.txt </code> <br/>
+        <code> $ git commit -m "Added from our desktop" </code> <br/>
+        <code> $ git push origin master </code>
+        </li>
+        <hr/>
+      </td>
+      <td align="left">
+      <ul>
+        <li>
+        <code> $ git pull </code> <br/>
+        <code> $ cat mars.txt </code> <br/>
+        <code> $ vi mars.txt </code> <br/>
+        <code> $ git add mars.txt </code> <br/>
+        <code> $ git commit -m "Fixed a conflict" </code> <br/>
+        <code> $ git push origin master </code>
+        </li>
+        <hr/>
+      </td>
+    </tr>
+    </table>
+  <aside class="notes">
+  </aside>
+    </section>
+
+
+  </body>
+</html>
+
+
+

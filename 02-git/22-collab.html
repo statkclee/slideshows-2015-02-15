@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>Git와 GitHub</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> 03. 협업(Collaboration) </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+    <aside class="notes">
+    </aside>
+      </section>
+
+    <section class="slide" style="font-size:60%">
+        <h2> 연습문제 1. (토의)</h2>
+  <p>GitHub 저장소를 생성하고, 복제하고, 파일을 추가하고, 파일 추가 변경사항을 GitHub에 푸쉬하고, 그리고 나서 GitHub 변경사항 <a href="../../gloss.html#timestamp">타임스탬프(timestamp)</a>를 살펴보자. GitHub는 시간을 어떻게 기록하고 왜 할까?</p>
+  <table>
+    <tr>
+      <td>
+        <img src='img/02-github-repository-address.png', height="40%">
+      </td>
+      <td>
+        <pre>
+        $ git clone https://github.com/statkclee/planets.git
+
+        $ echo "test ..." >> abc.txt
+
+        $ git add abc.txt
+
+        $ git commit -m "commit github test ... "
+
+        $ git push origin master
+        
+        ....</pre>
+      </td>
+    </tr>
+   </section>  
+
+
+  </body>
+</html>
+
+
+
