@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>텍스트 편집기</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> 01. 나노 편집기 (Nano Editor) </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+    <aside class="notes">
+    </aside>
+      </section>
+
+    <section class="slide" style="font-size:60%">
+        <h2> GNU Nano </h2>
+        <p> GNU 나노 편집기는 유닉스의 기본 편집기인 vi나 emacs 같은 처음 진입장벽이 높은 하지만 강력한
+          편집기보다는 처음 유닉스를 접하는 사용자가 쉽게 사용할 수 있는 편집기로 GNU에서 기존 
+          전자우편 편집기인 Pico를 바탕으로 만들어진 편집기로 초보자에게는 정말 적합하다. </p>
+        <p> GNU Nano 편집기는 <a href="http://www.nano-editor.org/"> http://www.nano-editor.org/</a> 에서 다운로드 받을 수 있다.</p>
+        <img src="./img/gnu-nano-homepage.png" alt="나노 편집기" height="80%">
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> (GNU Nano) 편집기 기능</h2>
+        <h3> Basic Features </h3>
+          <ul>
+            <li>편집문서 생성, 열기, 저장 </li>      
+            <li>이동(Navigation) </li>
+            <li>찾기, 바꾸기 (Find and Replace)</li>
+            <li>잘라내기, 복사하기, 붙여넣기 (Cut, Copy, Paste)</li>
+            <li>텍스트 양식 (Text Formatting)</li>
+            <li>실행취소, 재실생 (Undo and redo)</li>    
+            <li>UTF-8 지원</li>
+            <li>구문 강조 (Syntax highlighting)</li>
+          </ul>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> (GNU Nano) 편집기 기능</h2>
+        <h3> 편집문서 생성, 열기, 저장 </h3>
+        <table width="100%">
+          <tr>
+            <td width="50%">
+              <img src="./img/nano-screen.png" alt="나노 편집기 실행" height="80%">
+            </td>
+            <td>
+              <ul>
+                <li>편집기 상단: 프로그램 이름, 버젼, 작업 파일 정보 </li>
+                <li>중간 본문: 텍스트 파일 내용</li>
+                <li>하단에서 3번째줄: 시스템 메시지</li>
+                <li>편집기 하단: 단축키</li>
+              </ul> 
+              <blockquote>
+                <p><strong>^:</strong> Control 키</p><br>
+                <p><strong>M:</strong> Alt 키</p><br>               
+              </blockquote>
+            </td>
+          </tr>
+        </table>        
+        <p><a href="http://www.howtogeek.com/howto/42980/the-beginners-guide-to-nano-the-linux-command-line-text-editor/">출처: HowtoGeek </a></p>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> (GNU Nano) 편집기 기능</h2>
+        <h3> 단축기 및 도움말 </h3>
+        <table width="100%">
+          <tr>
+            <td width="50%">
+              <img src="./img/nano-help-shortcut.png" alt="나노 편집기 도움말과 단축키" height="80%">
+            </td>
+            <td>
+              <ul>
+                <li><strong>^G </strong>: 도움말 </li>
+                <li><strong>^X </strong>: 끝내기 </li>                
+                <li><strong>^O </strong>: 저장하기 </li>                
+                <li><strong>^W </strong>: 찾기 </li>                
+                <li><strong>^K </strong>: 잘라내기 </li>                
+                <li><strong>^U </strong>: 붙여넣기 </li>                
+                <li><strong>^C </strong>: 현재 위치 정보 </li>  
+                <li>... </li>  
+              </ul> 
+            </td>
+          </tr>
+        </table>        
+        <p><a href="http://www.howtogeek.com/howto/42980/the-beginners-guide-to-nano-the-linux-command-line-text-editor/">출처: HowtoGeek </a></p>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> (GNU Nano) 편집기 기능</h2>
+        <h3> 이동 (Navigation) </h3>
+        <table width="100%">
+          <tr>
+            <td width="50%">
+              <img src="./img/nano-navigation.png" alt="이동 (Navigation)" height="80%">
+            </td>
+            <td>
+              <ul>
+                <li><strong>Ctrl+F, Ctrl+B </strong>: 왼쪽, 오른쪽 화살표 </li>
+                <li><strong>Ctrl+P, Ctrl+N </strong>: 위쪽, 아래쪽 화살표 </li>                
+                <li><strong>Ctrl+A, Ctrl+E </strong>: 행의 처음으로 이동, 마지막으로 이동 </li>
+                <li><strong>Ctrl+V, Ctrl+Y </strong>: 다음 페이지, 이전 페이지  </li>                
+                <li><strong>Ctrl+Space, Alt+Space </strong>: 한번에 단어 앞 뒤로 이동 </li>                
+                <li><strong>Ctrl+_+숫자+,+숫자 </strong>: 바로 이동 </li>                
+                <li><strong>Ctrl+C </strong>: 현재 커서 위치 정보 </li>                
+              </ul> 
+            </td>
+          </tr>
+        </table>        
+        <p><a href="http://www.howtogeek.com/howto/42980/the-beginners-guide-to-nano-the-linux-command-line-text-editor/">출처: HowtoGeek </a></p>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> (GNU Nano) 편집기 기능</h2>
+        <h3> 잘라내기, 복사하기, 붙여넣기 (Cut, Copy, Paste) </h3>
+        <table width="100%">
+          <tr>
+            <td width="50%">
+              <img src="./img/nano-navigation.png" alt="이동 (Navigation)" height="80%">
+            </td>
+            <td>
+              <ul>
+                <li><strong>Ctrl+^ </strong>: 잘라내기 표시 선택하기</li>
+                <li>...</li>
+                <li><strong>Alt+^ </strong>: 복사하기</li>
+                <li><strong>Ctrl+K </strong>: 잘라내기</li>
+                <li>...</li>
+                <li><strong>Ctrl+U </strong>: 붙여넣기 </li>
+              </ul> 
+            </td>
+          </tr>
+        </table>        
+        <p><a href="http://www.howtogeek.com/howto/42980/the-beginners-guide-to-nano-the-linux-command-line-text-editor/">출처: HowtoGeek </a></p>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> (GNU Nano) 편집기 기능</h2>
+        <h3> 찾기 바꾸기 (Find and Replace) </h3>
+        <table width="100%">
+          <tr>
+            <td width="50%">
+              <img src="./img/nano-search.png" alt="찾기 (Search)" height="80%">
+            </td>
+            <td>
+              <ul>
+                <li><strong>Ctrl+W </strong>: 문자열 찾기</li>
+                <li><strong>Alt+W </strong>: 찾은 문자열 계속 찾기</li>
+                <li>...</li>
+                <li><strong>Crtl+\ </strong>: 바꾸기</li>
+              </ul> 
+            </td>
+          </tr>
+        </table>        
+        <p><a href="http://www.howtogeek.com/howto/42980/the-beginners-guide-to-nano-the-linux-command-line-text-editor/">출처: HowtoGeek </a></p>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> (GNU Nano) 편집기 기능</h2>
+        <h3> 파일 열기 </h3>
+        <table width="100%">
+          <tr>
+            <td width="50%">
+              <img src="./img/nano-file-open.png" alt="파일 열기 (File Open)" height="80%">
+            </td>
+            <td>
+              <ul>
+                <li><strong>Ctrl+R Ctrl+T </strong>: 파일 열기</li>
+              </ul> 
+            </td>
+          </tr>
+        </table>        
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> (GNU Nano) 편집기 기능</h2>
+        <h3> 실행 취소, 재실행 </h3>
+        <table width="100%">
+          <tr>
+            <td width="50%">
+              <img src="./img/nano-undo-redo.png" alt="실행 취소 및 재실행" height="80%">
+            </td>
+            <td>
+              <blockquote>$nano -u test.txt</blockquote>
+              <ul>
+                <li><strong>Alt+U </strong>: 실행 취소</li>
+                <li><strong>Alt+E </strong>: 재실행</li>
+              </ul> 
+            </td>
+          </tr>
+        </table>        
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> (GNU Nano) 편집기 기능</h2>
+        <h3> 구문 강조 (Syntax Highlighting) </h3>
+        <table width="100%">
+          <tr>
+            <td width="50%">
+              <img src="./img/nano-syntax.png" alt="구문 강조(Syntax Highlighting" height="80%">
+            </td>
+            <td>
+              <pre>
+root@vm:/usr/share/nano# ls
+asm.nanorc     fortran.nanorc   man.nanorc     ocaml.nanorc   ruby.nanorc
+awk.nanorc     gentoo.nanorc    mgp.nanorc     patch.nanorc   sh.nanorc
+cmake.nanorc   groff.nanorc     mutt.nanorc    perl.nanorc    tcl.nanorc
+c.nanorc       html.nanorc      nano-menu.xpm  php.nanorc     tex.nanorc
+css.nanorc     java.nanorc      nanorc.nanorc  pov.nanorc     xml.nanorc
+debian.nanorc  makefile.nanorc  objc.nanorc    python.nanorc    </pre>
+            </td>
+          </tr>
+        </table>        
+    </section>  
+
+
+  </body>
+</html>
+
+
+
