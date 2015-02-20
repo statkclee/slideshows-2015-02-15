@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title>컴퓨터에서 한국어</title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="img/00-voiceover.ogg" />
+    <meta name="timings" content="img/00-timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+  <div class="deck-container">
+
+    <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <h3> 02. 한국어 설정 </h2>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+    <aside class="notes">
+    </aside>
+      </section>
+
+    <section class="slide" style="font-size:60%">
+        <h2> 서버 언어 확인 </h2>
+        <p> 가장 먼저 영어는 기본으로 지원이 되고, 한국어가 지원되는지 확인해야한다. </p>
+<pre>root@vm:~# echo $LANG
+en_US</pre>
+<p>en_US.utf8를 지원하기 때문에 정상적으로 한글을 사용하는데는 문제가 없다.</p>
+<pre>root@vm:~# locale -a | grep en_US
+en_US
+en_US.iso88591
+en_US.utf8</pre>
+    </section>  
+
+    <section class="slide" style="font-size:60%">
+        <h2> 한국어 언어 변경 </h2>
+        <p> 다양한 방법이 있지만, locale-gen을 추천한다. </p>
+<pre>root@vm:~# locale-gen ko_KR.UTF-8
+Generating locales...
+  ko_KR.UTF-8... done
+Generation complete.</pre>
+        <p> 제대로 나오는지 확인해보자.</p>
+<pre>root@vm:~# date
+2015. 02. 20. (금) 06:50:18 CST</pre>
+    </section>
+
+    <section class="slide" style="font-size:60%">
+        <h2> 한국어 폰트(font) 설정 </h2>
+        <p> 자유로운 저작권 폰트(ex 나눔)를 다운로드 받아 리눅스 폰트 폴더로 이동한다. </p>
+<pre>root@vm:~# ls
+NanumBrush.ttf       NanumGothicExtraBold.ttf  NanumMyeongjoExtraBold.ttf
+NanumGothic.ttf      NanumMyeongjo.ttf         NanumPen.ttf
+NanumGothicBold.ttf  NanumMyeongjoBold.ttf     test.txt
+
+root@vm:~# mv *.ttf /usr/share/fonts
+
+root@vm:~# ls /usr/share/fonts/
+NanumBrush.ttf       NanumGothicExtraBold.ttf  NanumMyeongjoExtraBold.ttf
+NanumGothic.ttf      NanumMyeongjo.ttf         NanumPen.ttf
+NanumGothicBold.ttf  NanumMyeongjoBold.ttf     truetype</pre>
+
+        <p> 폰트를 갱신하고, 확인한다. </p>
+<pre>root@vm:~# fc-cache -f -v
+root@vm:~# fc-list
+/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf: DejaVu Serif:style=Bold
+/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf: DejaVu Sans Mono:style=Book
+/usr/share/fonts/NanumGothicExtraBold.ttf: 나눔고딕,NanumGothic,NanumGothicExtraBold,나눔고딕 ExtraBold:style=Bold,ExtraBold,Regular
+/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf: DejaVu Sans:style=Book
+/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf: DejaVu Sans:style=Bold
+/usr/share/fonts/NanumPen.ttf: 나눔손글씨 펜,Nanum Pen Script:style=Regular
+/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf: DejaVu Sans Mono:style=Bold
+/usr/share/fonts/NanumGothicBold.ttf: 나눔고딕,NanumGothic:style=Bold
+/usr/share/fonts/NanumBrush.ttf: 나눔손글씨 붓,Nanum Brush Script:style=Regular
+/usr/share/fonts/NanumMyeongjoExtraBold.ttf: 나눔명조,NanumMyeongjo,NanumMyeongjoExtraBold,나눔명조 ExtraBold:style=ExtraBold,Regular
+/usr/share/fonts/NanumMyeongjo.ttf: 나눔명조,NanumMyeongjo:style=Regular
+/usr/share/fonts/NanumGothic.ttf: 나눔고딕,NanumGothic:style=Regular
+/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf: DejaVu Serif:style=Book
+/usr/share/fonts/NanumMyeongjoBold.ttf: 나눔명조,NanumMyeongjo:style=Bold</pre>
+    </section>
+
+    <section class="slide" style="font-size:60%">
+        <h2> 시스템 한국어 폰트(font) 적용 </h2>
+        <pre>$ sudo dpkg-reconfigure console-setup</pre> 
+        <img src="./img/korean-system-font.png" width="80%">
+
+    </section>
+  </div>
+  </body>
+</html>
+
+
+
