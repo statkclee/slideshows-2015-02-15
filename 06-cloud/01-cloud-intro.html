@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+    <title> 클라우드 </title>
+    <meta name="author" content="Greg Wilson" />
+    <!-- <meta name="narrator" content="Katy Huff" />
+    <meta name="audio" content="voiceover.ogg" />
+    <meta name="timings" content="timings.json" /> -->
+
+    <script src="../js/deckjs-custom.js"></script>
+    <script>includedeck(["../css/software-carpentry.css"],{});</script>
+    <style type="text/css">
+      .slide.title-slide h1 {padding-bottom: 0;} /* title is long... */
+      a {text-decoration: underline;} /* make links clearer */
+      pre {font-size: 75%;} /* make code blocks smaller */
+      p.lesson {text-align: center; font-size: 120%; font-style: italic;}    
+    </style>
+  </head>
+  <body>
+    <div class="deck-container">
+
+      <section class="slide title-slide" data-container-class="no-status">
+        <h2 class="var-title"></h2>
+        <p>2015년 2월 </p>
+        <img class="logo" src="../img/software-carpentry-banner.png" alt="Software Carpentry Logo" />
+      </section>
+
+      <section class="slide">
+	     <h2>클라우드 공급사</h2>
+    	  <ol>
+    	    <li class="slide" id="extensions-goto">
+    		  AWS (Amazon Web Services, 아마존 웹서비스)
+            <ol>
+              <li>EC2(Elastic Compute Cloud): 컴퓨터 </li>
+              <li>S3(Simple Storage Service): 상대적 저속, 대용량 저장소 </li>
+              <li>EBS(Elastic Block Storage): 상대적 고속, EC2와 함께하는 저장소</li>
+            </ol>
+          </li>
+    	    <li class="slide" id="extensions-goto">
+    		  구글 클라우드 엔진 (Google Compute Engine), Google AppEngine, Google Docs
+    	    </li>
+    	    <li class="slide" id="extensions-goto">
+    		  마이크로소프트 애져 (Microsoft Azure), 오피스 365
+    	    </li>
+          <li class="slide" id="extensions-goto">
+          기타: Salesfore.com, EMC, KT-uCloud, SKT-Cloud, ...
+          </li>
+        </ol>
+      </section>
+
+      <section class="slide">
+       <h2>클라우드 역사</h2>
+       <img src="./img/cloud-history.png" width="95%">
+       <p style="font-size:50%">출처: Indranil Gupta, Illinois university</p>
+      </section>
+
+      <section class="slide">
+       <h2>클라우드 산업 역사 </h2>
+       <img src="./img/cloud-industry-history.png" width="95%">
+       <p style="font-size:50%">출처: Indranil Gupta, Illinois university</p>
+      </section>
+
+      <section class="slide">
+       <h2>IaaS, PaaS, SaaS</h2>
+       <img src="./img/iaas-paas-saas.png" width="95%">
+      </section>
+
+      <section class="slide">
+       <h2>PaaS로 진화</h2>
+       <img src="./img/evolution-to-paas.png" width="95%">
+      </section>
+
+      <section class="slide">
+       <h2>하이브리드 클라우드 (기업관점)</h2>
+       <img src="./img/hybrid-cloud.png" width="95%">
+      </section>
+
+      <section class="slide">
+       <h2>클라우드 선택 비고 (기업관점)</h2>
+       <img src="./img/cloud-quality-attributes.png" width="95%">
+      </section>
+
+      <section class="slide">
+       <h2>레드햇(Redhat) 클라우드 사례</h2>
+       <img src="./img/redhat-strategy.png" width="95%">
+      </section>
+
+      <section class="slide">
+       <h2>현재 클라우드 4가지 기능(Feature)</h2>
+        <ol>
+          <li class="slide" id="extensions-goto">
+          대규모 (Massive Scale)
+          </li>
+          <li class="slide" id="extensions-goto">
+          온디맨드 접근 (On-demand Access): <br>
+          종량제, 고정비 투자 없음.
+          </li>
+          <li class="slide" id="extensions-goto">
+          데이터 집약적 특성 (Data-intensive Nature): <br>
+          MB &#8594; GB &#8594; TB &#8594; PB &#8594; XB
+          </li>
+          <li class="slide" id="extensions-goto">
+          클라우드 프로그래밍 패러다임: <br>
+          MapReduce/Hadoop, NoSQL, Open Source, ...
+          </li>
+        </ol>
+
+       <p style="font-size:50%">출처: Indranil Gupta, Illinois university</p>
+      </section>
+
+
+    </div>
+  </body>
+</html>
+
+
